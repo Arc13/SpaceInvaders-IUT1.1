@@ -7,35 +7,29 @@
 
 class Circle : public BaseFig
 {
-protected:
-    virtual void Draw() const;
-
 public:
-    Circle(const Vec2D & pos_, const unsigned & rad, const RGBcolor & borderCol, const RGBcolor & inCol = RGBcolor ());
+    Circle(const Vec2D & pos_, const unsigned & rad_, const RGBcolor & inCol_, const RGBcolor & borderCol_ = RGBcolor ());
     Circle(const BaseFig &);
-    ~Circle() {}
+    virtual ~Circle() {}
 
-    // Operateur de décalage +
-    /*virtual*/ Circle operator + (const Vec2D & pos_) const;
+    virtual void Draw() const override;
 
-    friend Circle operator + (const Vec2D & p, const Circle & t)
-    {
-        return t + p;
+    // Opérateur de décalage +
+    Circle operator + (const Vec2D & pos_) const {
+        return Circle(pos + pos_, radius, inColor, borderColor);
     }
 
-    // Operateur de reduction *
-    /*virtual*/ Circle operator * (const float & f) const
-    {
-        return BaseFig::operator *(f);
-    }
-
-    friend Circle operator * (const float & f, const Circle & t)
-    {
-        return t * f;
+    // Opérateur de réduction *
+    Circle operator * (const float & f) const {
+        return Circle(pos * f, radius, inColor, borderColor);
     }
 
     // Fonction de clonage
     virtual std::unique_ptr<Drawable> clone() const override;
+
+private:
+    Vec2D pos;
+    unsigned radius;
 };
 
 #endif // CIRCLE_H

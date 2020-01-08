@@ -7,35 +7,30 @@
 
 class Rectangle : public BaseFig
 {
-protected:
-    virtual void Draw() const override;
-
 public:
-    Rectangle(const Vec2D & pos1, const Vec2D & pos2, const RGBcolor & borderCol, const RGBcolor & inCol = RGBcolor ());
-    Rectangle(const Vec2D & Vec2D, const unsigned & width, const unsigned & height, const RGBcolor & borderCol, const RGBcolor & inCol = RGBcolor ());
+    Rectangle(const Vec2D & pos1_, const Vec2D & pos2_, const RGBcolor & inCol_, const RGBcolor & borderCol_ = RGBcolor ());
+    Rectangle(const Vec2D & Vec2D_, const unsigned & width_, const unsigned & height_, const RGBcolor & inCol_, const RGBcolor & borderCol_ = RGBcolor ());
     Rectangle (const BaseFig &);
-    ~Rectangle() {}
+    virtual ~Rectangle() {}
+
+    virtual void Draw() const override;
 
     // Opérateur de décalage +
     Rectangle operator + (const Vec2D & pos_) const {
-        return BaseFig::operator +(pos_);
-    }
-
-    friend Rectangle operator + (const Vec2D & p, const Rectangle & t) {
-        return t + p;
+        return Rectangle(pos1 + pos_, pos2 + pos_, inColor, borderColor);
     }
 
     // Opérateur de réduction *
     Rectangle operator * (const float & f) const {
-        return BaseFig::operator *(f);
-    }
-
-    friend Rectangle operator * (const float & f, const Rectangle & t) {
-        return t * f;
+        return Rectangle(pos1 * f, pos2 * f, inColor, borderColor);
     }
 
     // Fonction de clonage
     virtual std::unique_ptr<Drawable> clone() const override;
+
+private:
+    Vec2D pos1;
+    Vec2D pos2;
 };
 
 #endif // RECTANGLE_H

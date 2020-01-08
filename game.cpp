@@ -46,6 +46,7 @@ void Game()
         // Efface l'écran a chaque itération
         Window.clearScreen();
 
+        // On met a jour et affiche le fond étoilé
         starBackground.Update(frameTime);
         Window << starBackground;
 

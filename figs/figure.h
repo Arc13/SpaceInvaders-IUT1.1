@@ -12,7 +12,7 @@
 class Figure : public BaseFig
 {
 protected:
-    virtual void Draw() const;
+    virtual void Draw() const override;
     std::vector<std::shared_ptr<BaseFig>> vFig;
 
 public:
@@ -25,20 +25,10 @@ public:
     }
 
     // Opérateur de décalage +
-    /*virtual*/ Figure operator + (const Vec2D & pos_) const;
-
-    friend Figure operator + (const Vec2D & p, const Figure & f)
-    {
-        return f + p;
-    } // Pour la commutativité
+    BaseFig operator + (const Vec2D & pos_) const;
 
     // Opérateur de réduction *
-    /*virtual*/ Figure operator * (const float & f) const;
-
-    friend Figure operator * (const float & f, const Figure & fig)
-    {
-        return fig * f;
-    } // Pour la commutativité
+    BaseFig operator * (const float & f) const;
 
     // Fonction de clonage
     virtual std::unique_ptr<Drawable> clone() const override;

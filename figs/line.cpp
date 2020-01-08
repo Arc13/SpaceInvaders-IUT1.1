@@ -27,25 +27,18 @@ void Line::Draw() const
     }*/
 }
 
-Line::Line(const Vec2D & pos1, const Vec2D & pos2, const RGBcolor &fillCol)
+Line::Line(const Vec2D & pos1_, const Vec2D & pos2_, const RGBcolor &fillCol_)
+    : BaseFig(fillCol_, fillCol_, "line")
+    , pos1(pos1_)
+    , pos2(pos2_)
 {
-    Vec2D tmp = Vec2D::min (pos1, pos2);
 
-    remarkablePt ["posMin"] = tmp;
-    remarkablePt ["posMax"] = ((tmp == pos1) ? pos2 : pos1);
-
-    inColor = borderColor = fillCol;
-    name = "line";
 }
 
 Line::Line(const BaseFig & b)
+    : BaseFig(b.getInColor(), b.getBorderColor(), b.getName())
 {
-    if (b.remarkablePt.size() != 2) throw MyException (kNoLine);
 
-    remarkablePt = b.remarkablePt;
-    borderColor = b.borderColor;
-    inColor = b.inColor;
-    name = "triangle";
 }
 
 std::unique_ptr<Drawable> Line::clone() const

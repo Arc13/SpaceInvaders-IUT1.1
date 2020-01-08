@@ -10,10 +10,12 @@ using namespace nsUtil;
 
 void Figure::Draw() const
 {
-
+    for (const std::shared_ptr<BaseFig> &fig : vFig) {
+        fig->Draw();
+    }
 }
 
-Figure Figure::operator *(const float &f) const
+BaseFig Figure::operator *(const float &f) const
 {
     Figure tmp;
     for (unsigned i = 0; i < this->vFig.size(); ++i)
@@ -31,7 +33,7 @@ Figure Figure::operator *(const float &f) const
     return tmp;
 }
 
-Figure Figure::operator +(const Vec2D &pos_) const
+BaseFig Figure::operator +(const Vec2D &pos_) const
 {
     Figure tmp;
     for (unsigned i = 0; i < this->vFig.size(); ++i)

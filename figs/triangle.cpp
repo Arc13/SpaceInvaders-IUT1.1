@@ -56,28 +56,19 @@ void Triangle::Draw() const
     Window << Line(pInt, pMax, borderColor);*/
 }
 
-Triangle::Triangle(const Vec2D &pos1, const Vec2D &pos2, const Vec2D &pos3, const RGBcolor &borderCol_, const RGBcolor &fillCol_)
+Triangle::Triangle(const Vec2D &pos1_, const Vec2D &pos2_, const Vec2D &pos3_, const RGBcolor &fillCol_, const RGBcolor &borderCol_)
+    : BaseFig(fillCol_, borderCol_, "triangle")
+    , pos1(pos1_)
+    , pos2(pos2_)
+    , pos3(pos3_)
 {
-    vector<Vec2D> Vpos {pos1, pos2, pos3};
-    sort(Vpos.begin(), Vpos.end (), Vec2D::minf);
 
-    remarkablePt["posMin"] = Vpos[0];
-    remarkablePt["posInt"] = Vpos[1];
-    remarkablePt["posMax"] = Vpos[2];
-
-    borderColor = borderCol_;
-    inColor = fillCol_;
-    name = "triangle";
 }
 
 Triangle::Triangle(const BaseFig & b)
+    : BaseFig(b.getInColor(), b.getBorderColor(), b.getName())
 {
-    if (b.remarkablePt.size() != 3) throw MyException(kNoTriangle);
 
-    remarkablePt = b.remarkablePt;
-    borderColor = b.borderColor;
-    inColor = b.inColor;
-    name = "triangle";
 }
 
 std::unique_ptr<Drawable> Triangle::clone() const

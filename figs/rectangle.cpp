@@ -9,59 +9,31 @@ using namespace nsUtil;
 
 void Rectangle::Draw() const
 {
-    // Pour éviter de faire moultes recherches
-    /*Vec2D botLeft(remarkablePt.find("botLeft")->second);
-    Vec2D topLeft(remarkablePt.find("topLeft")->second);
-    Vec2D botRight(remarkablePt.find("botRight")->second);
-    Vec2D topRight(remarkablePt.find("topRight")->second);
-
-    // La bordure
-    Window << Line(botLeft, topLeft, borderColor);
-    Window << Line(topLeft, topRight, borderColor);
-    Window << Line(topRight, botRight, borderColor);
-    Window << Line(botRight, botLeft, borderColor);
-
-    // L'intérieur
-    for (unsigned x = botLeft.abs + 1; x < topRight.abs; ++x)
-        for (unsigned y = botLeft.ord +1; y < topRight.ord; ++y)
-            Window.setPixel (Vec2D(x, y), inColor);*/
-
-    glColor4ub(128, 0, 0, 128);
-    glRecti(10, 10, 200, 200);
+    // Affiche un rectangle via la routine OpenGL
+    glColor3ub(inColor.Red, inColor.Green, inColor.Blue);
+    glRecti(pos1.abs, pos1.ord, pos2.abs, pos2.ord);
 }
 
-Rectangle::Rectangle(const Vec2D &pos1, const Vec2D &pos2, const RGBcolor &borderCol, const RGBcolor &inCol)
+Rectangle::Rectangle(const Vec2D &pos1_, const Vec2D &pos2_, const RGBcolor &inCol_, const RGBcolor &borderCol_)
+    : BaseFig(inCol_, borderCol_, "rectangle")
+    , pos1(pos1_)
+    , pos2(pos2_)
 {
-    remarkablePt["botLeft"]  = Vec2D(min(pos1.abs, pos2.abs), min(pos1.ord, pos2.ord));
-    remarkablePt["topLeft"]  = Vec2D(min(pos1.abs, pos2.abs), max(pos1.ord, pos2.ord));
-    remarkablePt["botRight"] = Vec2D(max(pos1.abs, pos2.abs), min(pos1.ord, pos2.ord));
-    remarkablePt["topRight"] = Vec2D(max(pos1.abs, pos2.abs), max(pos1.ord, pos2.ord));
 
-    borderColor = borderCol;
-    inColor = inCol;
-    name = "rectangle";
 }
 
-Rectangle::Rectangle(const Vec2D &pos_, const unsigned &width, const unsigned &height, const RGBcolor &borderCol, const RGBcolor &inCol)
+Rectangle::Rectangle(const Vec2D &pos_, const unsigned &width_, const unsigned &height_, const RGBcolor &inCol_, const RGBcolor &borderCol_)
+    : BaseFig(inCol_, borderCol_, "rectangle")
+    , pos1(pos_)
+    , pos2(Vec2D(pos_.abs + width_, pos_.ord + height_))
 {
-    remarkablePt["botLeft"]  = pos_;
-    remarkablePt["topLeft"]  = pos_ + Vec2D(0, height);
-    remarkablePt["botRight"] = pos_ + Vec2D(width, 0);
-    remarkablePt["topRight"] = pos_ + Vec2D(width, height);
 
-    borderColor = borderCol;
-    inColor = inCol;
-    name = "rectangle";
 }
 
 Rectangle::Rectangle(const BaseFig & b)
+    : BaseFig(b.getInColor(), b.getBorderColor(), b.getName())
 {
-    if (b.remarkablePt.size() != 4) throw MyException(kNoRectangle);
 
-    remarkablePt = b.remarkablePt;
-    borderColor = b.borderColor;
-    inColor = b.inColor;
-    name = "rectangle";
 }
 
 std::unique_ptr<Drawable> Rectangle::clone() const

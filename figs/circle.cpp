@@ -32,32 +32,18 @@ void Circle::Draw() const
     }*/
 }
 
-Circle::Circle(const Vec2D &pos_, const unsigned &rad, const RGBcolor &borderCol, const RGBcolor &inCol)
+Circle::Circle(const Vec2D &pos_, const unsigned &rad_, const RGBcolor &inCol_, const RGBcolor &borderCol_)
+    : BaseFig(inCol_, borderCol_, "circle")
+    , pos(pos_)
+    , radius(rad_)
 {
-    remarkablePt["ptCent"] = pos_;
-    remarkablePt["radius"] = Vec2D(0, rad);
 
-    borderColor = borderCol;
-    inColor = inCol;
-    name = "circle";
 }
 
 Circle::Circle(const BaseFig & b)
+    : BaseFig(b.getInColor(), b.getBorderColor(), b.getName())
 {
-    if (b.remarkablePt.size() != 2) throw MyException(kNoTriangle);
 
-    remarkablePt = b.remarkablePt;
-    borderColor = b.borderColor;
-    inColor = b.inColor;
-    name = "circle";
-}
-
-Circle Circle::operator +(const Vec2D &pos_) const
-{
-    Circle tmp(*this);
-    tmp.remarkablePt.find("ptCent")->second = tmp.remarkablePt.find("ptCent")->second + pos_;
-
-    return tmp;
 }
 
 std::unique_ptr<Drawable> Circle::clone() const

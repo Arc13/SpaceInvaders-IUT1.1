@@ -9,32 +9,29 @@
 class Triangle : public BaseFig
 {
 protected:
-    virtual void Draw() const;
+    virtual void Draw() const override;
 public:
-    Triangle(const Vec2D & pos1, const Vec2D &pos2, const Vec2D & pos3, const RGBcolor & borderCol_, const RGBcolor & fillCol_ = RGBcolor ());
+    Triangle(const Vec2D & pos1_, const Vec2D &pos2_, const Vec2D & pos3_, const RGBcolor & fillCol_, const RGBcolor & borderColl_ = RGBcolor ());
     Triangle (const BaseFig &);
-    ~Triangle() {}
+    virtual ~Triangle() {}
 
     // Opérateur de décalage +
     Triangle operator + (const Vec2D & pos_) const {
-        return BaseFig::operator +(pos_);
-    }
-
-    friend Triangle operator + (const Vec2D & p, const Triangle & t) {
-        return t + p;
+        return Triangle(pos1 + pos_, pos2 + pos_, pos3 + pos_, inColor, borderColor);
     }
 
     // Opérateur de réduction *
     Triangle operator * (const float & f) const {
-        return BaseFig::operator *(f);
-    }
-
-    friend Triangle operator * (const float & f, const Triangle & t) {
-        return t * f;
+        return Triangle(pos1 * f, pos2 * f, pos3 * f, inColor, borderColor);
     }
 
     // Fonction de clonage
     virtual std::unique_ptr<Drawable> clone() const override;
+
+private:
+    Vec2D pos1;
+    Vec2D pos2;
+    Vec2D pos3;
 };
 
 #endif // TRIANGLE_H

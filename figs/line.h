@@ -8,33 +8,29 @@
 class Line : public BaseFig
 {
 protected:
-    virtual void Draw() const;
+    virtual void Draw() const override;
 
 public:
-    Line (const Vec2D& pix1, const Vec2D & pix2, const RGBcolor & fillCol = RGBcolor ());
+    Line (const Vec2D& pos1_, const Vec2D & pos2_, const RGBcolor & fillCol_ = RGBcolor ());
     Line (const BaseFig &);
-    ~Line() {}
+    virtual ~Line() {}
 
     // Opérateur de décalage +
     Line operator + (const Vec2D & pos_) const {
-        return BaseFig::operator +(pos_);
-    }
-
-    friend Line operator + (const Vec2D & p, const Line & t) {
-        return t + p;
+        return Line(pos1 + pos_, pos2 + pos_, inColor);
     }
 
     // Opérateur de réduction *
     Line operator * (const float & f) const {
-        return BaseFig::operator *(f);
-    }
-
-    friend Line operator * (const float & f, const Line & t) {
-        return t * f;
+        return Line(pos1 * f, pos2 * f, inColor);
     }
 
     // Fonction de clonage
     virtual std::unique_ptr<Drawable> clone() const override;
+
+private:
+    Vec2D pos1;
+    Vec2D pos2;
 };
 
 #endif // LINE_H

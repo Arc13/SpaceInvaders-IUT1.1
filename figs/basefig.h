@@ -11,28 +11,23 @@
 class BaseFig : public IminGlInjectable
 {
 protected:
-    virtual void Draw () const override {}
-    BaseFig (const std::map<std::string, Vec2D>&, const RGBcolor &, const RGBcolor &);
+    BaseFig (const RGBcolor &, const RGBcolor &, const std::string &);
 
 public:
     BaseFig();
-    ~BaseFig() {}
+     ~BaseFig() {}
 
-    // Operateur de décalage +
-    BaseFig operator + (const Vec2D & pos_) const;
-    friend BaseFig operator + (const Vec2D &, const BaseFig &); // Pour la commutativité
-
-    // Operateur de réduction *
-    BaseFig operator * (const float & f) const;
-    friend BaseFig operator * (const float & f, const BaseFig &); // Pour la commutativité
+    virtual void Draw () const override {}
 
     // Fonction de clonage
     virtual std::unique_ptr<Drawable> clone() const override;
 
+    const RGBcolor getInColor() const;
+    const RGBcolor getBorderColor() const;
+
     // Données membres
     // Doivent être public :/ sinon ça pose des soucis dans les conversions
-    std::map<std::string, Vec2D> remarkablePt;
-    RGBcolor borderColor, inColor;
+    RGBcolor inColor, borderColor;
     std::string name; // ajouter pour l'introspection
     std::string getName() const;
 };
