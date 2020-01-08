@@ -60,7 +60,7 @@ void Game()
         Window << GuiText(Vec2D(10, 115), "TIMES NEW ROMAN 24", KGreen, GlutFont::BITMAP_TIMES_ROMAN_24);
 
         //test
-        Window << Rectangle(Vec2D(50, 50), Vec2D(20, 20), KRed);
+        Window << Rectangle(Vec2D(50, 50), Vec2D(20, 20), KRed) * 2;
 
         // Affiche le framerate
         displayFramerate(frameTime, Window);

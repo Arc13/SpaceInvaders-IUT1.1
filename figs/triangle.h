@@ -17,12 +17,12 @@ public:
 
     // Opérateur de décalage +
     Triangle operator + (const Vec2D & pos_) const {
-        return Triangle(pos1 + pos_, pos2 + pos_, pos3 + pos_, inColor, borderColor);
+        return Triangle(pos1 + pos_, pos2 + pos_, pos3 + pos_, getInColor(), getBorderColor());
     }
 
     // Opérateur de réduction *
     Triangle operator * (const float & f) const {
-        return Triangle(pos1 * f, pos2 * f, pos3 * f, inColor, borderColor);
+        return Triangle(pos1 * f, pos2 * f, pos3 * f, getInColor(), getBorderColor());
     }
 
     // Fonction de clonage

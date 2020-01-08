@@ -28,7 +28,17 @@ const RGBcolor BaseFig::getInColor() const
     return inColor;
 }
 
-string BaseFig::getName() const
+const string BaseFig::getName() const
 {
     return name;
+}
+
+void BaseFig::setInColor(const RGBcolor &inColor_)
+{
+    inColor = inColor_;
+}
+
+void BaseFig::setBorderColor(const RGBcolor &borderColor_)
+{
+    borderColor = borderColor_;
 }

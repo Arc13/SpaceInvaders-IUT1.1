@@ -9,6 +9,7 @@ using namespace nsUtil;
 
 void Rectangle::Draw() const
 {
+    const RGBcolor inColor = getInColor();
     // Affiche un rectangle via la routine OpenGL
     glColor3ub(inColor.Red, inColor.Green, inColor.Blue);
     glRecti(pos1.abs, pos1.ord, pos2.abs, pos2.ord);

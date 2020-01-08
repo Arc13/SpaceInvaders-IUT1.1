@@ -17,12 +17,12 @@ public:
 
     // Opérateur de décalage +
     Line operator + (const Vec2D & pos_) const {
-        return Line(pos1 + pos_, pos2 + pos_, inColor);
+        return Line(pos1 + pos_, pos2 + pos_, getInColor());
     }
 
     // Opérateur de réduction *
     Line operator * (const float & f) const {
-        return Line(pos1 * f, pos2 * f, inColor);
+        return Line(pos1 * f, pos2 * f, getInColor());
     }
 
     // Fonction de clonage

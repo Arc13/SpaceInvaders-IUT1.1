@@ -24,12 +24,14 @@ public:
 
     const RGBcolor getInColor() const;
     const RGBcolor getBorderColor() const;
+    const std::string getName() const;
 
-    // Données membres
-    // Doivent être public :/ sinon ça pose des soucis dans les conversions
+    void setInColor(const RGBcolor &inColor_);
+    void setBorderColor(const RGBcolor &borderColor_);
+
+private:
     RGBcolor inColor, borderColor;
-    std::string name; // ajouter pour l'introspection
-    std::string getName() const;
+    const std::string name; // ajouter pour l'introspection
 };
 
 #endif // BASEFIG_H

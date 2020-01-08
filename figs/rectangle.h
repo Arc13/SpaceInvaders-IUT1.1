@@ -17,12 +17,12 @@ public:
 
     // Opérateur de décalage +
     Rectangle operator + (const Vec2D & pos_) const {
-        return Rectangle(pos1 + pos_, pos2 + pos_, inColor, borderColor);
+        return Rectangle(pos1 + pos_, pos2 + pos_, getInColor(), getBorderColor());
     }
 
     // Opérateur de réduction *
     Rectangle operator * (const float & f) const {
-        return Rectangle(pos1 * f, pos2 * f, inColor, borderColor);
+        return Rectangle(pos1 * f, pos2 * f, getInColor(), getBorderColor());
     }
 
     // Fonction de clonage

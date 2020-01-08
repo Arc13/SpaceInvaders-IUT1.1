@@ -16,12 +16,12 @@ public:
 
     // Opérateur de décalage +
     Circle operator + (const Vec2D & pos_) const {
-        return Circle(pos + pos_, radius, inColor, borderColor);
+        return Circle(pos + pos_, radius, getInColor(), getBorderColor());
     }
 
     // Opérateur de réduction *
     Circle operator * (const float & f) const {
-        return Circle(pos * f, radius, inColor, borderColor);
+        return Circle(pos * f, radius, getInColor(), getBorderColor());
     }
 
     // Fonction de clonage
