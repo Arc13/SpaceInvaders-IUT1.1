@@ -9,28 +9,25 @@ using namespace nsUtil;
 
 void Line::Draw() const
 {
-    // Pour éviter de faire moultes recherches
-    /*Vec2D pMin (remarkablePt.find("posMin")->second);
-    Vec2D pMax (remarkablePt.find("posMax")->second);
-    if (pMin.abs != pMax.abs)
-    {
-        pair<float, float> equaPminPmax = computeab(pMin, pMax);
-        for (unsigned x = pMin.abs; x <= pMax.abs; ++x)
-        {
-            Window.setPixel(Vec2D(x, (unsigned)ceil(equaPminPmax.first * (float)x + equaPminPmax.second)), borderColor);
-        }
-    }
-    else
-    {
-        for (unsigned y = pMin.ord; y <= pMax.ord; ++y)
-            Window.setPixel(Vec2D(pMin.abs, y), borderColor);
-    }*/
+    // On met la couleur de la ligne
+    const RGBAcolor inColor = getInColor();
+    glColor4ub(inColor.Red, inColor.Green, inColor.Blue, inColor.Alpha);
+
+    // On règle le volume de la ligne
+    glLineWidth(lineWidth);
+
+    // On dessine la ligne
+    glBegin(GL_LINES);
+    glVertex2i(pos1.abs, pos1.ord);
+    glVertex2i(pos2.abs, pos2.ord);
+    glEnd();
 }
 
-Line::Line(const Vec2D & pos1_, const Vec2D & pos2_, const RGBAcolor &fillCol_)
+Line::Line(const Vec2D & pos1_, const Vec2D & pos2_, const RGBAcolor &fillCol_, const float &lineWidth_)
     : BaseFig(fillCol_, fillCol_, "line")
     , pos1(pos1_)
     , pos2(pos2_)
+    , lineWidth(lineWidth_)
 {
 
 }

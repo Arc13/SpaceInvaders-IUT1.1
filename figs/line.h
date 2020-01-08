@@ -11,7 +11,7 @@ protected:
     virtual void Draw() const override;
 
 public:
-    Line (const Vec2D& pos1_, const Vec2D & pos2_, const RGBAcolor & fillCol_ = RGBAcolor ());
+    Line (const Vec2D& pos1_, const Vec2D & pos2_, const RGBAcolor & fillCol_ = RGBAcolor (), const float &lineWidth_ = 1.f);
     Line (const BaseFig &);
     virtual ~Line() {}
 
@@ -31,6 +31,7 @@ public:
 private:
     Vec2D pos1;
     Vec2D pos2;
+    float lineWidth;
 };
 
 #endif // LINE_H

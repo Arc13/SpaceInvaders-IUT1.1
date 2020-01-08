@@ -130,6 +130,7 @@ void MinGL::callDisplay()
 {
     clearScreen();
     glRasterPos2i(0,0);
+    glShadeModel(GL_FLAT);
 
     for (const std::unique_ptr<Drawable> &actualDrawable : drawStack) {
         actualDrawable->Draw();

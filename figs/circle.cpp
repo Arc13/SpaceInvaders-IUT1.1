@@ -8,28 +8,25 @@ using namespace nsUtil;
 
 void Circle::Draw() const
 {
-    // Pour éviter de faire moultes recherches
-    /*Vec2D center(remarkablePt.find("ptCent")->second);
-    unsigned radius(remarkablePt.find("radius")->second.ord);
+    // Source: https://gist.github.com/linusthe3rd/803118
 
-    // La bordure
-    double j, inc = asin((double)1 / radius);
-    for (j = 0; j < 360; j += inc)
-    {
-      Window.setPixel(Vec2D (center.abs+cos(j)*radius, center.ord+sin(j)*radius), borderColor);
+    int i;
+    int triangleAmount = 20; // Nombre de triangles a dessiner
+    const RGBAcolor inColor = getInColor();
+
+    GLfloat twicePi = 2.0f * M_PI;
+
+    glBegin(GL_TRIANGLE_FAN);
+
+    glVertex2f(pos.abs, pos.ord); // Centre du cercle
+    glColor4ub(inColor.Red, inColor.Green, inColor.Blue, inColor.Alpha); // Couleur du cercle
+
+    for(i = 0; i <= triangleAmount;i++) {
+        glVertex2f(pos.abs + (radius * cos(i * twicePi / triangleAmount)),
+                   pos.ord + (radius * sin(i * twicePi / triangleAmount)));
     }
 
-    // L'intérieur
-    for (unsigned i = 0; i < radius - 1; ++i)
-    {
-        for (unsigned j = 0; j < sqrt(radius*radius - i*i) -1; ++j)
-        {
-            Window.setPixel(Vec2D(center.abs + j, center.ord + i), inColor);
-            Window.setPixel(Vec2D(center.abs - j, center.ord + i), inColor);
-            Window.setPixel(Vec2D(center.abs + j, center.ord - i), inColor);
-            Window.setPixel(Vec2D(center.abs - j, center.ord - i), inColor);
-        }
-    }*/
+    glEnd();
 }
 
 Circle::Circle(const Vec2D &pos_, const unsigned &rad_, const RGBAcolor &inCol_, const RGBAcolor &borderCol_)
