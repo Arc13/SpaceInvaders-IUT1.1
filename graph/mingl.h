@@ -11,7 +11,6 @@
 #include "drawable.h"
 #include "libgraphique_fonts.h"
 #include "rgbcolor.h"
-#include "text.h"
 
 #include "../tools/myexception.h"
 #include "../graph/vec2d.h"

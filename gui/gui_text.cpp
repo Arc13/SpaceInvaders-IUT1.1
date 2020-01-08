@@ -9,8 +9,11 @@
 #include "gui_text.h"
 
 GuiText::GuiText(const Vec2D &position_, const std::string &content_,
-                 const RGBcolor &textColor_, const GlutFont &textFont_)
-    : Text(position_, content_, textColor_, textFont_)
+                 const RGBcolor &textColor_, const GlutFont::GlutFonts &textFont_)
+    : position(position_)
+    , content(content_)
+    , textColor(textColor_)
+    , textFont(textFont_)
 {}
 
 std::unique_ptr<Drawable> GuiText::clone() const

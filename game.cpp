@@ -51,12 +51,12 @@ void Game()
 
         // On injecte tout ce qui doit être affiché
         Window << GuiText(Vec2D(10, 10), "BITMAP 8x13", KRed);
-        Window << GuiText(Vec2D(10, 25), "BITMAP 9x15", KRed, GlutFont(GlutFont::BITMAP_9_BY_15));
-        Window << GuiText(Vec2D(10, 40), "HELVETICA 10", KBlue, GlutFont(GlutFont::BITMAP_HELVETICA_10));
-        Window << GuiText(Vec2D(10, 55), "HELVETICA 12", KBlue, GlutFont(GlutFont::BITMAP_HELVETICA_12));
-        Window << GuiText(Vec2D(10, 75), "HELVETICA 18", KBlue, GlutFont(GlutFont::BITMAP_HELVETICA_18));
-        Window << GuiText(Vec2D(10, 95), "TIMES NEW ROMAN 10", KGreen, GlutFont(GlutFont::BITMAP_TIMES_ROMAN_10));
-        Window << GuiText(Vec2D(10, 115), "TIMES NEW ROMAN 24", KGreen, GlutFont(GlutFont::BITMAP_TIMES_ROMAN_24));
+        Window << GuiText(Vec2D(10, 25), "BITMAP 9x15", KRed, GlutFont::BITMAP_9_BY_15);
+        Window << GuiText(Vec2D(10, 40), "HELVETICA 10", KBlue, GlutFont::BITMAP_HELVETICA_10);
+        Window << GuiText(Vec2D(10, 55), "HELVETICA 12", KBlue, GlutFont::BITMAP_HELVETICA_12);
+        Window << GuiText(Vec2D(10, 75), "HELVETICA 18", KBlue, GlutFont::BITMAP_HELVETICA_18);
+        Window << GuiText(Vec2D(10, 95), "TIMES NEW ROMAN 10", KGreen, GlutFont::BITMAP_TIMES_ROMAN_10);
+        Window << GuiText(Vec2D(10, 115), "TIMES NEW ROMAN 24", KGreen, GlutFont::BITMAP_TIMES_ROMAN_24);
 
         //test
         Window << Rectangle(Vec2D(50, 50), Vec2D(20, 20), KRed);

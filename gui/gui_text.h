@@ -9,10 +9,10 @@
 #ifndef GUITEXT_H
 #define GUITEXT_H
 
-#include "../graph/text.h"
+#include "../tools/glut_font.h"
 #include "../graph/iminglinjectable.h"
 
-class GuiText : public Text, public IminGlInjectable
+class GuiText : public IminGlInjectable
 {
 public:
     /**
@@ -25,7 +25,7 @@ public:
             const RGBcolor &textColor_, const GlutFont &textFont_ = GlutFont(GlutFont::GlutFonts::BITMAP_8_BY_13));
      */
     GuiText(const Vec2D &position_, const std::string &content_,
-            const RGBcolor &textColor_, const GlutFont &textFont_ = GlutFont(GlutFont::GlutFonts::BITMAP_8_BY_13));
+            const RGBcolor &textColor_, const GlutFont::GlutFonts &textFont_ = GlutFont::GlutFonts::BITMAP_8_BY_13);
 
     // Fonction de clonage
     virtual std::unique_ptr<Drawable> clone() const override;
@@ -36,7 +36,27 @@ protected:
      * @param[in] Window : Window to render to
      * @fn virtual MinGL & _Edit (MinGL & Window) const;
      */
-    virtual void Draw() const;
+    virtual void Draw() const override;
+
+    /**
+     * @brief position : Position of the text on the window
+     */
+    Vec2D position;
+
+    /**
+     * @brief content : Content of the text
+     */
+    std::string content;
+
+    /**
+     * @brief textColor : Color of the text
+     */
+    RGBcolor textColor;
+
+    /**
+     * @brief textFont : Font of the text
+     */
+    GlutFont textFont;
 };
 
 #endif // GUITEXT_H

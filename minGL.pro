@@ -43,7 +43,6 @@ HEADERS += \
     graph/libgraphique_fonts.h \
     graph/mingl.h \
     graph/rgbcolor.h \
-    graph/text.h \
     graph/vec2d.h \
     gui/gui_star_background.h \
     gui/gui_text.h \
