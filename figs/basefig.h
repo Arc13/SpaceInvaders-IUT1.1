@@ -5,13 +5,13 @@
 #include <memory>
 
 #include "../graph/vec2d.h"
-#include "../graph/rgbcolor.h"
+#include "../graph/rgbacolor.h"
 #include "../graph/iminglinjectable.h"
 
 class BaseFig : public IminGlInjectable
 {
 protected:
-    BaseFig (const RGBcolor &, const RGBcolor &, const std::string &);
+    BaseFig (const RGBAcolor &, const RGBAcolor &, const std::string &);
 
 public:
     BaseFig();
@@ -22,15 +22,15 @@ public:
     // Fonction de clonage
     virtual std::unique_ptr<Drawable> clone() const override;
 
-    const RGBcolor getInColor() const;
-    const RGBcolor getBorderColor() const;
+    const RGBAcolor getInColor() const;
+    const RGBAcolor getBorderColor() const;
     const std::string getName() const;
 
-    void setInColor(const RGBcolor &inColor_);
-    void setBorderColor(const RGBcolor &borderColor_);
+    void setInColor(const RGBAcolor &inColor_);
+    void setBorderColor(const RGBAcolor &borderColor_);
 
 private:
-    RGBcolor inColor, borderColor;
+    RGBAcolor inColor, borderColor;
     const std::string name; // ajouter pour l'introspection
 };
 

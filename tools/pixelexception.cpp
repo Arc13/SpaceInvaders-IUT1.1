@@ -5,7 +5,7 @@
 
 using namespace std;
 
-PixelException::PixelException(const Vec2D &pixelPosition, const RGBcolor &color, const std::string &problem)
+PixelException::PixelException(const Vec2D &pixelPosition, const RGBAcolor &color, const std::string &problem)
     : pixelPosition(pixelPosition), pixelColor(color), problem(problem)
 {}
 

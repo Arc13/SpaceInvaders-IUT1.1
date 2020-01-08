@@ -8,7 +8,7 @@
 
 #include "gui_star_background.h"
 
-GuiStarBackground::GuiStarBackground(const unsigned &starCount_, const Vec2D &size_, const RGBcolor &unlitColor_, const RGBcolor &litColor_, const float &litProbability_)
+GuiStarBackground::GuiStarBackground(const unsigned &starCount_, const Vec2D &size_, const RGBAcolor &unlitColor_, const RGBAcolor &litColor_, const float &litProbability_)
     : m_unlitColor(unlitColor_)
     , m_litColor(litColor_)
     , m_litProbability(litProbability_)
@@ -40,7 +40,7 @@ void GuiStarBackground::Draw() const
     glBegin(GL_POINTS);
 
     for (const Star_t &star: m_stars) {
-        const RGBcolor currentColor = star.isLit ? m_litColor : m_unlitColor;
+        const RGBAcolor currentColor = star.isLit ? m_litColor : m_unlitColor;
 
         glColor3ub(currentColor.Red, currentColor.Green, currentColor.Blue);
         glVertex2i(star.pos.abs, star.pos.ord);

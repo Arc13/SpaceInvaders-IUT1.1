@@ -11,7 +11,7 @@ protected:
     virtual void Draw() const override;
 
 public:
-    Line (const Vec2D& pos1_, const Vec2D & pos2_, const RGBcolor & fillCol_ = RGBcolor ());
+    Line (const Vec2D& pos1_, const Vec2D & pos2_, const RGBAcolor & fillCol_ = RGBAcolor ());
     Line (const BaseFig &);
     virtual ~Line() {}
 

@@ -12,7 +12,7 @@ SOURCES += main.cpp \
     figs/triangle.cpp \
     game.cpp \
     graph/mingl.cpp \
-    graph/rgbcolor.cpp \
+    graph/rgbacolor.cpp \
     gui/gui_star_background.cpp \
     gui/gui_text.cpp \
     tools/CException.cxx \
@@ -42,7 +42,7 @@ HEADERS += \
     graph/drawable.h \
     graph/libgraphique_fonts.h \
     graph/mingl.h \
-    graph/rgbcolor.h \
+    graph/rgbacolor.h \
     graph/vec2d.h \
     gui/gui_star_background.h \
     gui/gui_text.h \

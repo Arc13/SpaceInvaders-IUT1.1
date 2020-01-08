@@ -56,7 +56,7 @@ void Triangle::Draw() const
     Window << Line(pInt, pMax, borderColor);*/
 }
 
-Triangle::Triangle(const Vec2D &pos1_, const Vec2D &pos2_, const Vec2D &pos3_, const RGBcolor &fillCol_, const RGBcolor &borderCol_)
+Triangle::Triangle(const Vec2D &pos1_, const Vec2D &pos2_, const Vec2D &pos3_, const RGBAcolor &fillCol_, const RGBAcolor &borderCol_)
     : BaseFig(fillCol_, borderCol_, "triangle")
     , pos1(pos1_)
     , pos2(pos2_)

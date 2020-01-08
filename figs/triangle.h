@@ -11,7 +11,7 @@ class Triangle : public BaseFig
 protected:
     virtual void Draw() const override;
 public:
-    Triangle(const Vec2D & pos1_, const Vec2D &pos2_, const Vec2D & pos3_, const RGBcolor & fillCol_, const RGBcolor & borderColl_ = RGBcolor ());
+    Triangle(const Vec2D & pos1_, const Vec2D &pos2_, const Vec2D & pos3_, const RGBAcolor & fillCol_, const RGBAcolor & borderColl_ = RGBAcolor ());
     Triangle (const BaseFig &);
     virtual ~Triangle() {}
 

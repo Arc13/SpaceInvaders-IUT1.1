@@ -28,7 +28,7 @@ public:
                       const float &litProbability_ = 0.05);
      */
     GuiStarBackground(const unsigned &starCount_, const Vec2D &size_,
-                      const RGBcolor &unlitColor_ = RGBcolor(128, 128, 128), const RGBcolor &litColor_ = RGBcolor(192, 192, 192),
+                      const RGBAcolor &unlitColor_ = RGBAcolor(128, 128, 128), const RGBAcolor &litColor_ = RGBAcolor(192, 192, 192),
                       const float &litProbability_ = 0.05);
 
     // Fonction de clonage
@@ -57,8 +57,8 @@ private:
 
     std::vector<Star_t> m_stars;
 
-    const RGBcolor m_unlitColor;
-    const RGBcolor m_litColor;
+    const RGBAcolor m_unlitColor;
+    const RGBAcolor m_litColor;
 
     const float m_litProbability;
 };

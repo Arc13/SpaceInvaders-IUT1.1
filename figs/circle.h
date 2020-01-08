@@ -8,7 +8,7 @@
 class Circle : public BaseFig
 {
 public:
-    Circle(const Vec2D & pos_, const unsigned & rad_, const RGBcolor & inCol_, const RGBcolor & borderCol_ = RGBcolor ());
+    Circle(const Vec2D & pos_, const unsigned & rad_, const RGBAcolor & inCol_, const RGBAcolor & borderCol_ = RGBAcolor ());
     Circle(const BaseFig &);
     virtual ~Circle() {}
 

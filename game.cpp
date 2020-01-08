@@ -13,7 +13,7 @@
 
 #include "gui/gui_text.h"
 #include "gui/gui_star_background.h"
-#include "graph/rgbcolor.h"
+#include "graph/rgbacolor.h"
 #include "graph/vec2d.h"
 #include "figs/rectangle.h"
 #include "figs/triangle.h"
@@ -60,7 +60,7 @@ void Game()
         Window << GuiText(Vec2D(10, 115), "TIMES NEW ROMAN 24", KGreen, GlutFont::BITMAP_TIMES_ROMAN_24);
 
         //test
-        Window << Rectangle(Vec2D(50, 50), Vec2D(20, 20), KRed) * 2;
+        Window << Rectangle(Vec2D(50, 50), Vec2D(20, 20), KRed);
 
         // Affiche le framerate
         displayFramerate(frameTime, Window);

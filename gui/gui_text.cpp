@@ -9,7 +9,7 @@
 #include "gui_text.h"
 
 GuiText::GuiText(const Vec2D &position_, const std::string &content_,
-                 const RGBcolor &textColor_, const GlutFont::GlutFonts &textFont_)
+                 const RGBAcolor &textColor_, const GlutFont::GlutFonts &textFont_)
     : position(position_)
     , content(content_)
     , textColor(textColor_)

@@ -10,7 +10,7 @@
 
 #include "drawable.h"
 #include "libgraphique_fonts.h"
-#include "rgbcolor.h"
+#include "rgbacolor.h"
 
 #include "../tools/myexception.h"
 #include "../graph/vec2d.h"
@@ -32,8 +32,8 @@ private:
     const unsigned windowHeight;
     const std::string windowName;
     std::shared_ptr<font> windowFont = std::make_shared<font>(FONT_HELVETICA_10);
-    RGBcolor fontColor = KWhite;
-    RGBcolor bgColor = RGBcolor(17, 17, 17);
+    RGBAcolor fontColor = KWhite;
+    RGBAcolor bgColor = RGBAcolor(17, 17, 17);
 
 
     // Ce dont on a besoin pour Glut

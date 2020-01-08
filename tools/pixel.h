@@ -3,16 +3,16 @@
 
 #include <string>
 
-#include "../graph/rgbcolor.h"
+#include "../graph/rgbacolor.h"
 #include "tools.h"
 
 class Pixel
 {
 public:
     unsigned abs, ord;
-    RGBcolor color;
+    RGBAcolor color;
 
-    Pixel (const unsigned & Abscisse = 0, const unsigned & Ordonnee = 0, const RGBcolor & coul = RGBcolor ());
+    Pixel (const unsigned & Abscisse = 0, const unsigned & Ordonnee = 0, const RGBAcolor & coul = RGBAcolor ());
 
     Pixel operator +(const Pixel & pix) const {
         return Pixel(abs + pix.abs, ord + pix.ord, color);

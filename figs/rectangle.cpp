@@ -9,13 +9,14 @@ using namespace nsUtil;
 
 void Rectangle::Draw() const
 {
-    const RGBcolor inColor = getInColor();
+    const RGBAcolor inColor = getInColor();
+
     // Affiche un rectangle via la routine OpenGL
-    glColor3ub(inColor.Red, inColor.Green, inColor.Blue);
+    glColor4ub(inColor.Red, inColor.Green, inColor.Blue, inColor.Alpha);
     glRecti(pos1.abs, pos1.ord, pos2.abs, pos2.ord);
 }
 
-Rectangle::Rectangle(const Vec2D &pos1_, const Vec2D &pos2_, const RGBcolor &inCol_, const RGBcolor &borderCol_)
+Rectangle::Rectangle(const Vec2D &pos1_, const Vec2D &pos2_, const RGBAcolor &inCol_, const RGBAcolor &borderCol_)
     : BaseFig(inCol_, borderCol_, "rectangle")
     , pos1(pos1_)
     , pos2(pos2_)
@@ -23,7 +24,7 @@ Rectangle::Rectangle(const Vec2D &pos1_, const Vec2D &pos2_, const RGBcolor &inC
 
 }
 
-Rectangle::Rectangle(const Vec2D &pos_, const unsigned &width_, const unsigned &height_, const RGBcolor &inCol_, const RGBcolor &borderCol_)
+Rectangle::Rectangle(const Vec2D &pos_, const unsigned &width_, const unsigned &height_, const RGBAcolor &inCol_, const RGBAcolor &borderCol_)
     : BaseFig(inCol_, borderCol_, "rectangle")
     , pos1(pos_)
     , pos2(Vec2D(pos_.abs + width_, pos_.ord + height_))

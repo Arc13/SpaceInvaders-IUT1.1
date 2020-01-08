@@ -8,8 +8,8 @@
 class Rectangle : public BaseFig
 {
 public:
-    Rectangle(const Vec2D & pos1_, const Vec2D & pos2_, const RGBcolor & inCol_, const RGBcolor & borderCol_ = RGBcolor ());
-    Rectangle(const Vec2D & Vec2D_, const unsigned & width_, const unsigned & height_, const RGBcolor & inCol_, const RGBcolor & borderCol_ = RGBcolor ());
+    Rectangle(const Vec2D & pos1_, const Vec2D & pos2_, const RGBAcolor & inCol_, const RGBAcolor & borderCol_ = RGBAcolor ());
+    Rectangle(const Vec2D & Vec2D_, const unsigned & width_, const unsigned & height_, const RGBAcolor & inCol_, const RGBAcolor & borderCol_ = RGBAcolor ());
     Rectangle (const BaseFig &);
     virtual ~Rectangle() {}
 

@@ -25,7 +25,7 @@ public:
             const RGBcolor &textColor_, const GlutFont &textFont_ = GlutFont(GlutFont::GlutFonts::BITMAP_8_BY_13));
      */
     GuiText(const Vec2D &position_, const std::string &content_,
-            const RGBcolor &textColor_, const GlutFont::GlutFonts &textFont_ = GlutFont::GlutFonts::BITMAP_8_BY_13);
+            const RGBAcolor &textColor_, const GlutFont::GlutFonts &textFont_ = GlutFont::GlutFonts::BITMAP_8_BY_13);
 
     // Fonction de clonage
     virtual std::unique_ptr<Drawable> clone() const override;
@@ -51,7 +51,7 @@ protected:
     /**
      * @brief textColor : Color of the text
      */
-    RGBcolor textColor;
+    RGBAcolor textColor;
 
     /**
      * @brief textFont : Font of the text

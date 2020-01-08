@@ -27,7 +27,7 @@ void Line::Draw() const
     }*/
 }
 
-Line::Line(const Vec2D & pos1_, const Vec2D & pos2_, const RGBcolor &fillCol_)
+Line::Line(const Vec2D & pos1_, const Vec2D & pos2_, const RGBAcolor &fillCol_)
     : BaseFig(fillCol_, fillCol_, "line")
     , pos1(pos1_)
     , pos2(pos2_)

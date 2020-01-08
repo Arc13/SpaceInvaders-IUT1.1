@@ -7,7 +7,7 @@ using namespace std;
 BaseFig::BaseFig()
 {}
 
-BaseFig::BaseFig(const RGBcolor & inCol_, const RGBcolor & bdCol_, const std::string &name_)
+BaseFig::BaseFig(const RGBAcolor & inCol_, const RGBAcolor & bdCol_, const std::string &name_)
     : inColor (inCol_)
     , borderColor (bdCol_)
     , name (name_)
@@ -18,12 +18,12 @@ std::unique_ptr<Drawable> BaseFig::clone() const
     return std::unique_ptr<BaseFig>(new BaseFig(*this));
 }
 
-const RGBcolor BaseFig::getBorderColor() const
+const RGBAcolor BaseFig::getBorderColor() const
 {
     return borderColor;
 }
 
-const RGBcolor BaseFig::getInColor() const
+const RGBAcolor BaseFig::getInColor() const
 {
     return inColor;
 }
@@ -33,12 +33,12 @@ const string BaseFig::getName() const
     return name;
 }
 
-void BaseFig::setInColor(const RGBcolor &inColor_)
+void BaseFig::setInColor(const RGBAcolor &inColor_)
 {
     inColor = inColor_;
 }
 
-void BaseFig::setBorderColor(const RGBcolor &borderColor_)
+void BaseFig::setBorderColor(const RGBAcolor &borderColor_)
 {
     borderColor = borderColor_;
 }

@@ -32,7 +32,7 @@ void Circle::Draw() const
     }*/
 }
 
-Circle::Circle(const Vec2D &pos_, const unsigned &rad_, const RGBcolor &inCol_, const RGBcolor &borderCol_)
+Circle::Circle(const Vec2D &pos_, const unsigned &rad_, const RGBAcolor &inCol_, const RGBAcolor &borderCol_)
     : BaseFig(inCol_, borderCol_, "circle")
     , pos(pos_)
     , radius(rad_)
