@@ -61,10 +61,10 @@ void Game()
         Window << GuiText(Vec2D(10, 115), "TIMES NEW ROMAN 24", KGreen, GlutFont::BITMAP_TIMES_ROMAN_24);
 
         //test
-        Window << Rectangle(Vec2D(280, 280), Vec2D(300, 300), KBlue);
-        Window << Circle(Vec2D(150, 150), 40, KYellow);
+        Window << Rectangle(Vec2D(280, 280), Vec2D(300, 300), KBlue, KPurple);
+        Window << Circle(Vec2D(150, 150), 40, KYellow, KRed);
         Window << Line(Vec2D(400, 400), Vec2D(500, 400), KRed);
-        Window << Triangle(Vec2D(100, 100), Vec2D(150, 100), Vec2D(100, 150), KCyan);
+        Window << Triangle(Vec2D(100, 100), Vec2D(150, 100), Vec2D(100, 150), KCyan, KRed);
 
         // Affiche le framerate
         displayFramerate(frameTime, Window);

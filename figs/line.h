@@ -7,13 +7,12 @@
 
 class Line : public BaseFig
 {
-protected:
-    virtual void Draw() const override;
-
 public:
     Line (const Vec2D& pos1_, const Vec2D & pos2_, const RGBAcolor & fillCol_ = RGBAcolor (), const float &lineWidth_ = 1.f);
     Line (const BaseFig &);
     virtual ~Line() {}
+
+    virtual void Draw() const override;
 
     // Opérateur de décalage +
     Line operator + (const Vec2D & pos_) const {

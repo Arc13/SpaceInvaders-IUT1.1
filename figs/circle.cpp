@@ -12,14 +12,16 @@ void Circle::Draw() const
 
     int i;
     int triangleAmount = 20; // Nombre de triangles a dessiner
+
+    // On règle la couleur du cercle
     const RGBAcolor inColor = getInColor();
+    glColor4ub(inColor.Red, inColor.Green, inColor.Blue, inColor.Alpha); // Couleur du cercle
 
     GLfloat twicePi = 2.0f * M_PI;
 
     glBegin(GL_TRIANGLE_FAN);
 
     glVertex2f(pos.abs, pos.ord); // Centre du cercle
-    glColor4ub(inColor.Red, inColor.Green, inColor.Blue, inColor.Alpha); // Couleur du cercle
 
     for(i = 0; i <= triangleAmount;i++) {
         glVertex2f(pos.abs + (radius * cos(i * twicePi / triangleAmount)),
@@ -27,6 +29,21 @@ void Circle::Draw() const
     }
 
     glEnd();
+
+    if (getBorderColor() != KTransparent) {
+        // On a une bordure, on l'affiche
+        const RGBAcolor borderColor = getBorderColor();
+        glColor4ub(borderColor.Red, borderColor.Green, borderColor.Blue, borderColor.Alpha);
+
+        glBegin(GL_LINE_LOOP);
+
+        for(i = 0; i <= triangleAmount;i++) {
+            glVertex2f(pos.abs + (radius * cos(i * twicePi / triangleAmount)),
+                       pos.ord + (radius * sin(i * twicePi / triangleAmount)));
+        }
+
+        glEnd();
+    }
 }
 
 Circle::Circle(const Vec2D &pos_, const unsigned &rad_, const RGBAcolor &inCol_, const RGBAcolor &borderCol_)

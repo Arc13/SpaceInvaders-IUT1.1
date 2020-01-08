@@ -19,8 +19,12 @@ public:
         , Alpha(A)
     {}
 
-    bool operator ==(const RGBAcolor & col) {
+    bool operator ==(const RGBAcolor & col) const {
         return col.Red == Red && col.Green == Green && col.Blue == Blue && col.Alpha == Alpha;
+    }
+
+    bool operator !=(const RGBAcolor &col) const {
+        return col.Red != Red || col.Green != Green || col.Blue != Blue || col.Alpha != Alpha;
     }
 
     RGBAcolor operator *(const float &rhs) const {

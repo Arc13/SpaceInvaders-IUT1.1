@@ -9,11 +9,25 @@ using namespace nsUtil;
 
 void Rectangle::Draw() const
 {
+    // On règle la couleur du rectangle
     const RGBAcolor inColor = getInColor();
+    glColor4ub(inColor.Red, inColor.Green, inColor.Blue, inColor.Alpha);
 
     // Affiche un rectangle via la routine OpenGL
-    glColor4ub(inColor.Red, inColor.Green, inColor.Blue, inColor.Alpha);
     glRecti(pos1.abs, pos1.ord, pos2.abs, pos2.ord);
+
+    if (getBorderColor() != KTransparent) {
+        // On a une bordure, on l'affiche
+        const RGBAcolor borderColor = getBorderColor();
+        glColor4ub(borderColor.Red, borderColor.Green, borderColor.Blue, borderColor.Alpha);
+
+        glBegin(GL_LINE_LOOP);
+        glVertex2i(pos1.abs, pos1.ord);
+        glVertex2i(pos1.abs, pos2.ord);
+        glVertex2i(pos2.abs, pos2.ord);
+        glVertex2i(pos2.abs, pos1.ord);
+        glEnd();
+    }
 }
 
 Rectangle::Rectangle(const Vec2D &pos1_, const Vec2D &pos2_, const RGBAcolor &inCol_, const RGBAcolor &borderCol_)

@@ -123,7 +123,7 @@ void MinGL::callReshape(int h, int w)
     gluOrtho2D(0.0, GLfloat (windowWidth), 0.0, GLfloat (windowHeight));
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    glViewport(0,0,h,w);
+    glViewport(0, 0, h, w);
 }
 
 void MinGL::callDisplay()
