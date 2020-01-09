@@ -16,16 +16,16 @@ GuiStarBackground::GuiStarBackground(const unsigned &starCount_, const Vec2D &si
     srand(time(NULL));
     for (unsigned i = 0; i < starCount_; ++i) {
         // Put a new star at random coordinates, unlit by default, in the star vector
-        m_stars.push_back({Vec2D(rand() % size_.abs, rand() % size_.ord), false});
+        m_stars.push_back({Vec2D(rand() % size_.x, rand() % size_.y), false});
     }
 }
 
-std::unique_ptr<Drawable> GuiStarBackground::clone() const
+std::unique_ptr<IDrawable> GuiStarBackground::clone() const
 {
     return std::unique_ptr<GuiStarBackground>(new GuiStarBackground(*this));
 }
 
-void GuiStarBackground::Update(std::chrono::milliseconds delta)
+void GuiStarBackground::Update(float delta)
 {
     for (Star_t &star: m_stars) {
         const double randNumber = rand() / (double)RAND_MAX;
@@ -43,7 +43,7 @@ void GuiStarBackground::Draw() const
         const RGBAcolor currentColor = star.isLit ? m_litColor : m_unlitColor;
 
         glColor3ub(currentColor.Red, currentColor.Green, currentColor.Blue);
-        glVertex2i(star.pos.abs, star.pos.ord);
+        glVertex2i(star.pos.x, star.pos.y);
     }
 
     glEnd();

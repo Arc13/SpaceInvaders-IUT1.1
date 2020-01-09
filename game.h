@@ -5,7 +5,7 @@
  * \author LAUGIER Colin
  * \author PALATUIK Alison
  * \author AMBAUD Marc
- * \version 1.0
+ * \version 1.1
  * \date 28 décembre 2019
  */
 

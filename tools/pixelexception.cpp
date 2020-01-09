@@ -14,7 +14,7 @@ const char* PixelException::what() const noexcept
     ostringstream sstr;
 
     sstr << "Pixel error: ";
-    sstr << "(" << pixelPosition.abs << "," << pixelPosition.ord << ") ";
+    sstr << "(" << pixelPosition.x << "," << pixelPosition.y << ") ";
     sstr << "[" << pixelColor << "]: ";
     sstr << problem;
 

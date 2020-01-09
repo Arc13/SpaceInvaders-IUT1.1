@@ -8,13 +8,14 @@
 
 #include "freeglut.h"
 
-#include "drawable.h"
+#include "idrawable.h"
 #include "libgraphique_fonts.h"
 #include "rgbacolor.h"
 
-#include "../tools/myexception.h"
 #include "../graph/vec2d.h"
 
+#include "../event/event_manager.h"
+#include "../tools/myexception.h"
 #include "../tools/pixelexception.h"
 
 /*!
@@ -28,8 +29,7 @@ class MinGL
 {
 private:
     // Les données membres en tant que tel
-    const unsigned windowWidth;
-    const unsigned windowHeight;
+    const Vec2D windowSize;
     const std::string windowName;
     std::shared_ptr<font> windowFont = std::make_shared<font>(FONT_HELVETICA_10);
     RGBAcolor fontColor = KWhite;
@@ -38,16 +38,18 @@ private:
 
     // Ce dont on a besoin pour Glut
     short glutWindowId = 0;
-    std::vector<std::unique_ptr<Drawable>> drawStack;
-    std::queue<char> keyboardBuffer;
+    std::vector<std::unique_ptr<IDrawable>> drawStack;
 
 
     // Les handlers
+    Event::EventManager eventManager;
     void callReshape(int h, int w);
     void callDisplay();
+    void callMouse(int button, int state, int x = 0, int y = 0);
+    void callMotion(int x, int y);
+    void callPassiveMotion(int x, int y);
     void callKeyboard(unsigned char key, int x = 0, int y = 0);
     void callKeyboardSpecial(int key, int x = 0, int y = 0);
-    void callMouse(int button, int state, int x = 0, int y = 0);
 
 public:
     static void initGlut()
@@ -60,19 +62,16 @@ public:
     void initGraphic();
     void stopGaphic();
 
-    MinGL(const unsigned &Width = 640, const unsigned &Height = 480, const std::string &Name = std::string());
+    MinGL(const std::string &name_ = std::string(), const Vec2D &windowSize_ = Vec2D(640, 480));
     ~MinGL();
 
+    void addDrawable(std::unique_ptr<IDrawable> drawable);
     void updateGraphic();
     void clearScreen();
 
-    void addDrawable(std::unique_ptr<Drawable> drawable);
+    Event::EventManager &getEventManager();
 
-    char getKey();
-
-    unsigned getWindowWidth() const;
-    unsigned getWindowHeight() const;
-    Vec2D getWindowSize() const;
+    const Vec2D getWindowSize() const;
 
 };
 

@@ -31,7 +31,7 @@ public:
     BaseFig operator * (const float & f) const;
 
     // Fonction de clonage
-    virtual std::unique_ptr<Drawable> clone() const override;
+    virtual std::unique_ptr<IDrawable> clone() const override;
 };
 
 #endif // FIGURE_H

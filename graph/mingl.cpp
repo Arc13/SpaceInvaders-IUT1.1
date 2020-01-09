@@ -30,10 +30,10 @@ struct callBackBuilder<void(Obj::*)(Arg...), oHandler>
 
 #define BIND_CALLBACK(HANDLER) callBackBuilder<decltype(HANDLER), HANDLER>::callback
 
-MinGL::MinGL(const unsigned &Width, const unsigned &Height, const std::string &Name)
-    : windowWidth(Width)
-    , windowHeight(Height)
-    , windowName(Name)
+MinGL::MinGL(const std::string &name_, const Vec2D &windowSize_)
+    : windowSize(windowSize_)
+    , windowName(name_)
+    , eventManager()
 {
 
 }
@@ -47,6 +47,11 @@ MinGL::~MinGL()
     stopGaphic();
 }
 
+void MinGL::addDrawable(std::unique_ptr<IDrawable> drawable)
+{
+    drawStack.push_back(std::move(drawable));
+}
+
 void MinGL::updateGraphic()
 {
     glutPostRedisplay();
@@ -58,32 +63,16 @@ void MinGL::clearScreen()
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void MinGL::addDrawable(std::unique_ptr<Drawable> drawable)
+Event::EventManager &MinGL::getEventManager()
 {
-    drawStack.push_back(std::move(drawable));
-}
-
-char MinGL::getKey()
-{
-    glutMainLoopEvent();
-
-    char key;
-    while (keyboardBuffer.size() == 0)
-    {
-        glutMainLoopEvent();
-    }
-
-    key = keyboardBuffer.front();
-    keyboardBuffer.pop();
-
-    return key;
+    return eventManager;
 }
 
 void MinGL::initGraphic()
 {
     // Initialisation GLUT
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
-    glutInitWindowSize(int(windowWidth), int(windowHeight));
+    glutInitWindowSize(int(windowSize.x), int(windowSize.y));
     glutInitWindowPosition(200, 100);
 
     glutWindowId = glutCreateWindow(windowName.c_str());
@@ -96,9 +85,11 @@ void MinGL::initGraphic()
     // Initialisation handlers
     glutReshapeFunc(BIND_CALLBACK(&MinGL::callReshape));
     glutDisplayFunc(BIND_CALLBACK(&MinGL::callDisplay));
+    glutMouseFunc(BIND_CALLBACK(&MinGL::callMouse));
+    glutMotionFunc(BIND_CALLBACK(&MinGL::callMotion));
+    glutPassiveMotionFunc(BIND_CALLBACK(&MinGL::callPassiveMotion));
     glutKeyboardFunc(BIND_CALLBACK(&MinGL::callKeyboard));
     glutSpecialFunc(BIND_CALLBACK(&MinGL::callKeyboardSpecial));
-    glutMouseFunc(BIND_CALLBACK(&MinGL::callMouse));
 
     // On set la couleur d'effacement (prend des float, donc obligé de diviser par la taille d'un GLuint)
     glClearColor(bgColor.Red / 256.f, bgColor.Green / 256.f, bgColor.Blue / 256.f, 1.f);
@@ -120,7 +111,7 @@ void MinGL::callReshape(int h, int w)
 {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluOrtho2D(0.0, GLfloat (windowWidth), 0.0, GLfloat (windowHeight));
+    gluOrtho2D(0.0, GLfloat (windowSize.x), GLfloat (windowSize.y), 0.0);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glViewport(0, 0, h, w);
@@ -132,7 +123,7 @@ void MinGL::callDisplay()
     glRasterPos2i(0,0);
     glShadeModel(GL_FLAT);
 
-    for (const std::unique_ptr<Drawable> &actualDrawable : drawStack) {
+    for (const std::unique_ptr<IDrawable> &actualDrawable : drawStack) {
         actualDrawable->Draw();
     }
     drawStack.clear();
@@ -142,33 +133,32 @@ void MinGL::callDisplay()
 }
 
 
+void MinGL::callMouse(int button, int state, int x, int y)
+{
+    eventManager.pushEvent(Event::Event(Event::EventType_t::MouseClick, {.clickData = Event::MouseClickData_t(button, state, x, y)}));
+}
+
+void MinGL::callMotion(int x, int y)
+{
+    eventManager.pushEvent(Event::Event(Event::EventType_t::MouseDrag, {.moveData = Event::MouseMoveData_t(x, y)}));
+}
+
+void MinGL::callPassiveMotion(int x, int y)
+{
+    eventManager.pushEvent(Event::Event(Event::EventType_t::MouseMove, {.moveData = Event::MouseMoveData_t(x, y)}));
+}
+
 void MinGL::callKeyboard(unsigned char key, int x, int y)
 {
-    keyboardBuffer.push(key);
-    cout << "keyboard [key = " << key << "; x = " << x << "; y = " << y << "]" << endl;
+    eventManager.pushEvent(Event::Event(Event::EventType_t::Keyboard, {.keyboardData = Event::KeyboardData_t(key, x, y)}));
 }
 
 void MinGL::callKeyboardSpecial(int key, int x, int y)
 {
-    keyboardBuffer.push(key << 8);
+    eventManager.pushEvent(Event::Event(Event::EventType_t::KeyboardSpecial, {.keyboardSpecialData = Event::KeyboardSpecialData_t(key, x, y)}));
 }
 
-void MinGL::callMouse(int button, int state, int x, int y)
+const Vec2D MinGL::getWindowSize() const
 {
-    cout << "mouse [button = " << button << "; state = " << state << "; x = " << x << "; y = " << y << "]" << endl;
-}
-
-unsigned MinGL::getWindowWidth() const
-{
-    return windowWidth;
-}
-
-unsigned MinGL::getWindowHeight() const
-{
-    return windowHeight;
-}
-
-Vec2D MinGL::getWindowSize() const
-{
-    return Vec2D(windowWidth, windowHeight);
+    return windowSize;
 }

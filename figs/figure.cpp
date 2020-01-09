@@ -51,7 +51,7 @@ BaseFig Figure::operator +(const Vec2D &pos_) const
     return tmp;
 }
 
-std::unique_ptr<Drawable> Figure::clone() const
+std::unique_ptr<IDrawable> Figure::clone() const
 {
     return std::unique_ptr<Figure>(new Figure(*this));
 }

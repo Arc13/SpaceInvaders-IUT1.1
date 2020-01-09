@@ -18,9 +18,9 @@ void Triangle::Draw() const
 
     // On dessine le triangle
     glBegin(GL_TRIANGLES);
-    glVertex2i(pos1.abs, pos1.ord);
-    glVertex2i(pos2.abs, pos2.ord);
-    glVertex2i(pos3.abs, pos3.ord);
+    glVertex2i(pos1.x, pos1.y);
+    glVertex2i(pos2.x, pos2.y);
+    glVertex2i(pos3.x, pos3.y);
     glEnd();
 
     if (getBorderColor() != KTransparent) {
@@ -29,9 +29,9 @@ void Triangle::Draw() const
         glColor4ub(borderColor.Red, borderColor.Green, borderColor.Blue, borderColor.Alpha);
 
         glBegin(GL_LINE_LOOP);
-        glVertex2i(pos1.abs, pos1.ord);
-        glVertex2i(pos2.abs, pos2.ord);
-        glVertex2i(pos3.abs, pos3.ord);
+        glVertex2i(pos1.x, pos1.y);
+        glVertex2i(pos2.x, pos2.y);
+        glVertex2i(pos3.x, pos3.y);
         glEnd();
     }
 }
@@ -51,7 +51,7 @@ Triangle::Triangle(const BaseFig & b)
 
 }
 
-std::unique_ptr<Drawable> Triangle::clone() const
+std::unique_ptr<IDrawable> Triangle::clone() const
 {
     return std::unique_ptr<Triangle>(new Triangle(*this));
 }

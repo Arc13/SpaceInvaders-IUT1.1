@@ -4,6 +4,7 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
+    event/event_manager.cpp \
     figs/basefig.cpp \
     figs/circle.cpp \
     figs/figure.cpp \
@@ -32,6 +33,8 @@ INCLUDEPATH += /usr/include/GL/
 QMAKE_CXXFLAGS += -Wall
 
 HEADERS += \
+    event/event.h \
+    event/event_manager.h \
     figs/basefig.h \
     figs/circle.h \
     figs/figure.h \
@@ -39,7 +42,7 @@ HEADERS += \
     figs/rectangle.h \
     figs/triangle.h \
     game.h \
-    graph/drawable.h \
+    graph/idrawable.h \
     graph/libgraphique_fonts.h \
     graph/mingl.h \
     graph/rgbacolor.h \

@@ -6,8 +6,8 @@
  */
 std::pair<float, float> computeab(const Vec2D & pt1, const Vec2D & pt2)
 {
-    float a = (float ((int)pt2.ord - (int)pt1.ord)) / (float ((int)pt2.abs - (int)pt1.abs));
-    float b = pt2.ord - a * pt2.abs;
+    float a = (float ((int)pt2.y - (int)pt1.y)) / (float ((int)pt2.x - (int)pt1.x));
+    float b = pt2.y - a * pt2.x;
 
     return std::make_pair (a,b);
 } // computeab()

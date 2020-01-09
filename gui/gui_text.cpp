@@ -16,7 +16,7 @@ GuiText::GuiText(const Vec2D &position_, const std::string &content_,
     , textFont(textFont_)
 {}
 
-std::unique_ptr<Drawable> GuiText::clone() const
+std::unique_ptr<IDrawable> GuiText::clone() const
 {
     return std::unique_ptr<GuiText>(new GuiText(*this));
 }
@@ -24,7 +24,7 @@ std::unique_ptr<Drawable> GuiText::clone() const
 void GuiText::Draw() const
 {
     glColor3ub(textColor.Red, textColor.Green, textColor.Blue);
-    glRasterPos2i(position.abs, position.ord);
+    glRasterPos2i(position.x, position.y);
 
     glutBitmapString(textFont.convertForGlut(), reinterpret_cast<const unsigned char *>(content.c_str()));
 }

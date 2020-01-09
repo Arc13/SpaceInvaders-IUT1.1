@@ -26,7 +26,7 @@ public:
     }
 
     // Fonction de clonage
-    virtual std::unique_ptr<Drawable> clone() const override;
+    virtual std::unique_ptr<IDrawable> clone() const override;
 
 private:
     Vec2D pos1;

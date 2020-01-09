@@ -20,7 +20,7 @@ public:
     virtual void Draw () const override {}
 
     // Fonction de clonage
-    virtual std::unique_ptr<Drawable> clone() const override;
+    virtual std::unique_ptr<IDrawable> clone() const override;
 
     const RGBAcolor getInColor() const;
     const RGBAcolor getBorderColor() const;

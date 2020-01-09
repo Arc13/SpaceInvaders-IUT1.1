@@ -13,7 +13,7 @@ BaseFig::BaseFig(const RGBAcolor & inCol_, const RGBAcolor & bdCol_, const std::
     , name (name_)
 {}
 
-std::unique_ptr<Drawable> BaseFig::clone() const
+std::unique_ptr<IDrawable> BaseFig::clone() const
 {
     return std::unique_ptr<BaseFig>(new BaseFig(*this));
 }

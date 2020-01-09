@@ -14,7 +14,7 @@ void Rectangle::Draw() const
     glColor4ub(inColor.Red, inColor.Green, inColor.Blue, inColor.Alpha);
 
     // Affiche un rectangle via la routine OpenGL
-    glRecti(pos1.abs, pos1.ord, pos2.abs, pos2.ord);
+    glRecti(pos1.x, pos1.y, pos2.x, pos2.y);
 
     if (getBorderColor() != KTransparent) {
         // On a une bordure, on l'affiche
@@ -22,10 +22,10 @@ void Rectangle::Draw() const
         glColor4ub(borderColor.Red, borderColor.Green, borderColor.Blue, borderColor.Alpha);
 
         glBegin(GL_LINE_LOOP);
-        glVertex2i(pos1.abs, pos1.ord);
-        glVertex2i(pos1.abs, pos2.ord);
-        glVertex2i(pos2.abs, pos2.ord);
-        glVertex2i(pos2.abs, pos1.ord);
+        glVertex2i(pos1.x, pos1.y);
+        glVertex2i(pos1.x, pos2.y);
+        glVertex2i(pos2.x, pos2.y);
+        glVertex2i(pos2.x, pos1.y);
         glEnd();
     }
 }
@@ -41,7 +41,7 @@ Rectangle::Rectangle(const Vec2D &pos1_, const Vec2D &pos2_, const RGBAcolor &in
 Rectangle::Rectangle(const Vec2D &pos_, const unsigned &width_, const unsigned &height_, const RGBAcolor &inCol_, const RGBAcolor &borderCol_)
     : BaseFig(inCol_, borderCol_, "rectangle")
     , pos1(pos_)
-    , pos2(Vec2D(pos_.abs + width_, pos_.ord + height_))
+    , pos2(Vec2D(pos_.x + width_, pos_.y + height_))
 {
 
 }
@@ -52,7 +52,7 @@ Rectangle::Rectangle(const BaseFig & b)
 
 }
 
-std::unique_ptr<Drawable> Rectangle::clone() const
+std::unique_ptr<IDrawable> Rectangle::clone() const
 {
     return std::unique_ptr<Rectangle>(new Rectangle(*this));
 }

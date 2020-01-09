@@ -21,11 +21,11 @@ void Circle::Draw() const
 
     glBegin(GL_TRIANGLE_FAN);
 
-    glVertex2f(pos.abs, pos.ord); // Centre du cercle
+    glVertex2f(pos.x, pos.y); // Centre du cercle
 
     for(i = 0; i <= triangleAmount;i++) {
-        glVertex2f(pos.abs + (radius * cos(i * twicePi / triangleAmount)),
-                   pos.ord + (radius * sin(i * twicePi / triangleAmount)));
+        glVertex2f(pos.x + (radius * cos(i * twicePi / triangleAmount)),
+                   pos.y + (radius * sin(i * twicePi / triangleAmount)));
     }
 
     glEnd();
@@ -38,8 +38,8 @@ void Circle::Draw() const
         glBegin(GL_LINE_LOOP);
 
         for(i = 0; i <= triangleAmount;i++) {
-            glVertex2f(pos.abs + (radius * cos(i * twicePi / triangleAmount)),
-                       pos.ord + (radius * sin(i * twicePi / triangleAmount)));
+            glVertex2f(pos.x + (radius * cos(i * twicePi / triangleAmount)),
+                       pos.y + (radius * sin(i * twicePi / triangleAmount)));
         }
 
         glEnd();
@@ -60,7 +60,7 @@ Circle::Circle(const BaseFig & b)
 
 }
 
-std::unique_ptr<Drawable> Circle::clone() const
+std::unique_ptr<IDrawable> Circle::clone() const
 {
     return std::unique_ptr<Circle>(new Circle(*this));
 }

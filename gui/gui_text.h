@@ -27,8 +27,11 @@ public:
     GuiText(const Vec2D &position_, const std::string &content_,
             const RGBAcolor &textColor_, const GlutFont::GlutFonts &textFont_ = GlutFont::GlutFonts::BITMAP_8_BY_13);
 
-    // Fonction de clonage
-    virtual std::unique_ptr<Drawable> clone() const override;
+    /**
+     * @brief Clones the object
+     * @fn virtual std::unique_ptr<IDrawable> clone() const override;
+     */
+    virtual std::unique_ptr<IDrawable> clone() const override;
 
 protected:
     /**

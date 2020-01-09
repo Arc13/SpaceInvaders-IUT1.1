@@ -18,8 +18,8 @@ void Line::Draw() const
 
     // On dessine la ligne
     glBegin(GL_LINES);
-    glVertex2i(pos1.abs, pos1.ord);
-    glVertex2i(pos2.abs, pos2.ord);
+    glVertex2i(pos1.x, pos1.y);
+    glVertex2i(pos2.x, pos2.y);
     glEnd();
 }
 
@@ -38,7 +38,7 @@ Line::Line(const BaseFig & b)
 
 }
 
-std::unique_ptr<Drawable> Line::clone() const
+std::unique_ptr<IDrawable> Line::clone() const
 {
     return std::unique_ptr<Line>(new Line(*this));
 }

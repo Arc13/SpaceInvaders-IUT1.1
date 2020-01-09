@@ -23,22 +23,23 @@
 
 using namespace std;
 
-void displayFramerate(const chrono::milliseconds FrameTime, MinGL &Window)
+void displayFramerate(const float &FrameTime, MinGL &Window)
 {
-    const string framerateStr = to_string(1 / (FrameTime.count() / 1000.f));
-    Window << GuiText(Vec2D(5, Window.getWindowHeight() - 15), framerateStr + " FPS", KPurple);
+    const string framerateStr = to_string(1 / (FrameTime / 1000.f));
+    Window << GuiText(Vec2D(5, 15), framerateStr + " FPS", KPurple);
 }
 
 void Game()
 {
-    // Initialise le système graphique
+    // Initialise le système graphique et d'évènements
     MinGL Window;
     Window.initGlut();
     Window.initGraphic();
 
+    // On instancie le background
     GuiStarBackground starBackground(300, Window.getWindowSize());
 
-    chrono::milliseconds frameTime;
+    chrono::duration<float> frameTime;
     while (true)
     {
         // Récupère l'heure au début de la boucle
@@ -47,18 +48,28 @@ void Game()
         // Efface l'écran a chaque itération
         Window.clearScreen();
 
+        // On vérifie pour de nouveaux événements
+        /*while (Window.getEventManager().hasEvent()) {
+            const Event::Event currentEvent = Window.getEventManager().pullEvent();
+            if (currentEvent.eventType == Event::MouseClick) {
+                cout << "click: " << currentEvent.eventData.clickData.x << ", " << currentEvent.eventData.clickData.y << endl;
+            } else if (currentEvent.eventType == Event::MouseMove) {
+                cout << "move: " << currentEvent.eventData.moveData.x << ", " << currentEvent.eventData.moveData.y << endl;
+            }
+        }*/
+
         // On met a jour et affiche le fond étoilé
-        starBackground.Update(frameTime);
+        starBackground.Update(frameTime.count());
         Window << starBackground;
 
         // On injecte tout ce qui doit être affiché
-        Window << GuiText(Vec2D(10, 10), "BITMAP 8x13", KRed);
-        Window << GuiText(Vec2D(10, 25), "BITMAP 9x15", KRed, GlutFont::BITMAP_9_BY_15);
-        Window << GuiText(Vec2D(10, 40), "HELVETICA 10", KBlue, GlutFont::BITMAP_HELVETICA_10);
-        Window << GuiText(Vec2D(10, 55), "HELVETICA 12", KBlue, GlutFont::BITMAP_HELVETICA_12);
-        Window << GuiText(Vec2D(10, 75), "HELVETICA 18", KBlue, GlutFont::BITMAP_HELVETICA_18);
-        Window << GuiText(Vec2D(10, 95), "TIMES NEW ROMAN 10", KGreen, GlutFont::BITMAP_TIMES_ROMAN_10);
-        Window << GuiText(Vec2D(10, 115), "TIMES NEW ROMAN 24", KGreen, GlutFont::BITMAP_TIMES_ROMAN_24);
+        Window << GuiText(Vec2D(10, 110), "BITMAP 8x13", KRed);
+        Window << GuiText(Vec2D(10, 125), "BITMAP 9x15", KRed, GlutFont::BITMAP_9_BY_15);
+        Window << GuiText(Vec2D(10, 140), "HELVETICA 10", KBlue, GlutFont::BITMAP_HELVETICA_10);
+        Window << GuiText(Vec2D(10, 155), "HELVETICA 12", KBlue, GlutFont::BITMAP_HELVETICA_12);
+        Window << GuiText(Vec2D(10, 175), "HELVETICA 18", KBlue, GlutFont::BITMAP_HELVETICA_18);
+        Window << GuiText(Vec2D(10, 195), "TIMES NEW ROMAN 10", KGreen, GlutFont::BITMAP_TIMES_ROMAN_10);
+        Window << GuiText(Vec2D(10, 215), "TIMES NEW ROMAN 24", KGreen, GlutFont::BITMAP_TIMES_ROMAN_24);
 
         //test
         Window << Rectangle(Vec2D(280, 280), Vec2D(300, 300), KBlue, KPurple);
@@ -67,7 +78,7 @@ void Game()
         Window << Triangle(Vec2D(100, 100), Vec2D(150, 100), Vec2D(100, 150), KCyan, KRed);
 
         // Affiche le framerate
-        displayFramerate(frameTime, Window);
+        displayFramerate(frameTime.count(), Window);
 
         // On met a jour la fenêtre
         Window.updateGraphic();
@@ -76,6 +87,6 @@ void Game()
          * Récupère l'heure a la fin de la boucle
          * pour calculer la durée de calcul d'une image
          */
-        frameTime = chrono::duration_cast<chrono::milliseconds>(chrono::system_clock::now() - start);
+        frameTime = chrono::system_clock::now() - start;
     }
 }
