@@ -12,9 +12,6 @@
 #ifndef GAME_H
 #define GAME_H
 
-#define STAR_COUNT 300
-#define STAR_LIT_PROBABILITY 0.05
-
 #include <chrono>
 #include <vector>
 
@@ -22,16 +19,16 @@
 
 /**
  * @brief Displays the game framerate to the window
- * @param[in] FrameTime : Time that the frame took to render
- * @param[in/out] Window : The window to print the framerate on
- * \fn void displayFramerate(const std::chrono::milliseconds FrameTime, MinGL &Window);
+ * @param[in] frameTime : Time that the frame took to render
+ * @param[in, out] window : The window to print the framerate on
+ * \fn void displayFramerate(const float &frameTime, MinGL &window);
  */
-void displayFramerate(const std::chrono::milliseconds FrameTime, MinGL &Window);
+void displayFramerate(const float &frameTime, MinGL &window);
 
 /**
  * @brief Main function of the game
- * \fn void Game();
+ * \fn void game();
  */
-void Game();
+void game();
 
 #endif // GAME_H

@@ -11,71 +11,68 @@
 
 #include "game.h"
 
-#include "gui/gui_star_background.h"
-#include "gui/gui_text.h"
+#include "gui/star_background.h"
+#include "gui/text.h"
 
 #include "screen/screen_id_map.h"
-#include "screen/screen_main_menu.h"
+#include "screen/main_menu.h"
 
 using namespace std;
 
-void displayFramerate(const float &FrameTime, MinGL &Window)
+void displayFramerate(const float &frameTime, MinGL &window)
 {
-    const string framerateStr = to_string(1 / (FrameTime / 1000.f));
-    Window << GuiText(Vec2D(5, 15), framerateStr + " FPS", KPurple);
-}
+    const string framerateStr = to_string(1 / (frameTime / 1000.f));
+    window << nsGui::Text(Vec2D(5, 15), framerateStr + " FPS", KPurple);
+} // displayFramerate
 
-void Game()
+void game()
 {
-    // Initialise le système graphique et d'évènements
+    // Initialise the graphics and event systems
     MinGL Window;
     Window.initGlut();
     Window.initGraphic();
 
-    // Initialise la gestion des écrans sur le menu principal
-    std::unique_ptr<IScreen> currentScreen = std::unique_ptr<ScreenMainMenu>(new ScreenMainMenu());
+    // Initialise the screen management
+    std::unique_ptr<nsScreen::IScreen> currentScreen = std::unique_ptr<nsScreen::MainMenu>(new nsScreen::MainMenu());
 
-    // On instancie le background
-    GuiStarBackground starBackground(300, Window.getWindowSize());
+    // Create the star background for the entire screen
+    nsGui::StarBackground starBackground(300, Window.getWindowSize());
 
     chrono::duration<float> frameTime;
     while (true)
     {
-        // Récupère l'heure au début de la boucle
+        // Gets system clock at the beginning of the loop
         chrono::time_point<chrono::system_clock> start = chrono::system_clock::now();
 
-        // Efface l'écran a chaque itération
+        // Clear screen each frame
         Window.clearScreen();
 
-        // Change d'écran si l'écran actuel le requête
-        const ScreenIdentifiers screenChangeId = currentScreen->getRequestedScreenChange();
-        if (screenChangeId != ScreenIdentifiers::None)
-            currentScreen = unique_ptr<IScreen>(ScreenIdMap::getScreenFromId(screenChangeId));
+        // Switch screen if the actual one requests it
+        const nsScreen::ScreenIdentifiers screenChangeId = currentScreen->getRequestedScreenChange();
+        if (screenChangeId != nsScreen::ScreenIdentifiers::ID_None)
+            currentScreen = unique_ptr<nsScreen::IScreen>(nsScreen::ScreenIdMap::getScreenFromId(screenChangeId));
 
-        // On vérifie pour de nouveaux événements
+        // Check for new events (user inputs)
         while (Window.getEventManager().hasEvent())
             currentScreen->processEvent(Window.getEventManager().pullEvent());
 
-        // Met a jour et affiche le fond étoilé
-        starBackground.Update(frameTime.count());
+        // Update and draw the star background
+        starBackground.update(frameTime.count());
         Window << starBackground;
 
-        // Met a jour l'écran actuel
+        // Update the actual screen
         currentScreen->update(frameTime.count());
 
-        // Affiche l'écran actuel
+        // Draw the actual screen
         currentScreen->draw(Window);
 
-        // Affiche le framerate
+        // Display the framerate
         displayFramerate(frameTime.count(), Window);
 
-        // On met a jour la fenêtre
+        // Push frame to the window
         Window.updateGraphic();
 
-        /*
-         * Récupère l'heure a la fin de la boucle
-         * pour calculer la durée de calcul d'une image
-         */
+        // Get system time at the end to compute rendering time
         frameTime = chrono::system_clock::now() - start;
-    }
+    } // Game()
 }

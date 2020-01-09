@@ -1,12 +1,15 @@
 #include "iscreen.h"
 
-ScreenIdentifiers IScreen::getRequestedScreenChange() const
+#define SCREENIDENTIFIERS nsScreen::IScreen
+
+nsScreen::ScreenIdentifiers SCREENIDENTIFIERS::getRequestedScreenChange() const
 {
     return m_screenChange;
 }
 
-void IScreen::requestScreenChange(const ScreenIdentifiers &screenId)
+void SCREENIDENTIFIERS::requestScreenChange(const ScreenIdentifiers &screenId)
 {
     m_screenChange = screenId;
 }
 
+#undef SCREENIDENTIFIERS

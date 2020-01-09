@@ -1,9 +1,9 @@
-/*!
- * \file glut_font.h
- * \brief Utility class to get fonts that Glut provides
- * \author SOLLIER Alexandre
- * \version 1.0
- * \date 28 décembre 2019
+/**
+ * @file glut_font.h
+ * @brief Utility class to get fonts that Glut provides
+ * @author SOLLIER Alexandre
+ * @version 1.0
+ * @date 28 décembre 2019
  */
 
 #ifndef GLUT_FONTS_H
@@ -35,6 +35,7 @@ public:
 
     /**
      * @brief Gets the font identifier to be used with Glut
+     * @return A Glut font identifier
      * @fn void *convertForGlut() const;
      */
     void *convertForGlut() const;
@@ -43,7 +44,7 @@ private:
     /**
      * @brief font : Font represented by this instance
      */
-    GlutFonts font;
+    GlutFonts m_font;
 };
 
 #endif // GLUT_FONTS_H

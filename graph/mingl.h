@@ -42,7 +42,7 @@ private:
 
 
     // Les handlers
-    Event::EventManager eventManager;
+    nsEvent::EventManager eventManager;
     void callReshape(int h, int w);
     void callDisplay();
     void callMouse(int button, int state, int x = 0, int y = 0);
@@ -69,7 +69,7 @@ public:
     void updateGraphic();
     void clearScreen();
 
-    Event::EventManager &getEventManager();
+    nsEvent::EventManager &getEventManager();
 
     const Vec2D getWindowSize() const;
 

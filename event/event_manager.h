@@ -1,9 +1,9 @@
-/*!
- * \file event_manager.h
- * \brief The event manager for user inputs
- * \author SOLLIER Alexandre
- * \version 1.0
- * \date 09 janvier 2020
+/**
+ * @file event_manager.h
+ * @brief The event manager for user inputs
+ * @author SOLLIER Alexandre
+ * @version 1.0
+ * @date 09 janvier 2020
  */
 
 #ifndef EVENTMANAGER_H
@@ -13,21 +13,43 @@
 
 #include "event.h"
 
-namespace Event {
+namespace nsEvent {
 
+/**
+ * \class EventManager
+ * \brief Manages a queue of incoming events
+ */
 class EventManager
 {
 public:
-    EventManager();
-
+    /**
+     * @brief Checks if there's an event to be pulled
+     * @return Whether the queue has one or more element
+     * @fn bool hasEvent();
+     */
     bool hasEvent();
-    void pushEvent(const Event &event);
-    const Event pullEvent();
+
+    /**
+     * @brief Pushes a new event to the queue
+     * @param[in] event : Event to push
+     * @fn void pushEvent(const Event_t &event);
+     */
+    void pushEvent(const Event_t &event);
+
+    /**
+     * @brief Pulls the oldest event, and then removes it from the queue
+     * @return A copy of the oldest event
+     * @fn const Event_t pullEvent();
+     */
+    const Event_t pullEvent();
 
 private:
-    std::queue<Event> m_eventQueue;
+    /**
+     * @brief m_eventQueue : Queue holding incoming events
+     */
+    std::queue<Event_t> m_eventQueue;
 };
 
-} // namespace Event
+} // namespace nsEvent
 
 #endif // EVENTMANAGER_H

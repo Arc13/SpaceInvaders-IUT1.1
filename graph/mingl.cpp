@@ -63,7 +63,7 @@ void MinGL::clearScreen()
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-Event::EventManager &MinGL::getEventManager()
+nsEvent::EventManager &MinGL::getEventManager()
 {
     return eventManager;
 }
@@ -135,27 +135,27 @@ void MinGL::callDisplay()
 
 void MinGL::callMouse(int button, int state, int x, int y)
 {
-    eventManager.pushEvent(Event::Event(Event::EventType_t::MouseClick, {.clickData = Event::MouseClickData_t(button, state, x, y)}));
+    eventManager.pushEvent(nsEvent::Event_t(nsEvent::EventType_t::MouseClick, {.clickData = nsEvent::MouseClickData_t(button, state, x, y)}));
 }
 
 void MinGL::callMotion(int x, int y)
 {
-    eventManager.pushEvent(Event::Event(Event::EventType_t::MouseDrag, {.moveData = Event::MouseMoveData_t(x, y)}));
+    eventManager.pushEvent(nsEvent::Event_t(nsEvent::EventType_t::MouseDrag, {.moveData = nsEvent::MouseMoveData_t(x, y)}));
 }
 
 void MinGL::callPassiveMotion(int x, int y)
 {
-    eventManager.pushEvent(Event::Event(Event::EventType_t::MouseMove, {.moveData = Event::MouseMoveData_t(x, y)}));
+    eventManager.pushEvent(nsEvent::Event_t(nsEvent::EventType_t::MouseMove, {.moveData = nsEvent::MouseMoveData_t(x, y)}));
 }
 
 void MinGL::callKeyboard(unsigned char key, int x, int y)
 {
-    eventManager.pushEvent(Event::Event(Event::EventType_t::Keyboard, {.keyboardData = Event::KeyboardData_t(key, x, y)}));
+    eventManager.pushEvent(nsEvent::Event_t(nsEvent::EventType_t::Keyboard, {.keyboardData = nsEvent::KeyboardData_t(key, x, y)}));
 }
 
 void MinGL::callKeyboardSpecial(int key, int x, int y)
 {
-    eventManager.pushEvent(Event::Event(Event::EventType_t::KeyboardSpecial, {.keyboardSpecialData = Event::KeyboardSpecialData_t(key, x, y)}));
+    eventManager.pushEvent(nsEvent::Event_t(nsEvent::EventType_t::KeyboardSpecial, {.keyboardSpecialData = nsEvent::KeyboardSpecialData_t(key, x, y)}));
 }
 
 const Vec2D MinGL::getWindowSize() const

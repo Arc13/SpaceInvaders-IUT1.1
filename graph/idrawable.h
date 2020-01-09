@@ -1,9 +1,9 @@
-/*!
- * \file idrawable.h
- * \brief An interface for drawable objects
- * \author SOLLIER Alexandre
- * \version 1.0
- * \date 08 janvier 2020
+/**
+ * @file idrawable.h
+ * @brief An interface for drawable objects
+ * @author SOLLIER Alexandre
+ * @version 1.0
+ * @date 08 janvier 2020
  */
 
 #ifndef DRAWABLE_H
@@ -22,13 +22,14 @@ public:
 
     /**
      * @brief Signature for the function to clone the object
+     * @return A pointer to the cloned object
      * @fn virtual std::unique_ptr<IDrawable> clone() const;
      */
     virtual std::unique_ptr<IDrawable> clone() const = 0;
 
     /**
      * @brief Signature for the function to draw the object
-     * @fn virtual void Draw() const;
+     * @fn virtual void draw();
      */
     virtual void draw() = 0;
 };

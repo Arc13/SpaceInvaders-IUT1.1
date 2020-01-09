@@ -11,12 +11,14 @@
 #include <freeglut_std.h>
 
 GlutFont::GlutFont(const GlutFont::GlutFonts &font_)
-    : font(font_)
+    : m_font(font_)
 {}
 
 void *GlutFont::convertForGlut() const
 {
-    switch (font) {
+    // Check the current font and return the right Glut identifier
+    switch (m_font)
+    {
         case BITMAP_9_BY_15:
             return GLUT_BITMAP_9_BY_15;
         case BITMAP_TIMES_ROMAN_10:

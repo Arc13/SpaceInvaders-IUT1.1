@@ -1,17 +1,23 @@
 #include "screen_id_map.h"
 
-#include "screen_main_menu.h"
+#include "main_menu.h"
 
 #include "../tools/myexception.h"
 
-std::unique_ptr<IScreen> ScreenIdMap::getScreenFromId(const ScreenIdentifiers &screenId)
-{
-    switch (screenId) {
-    case ScreenIdentifiers::MainMenu:
-        return std::unique_ptr<IScreen>(new ScreenMainMenu());
+#define SCREENIDMAP nsScreen::ScreenIdMap
 
-    case ScreenIdentifiers::None:
-    default:
-        throw MyException(nsUtil::kScreenNotFound);
+std::unique_ptr<nsScreen::IScreen> SCREENIDMAP::getScreenFromId(const nsScreen::ScreenIdentifiers &screenId)
+{
+    // Check the ID and return the right Screen
+    switch (screenId)
+    {
+        case ScreenIdentifiers::ID_MainMenu:
+            return std::unique_ptr<IScreen>(new nsScreen::MainMenu());
+
+        case ScreenIdentifiers::ID_None:
+        default:
+            throw MyException(nsUtil::kScreenNotFound);
     }
 }
+
+#undef SCREENIDMAP

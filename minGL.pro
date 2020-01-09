@@ -14,11 +14,11 @@ SOURCES += main.cpp \
     game.cpp \
     graph/mingl.cpp \
     graph/rgbacolor.cpp \
-    gui/gui_star_background.cpp \
-    gui/gui_text.cpp \
+    gui/star_background.cpp \
+    gui/text.cpp \
     screen/iscreen.cpp \
+    screen/main_menu.cpp \
     screen/screen_id_map.cpp \
-    screen/screen_main_menu.cpp \
     tools/CException.cxx \
     tools/glut_font.cpp \
     tools/myexception.cpp \
@@ -50,12 +50,12 @@ HEADERS += \
     graph/mingl.h \
     graph/rgbacolor.h \
     graph/vec2d.h \
-    gui/gui_star_background.h \
-    gui/gui_text.h \
+    gui/star_background.h \
+    gui/text.h \
     screen/iscreen.h \
+    screen/main_menu.h \
     screen/screen_id_map.h \
     screen/screen_identifiers.h \
-    screen/screen_main_menu.h \
     tools/CException.h \
     tools/CException.hxx \
     tools/CstCodErr.h \
