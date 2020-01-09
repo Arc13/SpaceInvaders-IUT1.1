@@ -11,15 +11,11 @@
 
 #include "game.h"
 
-#include "gui/gui_text.h"
 #include "gui/gui_star_background.h"
-#include "graph/rgbacolor.h"
-#include "graph/vec2d.h"
-#include "figs/line.h"
-#include "figs/rectangle.h"
-#include "figs/triangle.h"
-#include "figs/circle.h"
-#include "figs/figure.h"
+#include "gui/gui_text.h"
+
+#include "screen/screen_id_map.h"
+#include "screen/screen_main_menu.h"
 
 using namespace std;
 
@@ -36,6 +32,9 @@ void Game()
     Window.initGlut();
     Window.initGraphic();
 
+    // Initialise la gestion des écrans sur le menu principal
+    std::unique_ptr<IScreen> currentScreen = std::unique_ptr<ScreenMainMenu>(new ScreenMainMenu());
+
     // On instancie le background
     GuiStarBackground starBackground(300, Window.getWindowSize());
 
@@ -48,34 +47,24 @@ void Game()
         // Efface l'écran a chaque itération
         Window.clearScreen();
 
-        // On vérifie pour de nouveaux événements
-        /*while (Window.getEventManager().hasEvent()) {
-            const Event::Event currentEvent = Window.getEventManager().pullEvent();
-            if (currentEvent.eventType == Event::MouseClick) {
-                cout << "click: " << currentEvent.eventData.clickData.x << ", " << currentEvent.eventData.clickData.y << endl;
-            } else if (currentEvent.eventType == Event::MouseMove) {
-                cout << "move: " << currentEvent.eventData.moveData.x << ", " << currentEvent.eventData.moveData.y << endl;
-            }
-        }*/
+        // Change d'écran si l'écran actuel le requête
+        const ScreenIdentifiers screenChangeId = currentScreen->getRequestedScreenChange();
+        if (screenChangeId != ScreenIdentifiers::None)
+            currentScreen = unique_ptr<IScreen>(ScreenIdMap::getScreenFromId(screenChangeId));
 
-        // On met a jour et affiche le fond étoilé
+        // On vérifie pour de nouveaux événements
+        while (Window.getEventManager().hasEvent())
+            currentScreen->processEvent(Window.getEventManager().pullEvent());
+
+        // Met a jour et affiche le fond étoilé
         starBackground.Update(frameTime.count());
         Window << starBackground;
 
-        // On injecte tout ce qui doit être affiché
-        Window << GuiText(Vec2D(10, 110), "BITMAP 8x13", KRed);
-        Window << GuiText(Vec2D(10, 125), "BITMAP 9x15", KRed, GlutFont::BITMAP_9_BY_15);
-        Window << GuiText(Vec2D(10, 140), "HELVETICA 10", KBlue, GlutFont::BITMAP_HELVETICA_10);
-        Window << GuiText(Vec2D(10, 155), "HELVETICA 12", KBlue, GlutFont::BITMAP_HELVETICA_12);
-        Window << GuiText(Vec2D(10, 175), "HELVETICA 18", KBlue, GlutFont::BITMAP_HELVETICA_18);
-        Window << GuiText(Vec2D(10, 195), "TIMES NEW ROMAN 10", KGreen, GlutFont::BITMAP_TIMES_ROMAN_10);
-        Window << GuiText(Vec2D(10, 215), "TIMES NEW ROMAN 24", KGreen, GlutFont::BITMAP_TIMES_ROMAN_24);
+        // Met a jour l'écran actuel
+        currentScreen->update(frameTime.count());
 
-        //test
-        Window << Rectangle(Vec2D(280, 280), Vec2D(300, 300), KBlue, KPurple);
-        Window << Circle(Vec2D(150, 150), 40, KYellow, KRed);
-        Window << Line(Vec2D(400, 400), Vec2D(500, 400), KRed);
-        Window << Triangle(Vec2D(100, 100), Vec2D(150, 100), Vec2D(100, 150), KCyan, KRed);
+        // Affiche l'écran actuel
+        currentScreen->draw(Window);
 
         // Affiche le framerate
         displayFramerate(frameTime.count(), Window);

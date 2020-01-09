@@ -12,7 +12,7 @@ public:
     Line (const BaseFig &);
     virtual ~Line() {}
 
-    virtual void Draw() const override;
+    virtual void draw() override;
 
     // Opérateur de décalage +
     Line operator + (const Vec2D & pos_) const {

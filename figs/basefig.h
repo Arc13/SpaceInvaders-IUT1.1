@@ -17,7 +17,7 @@ public:
     BaseFig();
      ~BaseFig() {}
 
-    virtual void Draw () const override {}
+    virtual void draw() override {}
 
     // Fonction de clonage
     virtual std::unique_ptr<IDrawable> clone() const override;

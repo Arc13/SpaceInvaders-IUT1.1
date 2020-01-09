@@ -38,6 +38,8 @@ namespace nsUtil
         kNoRectangle    = 305,
         kNoCircle       = 306,
         kTypeNotFound   = 307,
+
+        kScreenNotFound = 400,
     };
 
     const std::map <unsigned, std::string> kError
@@ -50,6 +52,7 @@ namespace nsUtil
         {kNoRectangle, "Nombre incorrect de points pour la construction d'un rectangle"},
         {kNoCircle, "Nombre incorrect de points pour la construction d'un cercle"},
         {kTypeNotFound, "Instanciation impossible: Pas le bon type"},
+        {kScreenNotFound, "Impossible de trouver l'écran via son identifiant."},
     };
 } // namespace nsUtil
 

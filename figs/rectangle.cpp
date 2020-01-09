@@ -7,7 +7,7 @@
 using namespace std;
 using namespace nsUtil;
 
-void Rectangle::Draw() const
+void Rectangle::draw()
 {
     // On règle la couleur du rectangle
     const RGBAcolor inColor = getInColor();

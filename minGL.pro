@@ -16,6 +16,9 @@ SOURCES += main.cpp \
     graph/rgbacolor.cpp \
     gui/gui_star_background.cpp \
     gui/gui_text.cpp \
+    screen/iscreen.cpp \
+    screen/screen_id_map.cpp \
+    screen/screen_main_menu.cpp \
     tools/CException.cxx \
     tools/glut_font.cpp \
     tools/myexception.cpp \
@@ -49,6 +52,10 @@ HEADERS += \
     graph/vec2d.h \
     gui/gui_star_background.h \
     gui/gui_text.h \
+    screen/iscreen.h \
+    screen/screen_id_map.h \
+    screen/screen_identifiers.h \
+    screen/screen_main_menu.h \
     tools/CException.h \
     tools/CException.hxx \
     tools/CstCodErr.h \

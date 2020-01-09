@@ -6,7 +6,7 @@
 using namespace std;
 using namespace nsUtil;
 
-void Circle::Draw() const
+void Circle::draw()
 {
     // Source: https://gist.github.com/linusthe3rd/803118
 

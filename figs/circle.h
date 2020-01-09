@@ -12,7 +12,7 @@ public:
     Circle(const BaseFig &);
     virtual ~Circle() {}
 
-    virtual void Draw() const override;
+    virtual void draw() override;
 
     // Opérateur de décalage +
     Circle operator + (const Vec2D & pos_) const {

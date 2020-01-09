@@ -124,7 +124,7 @@ void MinGL::callDisplay()
     glShadeModel(GL_FLAT);
 
     for (const std::unique_ptr<IDrawable> &actualDrawable : drawStack) {
-        actualDrawable->Draw();
+        actualDrawable->draw();
     }
     drawStack.clear();
 

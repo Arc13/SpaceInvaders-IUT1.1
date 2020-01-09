@@ -13,7 +13,7 @@ public:
     Triangle (const BaseFig &);
     virtual ~Triangle() {}
 
-    virtual void Draw() const override;
+    virtual void draw() override;
 
     // Opérateur de décalage +
     Triangle operator + (const Vec2D & pos_) const {

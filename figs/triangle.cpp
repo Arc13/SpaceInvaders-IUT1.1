@@ -10,7 +10,7 @@
 using namespace std;
 using namespace nsUtil;
 
-void Triangle::Draw() const
+void Triangle::draw()
 {
     // On règle la couleur du triangle
     const RGBAcolor inColor = getInColor();

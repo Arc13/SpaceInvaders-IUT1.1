@@ -8,10 +8,10 @@
 using namespace std;
 using namespace nsUtil;
 
-void Figure::Draw() const
+void Figure::draw()
 {
     for (const std::shared_ptr<BaseFig> &fig : vFig) {
-        fig->Draw();
+        fig->draw();
     }
 }
 

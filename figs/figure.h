@@ -12,7 +12,7 @@
 class Figure : public BaseFig
 {
 protected:
-    virtual void Draw() const override;
+    virtual void draw() override;
     std::vector<std::shared_ptr<BaseFig>> vFig;
 
 public:

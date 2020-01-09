@@ -35,7 +35,7 @@ void GuiStarBackground::Update(float delta)
     }
 }
 
-void GuiStarBackground::Draw() const
+void GuiStarBackground::draw()
 {
     glBegin(GL_POINTS);
 

@@ -35,11 +35,11 @@ public:
 
 protected:
     /**
-     * @brief Renders the element to the provided Window
+     * @brief Renders the element
      * @param[in] Window : Window to render to
-     * @fn virtual MinGL & _Edit (MinGL & Window) const;
+     * @fn virtual void draw() override;
      */
-    virtual void Draw() const override;
+    virtual void draw() override;
 
     /**
      * @brief position : Position of the text on the window

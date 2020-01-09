@@ -15,7 +15,7 @@ class IDrawable
 {
 public:
     /**
-     * @brief Constructor for the IDrawable class
+     * @brief Destructor for the IDrawable class
      * @fn virtual ~IDrawable() {}
      */
     virtual ~IDrawable() {}
@@ -30,7 +30,7 @@ public:
      * @brief Signature for the function to draw the object
      * @fn virtual void Draw() const;
      */
-    virtual void Draw() const = 0;
+    virtual void draw() = 0;
 };
 
 #endif // DRAWABLE_H

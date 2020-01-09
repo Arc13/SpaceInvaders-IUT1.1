@@ -21,7 +21,7 @@ std::unique_ptr<IDrawable> GuiText::clone() const
     return std::unique_ptr<GuiText>(new GuiText(*this));
 }
 
-void GuiText::Draw() const
+void GuiText::draw()
 {
     glColor3ub(textColor.Red, textColor.Green, textColor.Blue);
     glRasterPos2i(position.x, position.y);
