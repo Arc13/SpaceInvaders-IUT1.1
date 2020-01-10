@@ -9,6 +9,7 @@
 #ifndef ISCREEN_H
 #define ISCREEN_H
 
+#include <chrono>
 #include <memory>
 
 #include "screen_identifiers.h"
@@ -44,9 +45,9 @@ public:
     /**
      * @brief Called every frame to update screen's logic
      * @param[in] delta : Time that the previous frame took to render
-     * @fn virtual void update(const float &delta);
+     * @fn virtual void update(const std::chrono::microseconds &delta);
      */
-    virtual void update(const float &delta) = 0;
+    virtual void update(const std::chrono::microseconds &delta) = 0;
 
     /**
      * @brief Called every frame to draw the screen
@@ -59,7 +60,7 @@ public:
      * @brief Gets the ID of the new screen that this screen requested to switch to
      * @fn ScreenIdentifiers getRequestedScreenChange() const;
      */
-    ScreenIdentifiers getRequestedScreenChange() const;
+    const ScreenIdentifiers& getRequestedScreenChange() const;
 
 protected:
     /**

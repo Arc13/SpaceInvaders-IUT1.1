@@ -9,6 +9,8 @@
  * \date 28 décembre 2019
  */
 
+#include <thread>
+
 #include "game.h"
 
 #include "gui/star_background.h"
@@ -19,16 +21,16 @@
 
 using namespace std;
 
-void displayFramerate(const float &frameTime, MinGL &window)
+void displayFramerate(const std::chrono::microseconds &frameTime, MinGL &window)
 {
-    const string framerateStr = to_string(1 / (frameTime / 1000.f));
+    const string framerateStr = to_string(1 / (frameTime.count() / 1000000.f));
     window << nsGui::Text(Vec2D(5, 15), framerateStr + " FPS", KPurple);
 } // displayFramerate
 
 void game()
 {
     // Initialise the graphics and event systems
-    MinGL Window;
+    MinGL Window("Space Outvaders");
     Window.initGlut();
     Window.initGraphic();
 
@@ -38,11 +40,11 @@ void game()
     // Create the star background for the entire screen
     nsGui::StarBackground starBackground(300, Window.getWindowSize());
 
-    chrono::duration<float> frameTime;
+    chrono::microseconds frameTime;
     while (true)
     {
         // Gets system clock at the beginning of the loop
-        chrono::time_point<chrono::system_clock> start = chrono::system_clock::now();
+        chrono::time_point<chrono::high_resolution_clock> start = chrono::high_resolution_clock::now();
 
         // Clear screen each frame
         Window.clearScreen();
@@ -61,18 +63,22 @@ void game()
         Window << starBackground;
 
         // Update the actual screen
-        currentScreen->update(frameTime.count());
+        currentScreen->update(frameTime);
 
         // Draw the actual screen
         currentScreen->draw(Window);
 
         // Display the framerate
-        displayFramerate(frameTime.count(), Window);
+        displayFramerate(frameTime, Window);
 
         // Push frame to the window
         Window.updateGraphic();
 
+        // Wait 12ms until the next update (~60fps)
+        this_thread::sleep_for(chrono::milliseconds(12));
+
         // Get system time at the end to compute rendering time
-        frameTime = chrono::system_clock::now() - start;
+        frameTime = chrono::duration_cast<chrono::microseconds>(chrono::high_resolution_clock::now() - start);
+
     } // Game()
 }

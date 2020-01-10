@@ -14,6 +14,7 @@ SOURCES += main.cpp \
     game.cpp \
     graph/mingl.cpp \
     graph/rgbacolor.cpp \
+    gui/fat_button.cpp \
     gui/star_background.cpp \
     gui/text.cpp \
     screen/iscreen.cpp \
@@ -23,7 +24,10 @@ SOURCES += main.cpp \
     tools/glut_font.cpp \
     tools/myexception.cpp \
     tools/tools.cpp \
-    tools/pixelexception.cpp
+    tools/pixelexception.cpp \
+    transition/transition.cpp \
+    transition/transition_contract.cpp \
+    transition/transition_engine.cpp
 
 QT += opengl core gui
 
@@ -50,6 +54,7 @@ HEADERS += \
     graph/mingl.h \
     graph/rgbacolor.h \
     graph/vec2d.h \
+    gui/fat_button.h \
     gui/star_background.h \
     gui/text.h \
     screen/iscreen.h \
@@ -66,4 +71,8 @@ HEADERS += \
     tools/pixel.h \
     tools/tools.h \
     graph/iminglinjectable.h \
-    tools/pixelexception.h
+    tools/pixelexception.h \
+    transition/itransitionable.h \
+    transition/transition.h \
+    transition/transition_contract.h \
+    transition/transition_engine.h

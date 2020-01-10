@@ -2,7 +2,7 @@
 
 #define SCREENIDENTIFIERS nsScreen::IScreen
 
-nsScreen::ScreenIdentifiers SCREENIDENTIFIERS::getRequestedScreenChange() const
+const nsScreen::ScreenIdentifiers& SCREENIDENTIFIERS::getRequestedScreenChange() const
 {
     return m_screenChange;
 }

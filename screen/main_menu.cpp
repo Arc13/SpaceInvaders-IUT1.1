@@ -16,6 +16,12 @@
 
 #define MAINMENU nsScreen::MainMenu
 
+nsScreen::MainMenu::MainMenu()
+    : m_fatBtn(Vec2D(50, 50), Vec2D(50, 50))
+{
+
+}
+
 void MAINMENU::processEvent(const nsEvent::Event_t &event)
 {
     // Function called each time an event happend
@@ -25,12 +31,15 @@ void MAINMENU::processEvent(const nsEvent::Event_t &event)
         std::cout << "move: " << event.eventData.moveData.x << ", " << event.eventData.moveData.y << std::endl;
     } else if (event.eventType == nsEvent::Keyboard) {
         std::cout << "keyboard: " << event.eventData.keyboardData.x << ", " << event.eventData.keyboardData.y << std::endl;
+        m_transitionEngine.startContract(TransitionContract(m_fatBtn, FatButton::TRANSITION_FIRST_RGB, std::chrono::seconds(2), {255, 255, 255}));
+        m_transitionEngine.startContract(TransitionContract(m_fatBtn, FatButton::TRANSITION_POSITION, std::chrono::seconds(2), {50, 200}));
     }
 }
 
-void MAINMENU::update(const float &delta)
+void MAINMENU::update(const std::chrono::microseconds &delta)
 {
     // Function called each frame, updates screen logic
+    m_transitionEngine.update(delta);
 }
 
 void MAINMENU::draw(MinGL &window)
@@ -50,6 +59,8 @@ void MAINMENU::draw(MinGL &window)
     window << Circle(Vec2D(150, 150), 40, KYellow, KRed);
     window << Line(Vec2D(400, 400), Vec2D(500, 400), KRed);
     window << Triangle(Vec2D(100, 100), Vec2D(150, 100), Vec2D(100, 150), KCyan, KRed);
+
+    window << m_fatBtn;
 }
 
 #undef MAINMENU

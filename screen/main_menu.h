@@ -13,6 +13,10 @@
 
 #include <iostream>
 
+#include "../transition/transition_engine.h"
+
+#include "gui/fat_button.h"
+
 namespace nsScreen {
 
 /**
@@ -22,26 +26,16 @@ namespace nsScreen {
 class MainMenu : public IScreen
 {
 public:
-    /**
-     * @brief Called whenever an user input happens
-     * @param[in] event : The event that just happened
-     * @fn virtual void processEvent(const nsEvent::Event &event) override;
-     */
+    MainMenu();
+
     virtual void processEvent(const nsEvent::Event_t &event) override;
-
-    /**
-     * @brief Called every frame to update screen's logic
-     * @param[in] delta : Time that the previous frame took to render
-     * @fn virtual void update(const float &delta) override;
-     */
-    virtual void update(const float &delta) override;
-
-    /**
-     * @brief Called every frame to draw the screen
-     * @param[in] window : The window to draw to
-     * @fn virtual void draw(MinGL &window) override;
-     */
+    virtual void update(const std::chrono::microseconds &delta) override;
     virtual void draw(MinGL &window) override;
+
+private:
+    TransitionEngine m_transitionEngine;
+
+    FatButton m_fatBtn;
 };
 
 } // namespace nsScreen

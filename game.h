@@ -23,7 +23,7 @@
  * @param[in, out] window : The window to print the framerate on
  * \fn void displayFramerate(const float &frameTime, MinGL &window);
  */
-void displayFramerate(const float &frameTime, MinGL &window);
+void displayFramerate(const std::chrono::microseconds &frameTime, MinGL &window);
 
 /**
  * @brief Main function of the game
