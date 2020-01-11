@@ -3,7 +3,7 @@
 
 #include <chrono>
 #include <memory>
-#include <vector>
+#include <list>
 
 #include "transition.h"
 
@@ -14,7 +14,9 @@ public:
     void startContract(const TransitionContract &contract);
 
 private:
-    std::vector<Transition> m_transitionList;
+    typedef std::list<Transition> TransitionVector_t;
+
+    TransitionVector_t m_transitionList;
 };
 
 #endif // TRANSITION_ENGINE_H

@@ -19,6 +19,8 @@
 #include "screen/screen_id_map.h"
 #include "screen/main_menu.h"
 
+#define FPS_LIMIT 60
+
 using namespace std;
 
 void displayFramerate(const std::chrono::microseconds &frameTime, MinGL &window)
@@ -74,8 +76,8 @@ void game()
         // Push frame to the window
         Window.updateGraphic();
 
-        // Wait 12ms until the next update (~60fps)
-        this_thread::sleep_for(chrono::milliseconds(12));
+        // Wait a bit to limit the framerate and let the CPU relax
+        this_thread::sleep_for(chrono::milliseconds(1000 / FPS_LIMIT) - chrono::duration_cast<chrono::microseconds>(chrono::high_resolution_clock::now() - start));
 
         // Get system time at the end to compute rendering time
         frameTime = chrono::duration_cast<chrono::microseconds>(chrono::high_resolution_clock::now() - start);

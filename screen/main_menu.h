@@ -36,6 +36,8 @@ private:
     TransitionEngine m_transitionEngine;
 
     FatButton m_fatBtn;
+    FatButton m_fatBtn2;
+    FatButton m_fatBtn3;
 };
 
 } // namespace nsScreen
