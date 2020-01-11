@@ -7,6 +7,9 @@
 
 #include "itransitionable.h"
 
+namespace nsTransition
+{
+
 class TransitionContract
 {
 public:
@@ -23,11 +26,14 @@ public:
                        const std::chrono::seconds &duration, const std::vector<float> &destination,
                        const TransitionMode &transitionMode = TransitionMode::MODE_FINITE);
 
-    const int& what() const;
-    const ITransitionable& where() const;
-
-    const std::vector<float>& getDestination() const;
+    const int& getId() const;
+    const ITransitionable& getTarget() const;
     const TransitionMode& getTransitionMode() const;
+
+    const std::vector<float>& getBeginning() const;
+    const std::vector<float>& getDestination() const;
+
+    const SystemDuration_t& getDuration() const;
 
     void setFinishCallback(const std::function<void()> &callback);
 
@@ -43,5 +49,7 @@ protected:
 
     std::function<void()> m_finishCallback;
 };
+
+} // namespace nsTransition
 
 #endif // TRANSITION_CONTRACT_H

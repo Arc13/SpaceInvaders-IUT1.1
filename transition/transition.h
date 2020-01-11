@@ -3,6 +3,9 @@
 
 #include "transition_contract.h"
 
+namespace nsTransition
+{
+
 class Transition : public TransitionContract
 {
 public:
@@ -26,5 +29,7 @@ private:
     void updateValues();
     void handleEndlife();
 };
+
+} // namespace nsTransition
 
 #endif // TRANSITION_H

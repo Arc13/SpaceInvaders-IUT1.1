@@ -7,6 +7,9 @@
 
 #include "transition.h"
 
+namespace nsTransition
+{
+
 class TransitionEngine
 {
 public:
@@ -18,5 +21,7 @@ private:
 
     TransitionVector_t m_transitionList;
 };
+
+} // namespace nsTransition
 
 #endif // TRANSITION_ENGINE_H

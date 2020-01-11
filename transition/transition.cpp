@@ -2,49 +2,51 @@
 
 #include <algorithm>
 
-Transition::Transition(const TransitionContract &contract)
+#define TRANSITION nsTransition::Transition
+
+TRANSITION::Transition(const TransitionContract &contract)
     : TransitionContract(contract)
     , m_startTime(std::chrono::high_resolution_clock::now())
     , m_elapsed(0)
     , m_reverse(false)
     , m_finished(false)
-{}
+{} // Transition()
 
-const TransitionContract::SystemDuration_t& Transition::getElapsed() const
+const TRANSITION::SystemDuration_t& TRANSITION::getElapsed() const
 {
     return m_elapsed;
-}
+} // getElapsed()
 
-void Transition::setElapsed(const TransitionContract::SystemDuration_t &elapsed)
+void TRANSITION::setElapsed(const TransitionContract::SystemDuration_t &elapsed)
 {
     // Set the new elapsed time
     m_elapsed = elapsed;
 
     // Update the target values
     updateValues();
-}
+} // setElapsed()
 
-void Transition::addToElapsed(const TransitionContract::SystemDuration_t &addedTime)
+void TRANSITION::addToElapsed(const TransitionContract::SystemDuration_t &addedTime)
 {
     setElapsed(getElapsed() + addedTime);
-}
+} // addToElapsed()
 
-const bool &Transition::isReversed() const
+const bool &TRANSITION::isReversed() const
 {
     return m_reverse;
-}
+} // isReversed()
 
-void Transition::finish()
+void TRANSITION::finish()
 {
     m_finished = true;
-}
+} // finish()
 
-const bool& Transition::isFinished() const
+const bool& TRANSITION::isFinished() const
 {
     return m_finished;
-}
+} // isFinished()
 
-void Transition::updateValues()
+void TRANSITION::updateValues()
 {
     // Get the elapsed progress and clamp it between 0 and 1
     float elapsedProgress = m_elapsed / m_duration;
@@ -68,9 +70,9 @@ void Transition::updateValues()
     {
         handleEndlife();
     }
-}
+} // updateValues()
 
-void Transition::handleEndlife()
+void TRANSITION::handleEndlife()
 {
     switch (m_transitionMode)
     {
@@ -102,4 +104,6 @@ void Transition::handleEndlife()
     {
         m_finishCallback();
     }
-}
+} // handleEndlife()
+
+#undef TRANSITION

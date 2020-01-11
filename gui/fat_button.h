@@ -4,7 +4,10 @@
 #include "../graph/iminglinjectable.h"
 #include "../transition/itransitionable.h"
 
-class FatButton : public IminGlInjectable, public ITransitionable
+namespace nsGui
+{
+
+class FatButton : public IminGlInjectable, public nsTransition::ITransitionable
 {
 public:
     FatButton(const Vec2D &position, const Vec2D &size);
@@ -36,5 +39,7 @@ private:
     Vec2D m_position;
     Vec2D m_size;
 };
+
+} // namespace nsGui
 
 #endif // FAT_BUTTON_H

@@ -1,6 +1,8 @@
 #include "transition_contract.h"
 
-TransitionContract::TransitionContract(ITransitionable& target, const int &id,
+#define TRANSITIONCONTRACT nsTransition::TransitionContract
+
+TRANSITIONCONTRACT::TransitionContract(ITransitionable& target, const int &id,
                                        const std::chrono::seconds &duration, const std::vector<float> &destination,
                                        const TransitionMode &transitionMode)
     : m_id(id)
@@ -11,29 +13,41 @@ TransitionContract::TransitionContract(ITransitionable& target, const int &id,
 {
     m_beginning.resize(destination.size());
     target.getValues(id, m_beginning);
-}
+} // TransitionContract()
 
-const int& TransitionContract::what() const
+const int& TRANSITIONCONTRACT::getId() const
 {
     return m_id;
-}
+} // what()
 
-const std::vector<float>& TransitionContract::getDestination() const
-{
-    return m_destination;
-}
-
-const TransitionContract::TransitionMode& TransitionContract::getTransitionMode() const
+const TRANSITIONCONTRACT::TransitionMode& TRANSITIONCONTRACT::getTransitionMode() const
 {
     return m_transitionMode;
-}
+} // getTransitionMode()
 
-void TransitionContract::setFinishCallback(const std::function<void ()> &callback)
+const std::vector<float>& TRANSITIONCONTRACT::getBeginning() const
+{
+    return m_beginning;
+} // getBeginning()
+
+const std::vector<float>& TRANSITIONCONTRACT::getDestination() const
+{
+    return m_destination;
+} // getDestination()
+
+const TRANSITIONCONTRACT::SystemDuration_t &TRANSITIONCONTRACT::getDuration() const
+{
+    return m_duration;
+} // getDuration()
+
+void TRANSITIONCONTRACT::setFinishCallback(const std::function<void ()> &callback)
 {
     m_finishCallback = callback;
-}
+} // setFinishCallback()
 
-const ITransitionable& TransitionContract::where() const
+const nsTransition::ITransitionable& TRANSITIONCONTRACT::getTarget() const
 {
     return m_target;
-}
+} // where()
+
+#undef TRANSITIONCONTRACT

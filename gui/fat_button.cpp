@@ -1,25 +1,25 @@
 #include "fat_button.h"
 
-FatButton::FatButton(const Vec2D &position, const Vec2D &size)
+#define FATBUTTON nsGui::FatButton
+
+FATBUTTON::FatButton(const Vec2D &position, const Vec2D &size)
     : m_firstColor(255, 0, 0)
     , m_secondColor(0, 255, 0)
     , m_position(position)
     , m_size(size)
+{} // FatButton
+
+void FATBUTTON::update(float delta)
 {
 
-}
+} // update()
 
-void FatButton::update(float delta)
-{
-
-}
-
-std::unique_ptr<IDrawable> FatButton::clone() const
+std::unique_ptr<IDrawable> FATBUTTON::clone() const
 {
     return std::unique_ptr<FatButton>(new FatButton(*this));
-}
+} // clone()
 
-void FatButton::getValues(const int &id, std::vector<float> &values)
+void FATBUTTON::getValues(const int &id, std::vector<float> &values)
 {
     switch (id) {
         case TRANSITION_FIRST_RGB:
@@ -40,9 +40,9 @@ void FatButton::getValues(const int &id, std::vector<float> &values)
 
             break;
     }
-}
+} // getValues()
 
-void FatButton::setValues(const int &id, const std::vector<float> &values)
+void FATBUTTON::setValues(const int &id, const std::vector<float> &values)
 {
     switch (id) {
         case TRANSITION_FIRST_RGB:
@@ -64,9 +64,9 @@ void FatButton::setValues(const int &id, const std::vector<float> &values)
 
             break;
     }
-}
+} // setValues()
 
-void FatButton::draw()
+void FATBUTTON::draw()
 {
     glShadeModel(GL_SMOOTH);
 
@@ -83,4 +83,6 @@ void FatButton::draw()
     glEnd();
 
     glShadeModel(GL_FLAT);
-}
+} // draw()
+
+#undef FATBUTTON

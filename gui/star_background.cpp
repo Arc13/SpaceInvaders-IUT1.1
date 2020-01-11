@@ -22,7 +22,7 @@ STARBACKGROUND::StarBackground(const unsigned &starCount_, const Vec2D &size_, c
         // Put a new star at random coordinates, unlit by default, in the star vector
         m_stars.push_back({Vec2D(rand() % size_.x, rand() % size_.y), false});
     }
-}
+} // StarBackground()
 
 std::unique_ptr<IDrawable> STARBACKGROUND::clone() const
 {
@@ -42,7 +42,7 @@ void STARBACKGROUND::draw()
     }
 
     glEnd();
-}
+} // draw()
 
 void STARBACKGROUND::update(float delta)
 {
@@ -54,6 +54,6 @@ void STARBACKGROUND::update(float delta)
             star.isLit = !star.isLit;
         }
     }
-}
+} // update()
 
 #undef STARBACKGROUND

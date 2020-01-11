@@ -1,8 +1,8 @@
 #include "transition_engine.h"
 
-#include <iostream>
+#define TRANSITIONENGINE nsTransition::TransitionEngine
 
-void TransitionEngine::update(const std::chrono::microseconds &delta)
+void TRANSITIONENGINE::update(const std::chrono::microseconds &delta)
 {
     // Update every transitioned items
     TransitionVector_t::iterator iter = m_transitionList.begin();
@@ -19,9 +19,11 @@ void TransitionEngine::update(const std::chrono::microseconds &delta)
             ++iter;
         }
     }
-}
+} // update()
 
-void TransitionEngine::startContract(const TransitionContract &contract)
+void TRANSITIONENGINE::startContract(const TransitionContract &contract)
 {
     m_transitionList.push_back(Transition(contract));
-}
+} // startContract()
+
+#undef TRANSITIONENGINE

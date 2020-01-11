@@ -3,6 +3,9 @@
 
 #include <vector>
 
+namespace nsTransition
+{
+
 class ITransitionable
 {
 public:
@@ -11,5 +14,7 @@ public:
     virtual void getValues(const int &id, std::vector<float> &values) = 0;
     virtual void setValues(const int &id, const std::vector<float> &values) = 0;
 };
+
+} // namespace nsTransition
 
 #endif // ITRANSITIONABLE_H

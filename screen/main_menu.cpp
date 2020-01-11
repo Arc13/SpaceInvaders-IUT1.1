@@ -16,13 +16,11 @@
 
 #define MAINMENU nsScreen::MainMenu
 
-nsScreen::MainMenu::MainMenu()
+MAINMENU::MainMenu()
     : m_fatBtn(Vec2D(50, 50), Vec2D(50, 50))
     , m_fatBtn2(Vec2D(150, 50), Vec2D(50, 50))
     , m_fatBtn3(Vec2D(250, 50), Vec2D(50, 50))
-{
-
-}
+{} // MainMenu()
 
 void MAINMENU::processEvent(const nsEvent::Event_t &event)
 {
@@ -34,26 +32,26 @@ void MAINMENU::processEvent(const nsEvent::Event_t &event)
     } else if (event.eventType == nsEvent::Keyboard) {
         std::cout << "keyboard: " << event.eventData.keyboardData.x << ", " << event.eventData.keyboardData.y << std::endl;
 
-        TransitionContract ctr = TransitionContract(m_fatBtn, FatButton::TRANSITION_FIRST_RGB, std::chrono::seconds(2), {255, 255, 255});
+        nsTransition::TransitionContract ctr = nsTransition::TransitionContract(m_fatBtn, nsGui::FatButton::TRANSITION_FIRST_RGB, std::chrono::seconds(2), {255, 255, 255});
         ctr.setFinishCallback([]() {
             std::cout << "First transition has finished!" << std::endl;
         });
         m_transitionEngine.startContract(ctr);
-        m_transitionEngine.startContract(TransitionContract(m_fatBtn, FatButton::TRANSITION_POSITION, std::chrono::seconds(2), {50, 200}));
+        m_transitionEngine.startContract(nsTransition::TransitionContract(m_fatBtn, nsGui::FatButton::TRANSITION_POSITION, std::chrono::seconds(2), {50, 200}));
 
-        m_transitionEngine.startContract(TransitionContract(m_fatBtn2, FatButton::TRANSITION_FIRST_RGB, std::chrono::seconds(2), {255, 255, 255}, TransitionContract::MODE_LOOP));
-        m_transitionEngine.startContract(TransitionContract(m_fatBtn2, FatButton::TRANSITION_POSITION, std::chrono::seconds(2), {150, 200}, TransitionContract::MODE_LOOP));
+        m_transitionEngine.startContract(nsTransition::TransitionContract(m_fatBtn2, nsGui::FatButton::TRANSITION_FIRST_RGB, std::chrono::seconds(2), {255, 255, 255}, nsTransition::TransitionContract::MODE_LOOP));
+        m_transitionEngine.startContract(nsTransition::TransitionContract(m_fatBtn2, nsGui::FatButton::TRANSITION_POSITION, std::chrono::seconds(2), {150, 200}, nsTransition::TransitionContract::MODE_LOOP));
 
-        m_transitionEngine.startContract(TransitionContract(m_fatBtn3, FatButton::TRANSITION_FIRST_RGB, std::chrono::seconds(2), {255, 255, 255}, TransitionContract::MODE_LOOP_SMOOTH));
-        m_transitionEngine.startContract(TransitionContract(m_fatBtn3, FatButton::TRANSITION_POSITION, std::chrono::seconds(2), {250, 200}, TransitionContract::MODE_LOOP_SMOOTH));
+        m_transitionEngine.startContract(nsTransition::TransitionContract(m_fatBtn3, nsGui::FatButton::TRANSITION_FIRST_RGB, std::chrono::seconds(2), {255, 255, 255}, nsTransition::TransitionContract::MODE_LOOP_SMOOTH));
+        m_transitionEngine.startContract(nsTransition::TransitionContract(m_fatBtn3, nsGui::FatButton::TRANSITION_POSITION, std::chrono::seconds(2), {250, 200}, nsTransition::TransitionContract::MODE_LOOP_SMOOTH));
     }
-}
+} // processEvent()
 
 void MAINMENU::update(const std::chrono::microseconds &delta)
 {
     // Function called each frame, updates screen logic
     m_transitionEngine.update(delta);
-}
+} // update()
 
 void MAINMENU::draw(MinGL &window)
 {
@@ -76,6 +74,6 @@ void MAINMENU::draw(MinGL &window)
     window << m_fatBtn;
     window << m_fatBtn2;
     window << m_fatBtn3;
-}
+} // draw()
 
 #undef MAINMENU

@@ -33,11 +33,11 @@ public:
     virtual void draw(MinGL &window) override;
 
 private:
-    TransitionEngine m_transitionEngine;
+    nsTransition::TransitionEngine m_transitionEngine;
 
-    FatButton m_fatBtn;
-    FatButton m_fatBtn2;
-    FatButton m_fatBtn3;
+    nsGui::FatButton m_fatBtn;
+    nsGui::FatButton m_fatBtn2;
+    nsGui::FatButton m_fatBtn3;
 };
 
 } // namespace nsScreen

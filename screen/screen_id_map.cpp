@@ -18,6 +18,6 @@ std::unique_ptr<nsScreen::IScreen> SCREENIDMAP::getScreenFromId(const nsScreen::
         default:
             throw MyException(nsUtil::kScreenNotFound);
     }
-}
+} // getScreenFromId()
 
 #undef SCREENIDMAP

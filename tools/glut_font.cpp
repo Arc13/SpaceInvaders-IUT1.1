@@ -12,7 +12,7 @@
 
 GlutFont::GlutFont(const GlutFont::GlutFonts &font_)
     : m_font(font_)
-{}
+{} // GlutFont()
 
 void *GlutFont::convertForGlut() const
 {
@@ -34,4 +34,4 @@ void *GlutFont::convertForGlut() const
         default:
             return GLUT_BITMAP_8_BY_13;
     }
-}
+} // convertForGlut()

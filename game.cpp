@@ -27,7 +27,7 @@ void displayFramerate(const std::chrono::microseconds &frameTime, MinGL &window)
 {
     const string framerateStr = to_string(1 / (frameTime.count() / 1000000.f));
     window << nsGui::Text(Vec2D(5, 15), framerateStr + " FPS", KPurple);
-} // displayFramerate
+} // displayFramerate()
 
 void game()
 {

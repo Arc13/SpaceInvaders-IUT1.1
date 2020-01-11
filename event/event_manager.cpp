@@ -5,12 +5,12 @@
 bool EVENTMANAGER::hasEvent()
 {
     return m_eventQueue.size() > 0;
-}
+} // hasEvent()
 
 void EVENTMANAGER::pushEvent(const Event_t &event)
 {
     m_eventQueue.push(event);
-}
+} // pushEvent()
 
 const nsEvent::Event_t EVENTMANAGER::pullEvent()
 {
@@ -18,6 +18,6 @@ const nsEvent::Event_t EVENTMANAGER::pullEvent()
     const Event_t event = m_eventQueue.front();
     m_eventQueue.pop();
     return event;
-}
+} // pullEvent()
 
 #undef EVENTMANAGER

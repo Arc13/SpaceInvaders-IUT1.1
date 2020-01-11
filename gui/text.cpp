@@ -16,12 +16,12 @@ TEXT::Text(const Vec2D &position_, const std::string &content_,
     , m_content(content_)
     , m_textColor(textColor_)
     , m_textFont(textFont_)
-{}
+{} // Text()
 
 std::unique_ptr<IDrawable> TEXT::clone() const
 {
     return std::unique_ptr<Text>(new Text(*this));
-}
+} // clone()
 
 void TEXT::draw()
 {
@@ -30,6 +30,6 @@ void TEXT::draw()
     glRasterPos2i(m_position.x, m_position.y);
 
     glutBitmapString(m_textFont.convertForGlut(), reinterpret_cast<const unsigned char *>(m_content.c_str()));
-}
+} // draw()
 
 #undef TEXT
