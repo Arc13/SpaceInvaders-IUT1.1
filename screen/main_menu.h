@@ -42,6 +42,8 @@ private:
     nsGui::FatButton m_fatBtn;
     nsGui::FatButton m_fatBtn2;
     nsGui::FatButton m_fatBtn3;
+
+    bool m_stoptrans;
 };
 
 } // namespace nsScreen

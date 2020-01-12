@@ -2,7 +2,7 @@
  * @file transition.h
  * @brief A playing transition
  * @author SOLLIER Alexandre
- * @version 1.0
+ * @version 1.1
  * @date 10 janvier 2020
  */
 
@@ -25,6 +25,15 @@ namespace nsTransition
 class Transition : public TransitionContract
 {
 public:
+    /**
+     * @brief TransitionMode : List of all Transition finish modes
+     */
+    enum TransitionFinishModes {
+        FINISH_START, /**< This finish mode will set the target values to its start values */
+        FINISH_CURRENT, /**< This finish mode will not touch the current values of the target */
+        FINISH_DESTINATION, /**< This finish mode will set the target values to its destination values */
+    };
+
     /**
      * @brief Constructor for the Transition class
      * @param[in] contract : Contract used to initialise this Transition
@@ -62,10 +71,10 @@ public:
     const bool& isReversed() const;
 
     /**
-     * @brief Marks this instance of Transition as finished
+     * @brief Marks this instance of Transition as finished, using the specified mode if any
      * @fn void finish();
      */
-    void finish();
+    void finish(const TransitionFinishModes &finishMode = TransitionFinishModes::FINISH_DESTINATION);
 
     /**
      * @brief Returns whether this instance of Transition is marked as finished

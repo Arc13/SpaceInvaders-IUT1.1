@@ -20,6 +20,7 @@ MAINMENU::MainMenu()
     : m_fatBtn(Vec2D(50, 50), Vec2D(50, 50))
     , m_fatBtn2(Vec2D(150, 50), Vec2D(50, 50))
     , m_fatBtn3(Vec2D(250, 50), Vec2D(50, 50))
+    , m_stoptrans(false)
 {} // MainMenu()
 
 void MAINMENU::processEvent(const nsEvent::Event_t &event)
@@ -30,20 +31,29 @@ void MAINMENU::processEvent(const nsEvent::Event_t &event)
     } else if (event.eventType == nsEvent::MouseMove) {
         //std::cout << "move: " << event.eventData.moveData.x << ", " << event.eventData.moveData.y << std::endl;
     } else if (event.eventType == nsEvent::Keyboard) {
-        std::cout << "keyboard: " << event.eventData.keyboardData.x << ", " << event.eventData.keyboardData.y << std::endl;
+        if (!m_stoptrans)
+        {
+            std::cout << "keyboard: " << event.eventData.keyboardData.x << ", " << event.eventData.keyboardData.y << std::endl;
 
-        nsTransition::TransitionContract ctr = nsTransition::TransitionContract(m_fatBtn, nsGui::FatButton::TRANSITION_FIRST_RGB, std::chrono::seconds(2), {255, 255, 255});
-        ctr.setDestinationCallback([]() {
-            std::cout << "First transition has finished!" << std::endl;
-        });
-        m_transitionEngine.startContract(ctr);
-        m_transitionEngine.startContract(nsTransition::TransitionContract(m_fatBtn, nsGui::FatButton::TRANSITION_POSITION, std::chrono::seconds(2), {50, 200}));
+            nsTransition::TransitionContract ctr = nsTransition::TransitionContract(m_fatBtn, nsGui::FatButton::TRANSITION_FIRST_RGB, std::chrono::seconds(2), {255, 255, 255});
+            ctr.setDestinationCallback([]() {
+                std::cout << "First transition has finished!" << std::endl;
+            });
+            m_transitionEngine.startContract(ctr);
+            m_transitionEngine.startContract(nsTransition::TransitionContract(m_fatBtn, nsGui::FatButton::TRANSITION_POSITION, std::chrono::seconds(2), {50, 200}));
 
-        m_transitionEngine.startContract(nsTransition::TransitionContract(m_fatBtn2, nsGui::FatButton::TRANSITION_FIRST_RGB, std::chrono::seconds(2), {255, 255, 255}, nsTransition::TransitionContract::MODE_LOOP));
-        m_transitionEngine.startContract(nsTransition::TransitionContract(m_fatBtn2, nsGui::FatButton::TRANSITION_POSITION, std::chrono::seconds(2), {150, 200}, nsTransition::TransitionContract::MODE_LOOP));
+            m_transitionEngine.startContract(nsTransition::TransitionContract(m_fatBtn2, nsGui::FatButton::TRANSITION_FIRST_RGB, std::chrono::seconds(2), {255, 255, 255}, nsTransition::TransitionContract::MODE_LOOP));
+            m_transitionEngine.startContract(nsTransition::TransitionContract(m_fatBtn2, nsGui::FatButton::TRANSITION_POSITION, std::chrono::seconds(2), {150, 200}, nsTransition::TransitionContract::MODE_LOOP));
 
-        m_transitionEngine.startContract(nsTransition::TransitionContract(m_fatBtn3, nsGui::FatButton::TRANSITION_FIRST_RGB, std::chrono::seconds(2), {255, 255, 255}, nsTransition::TransitionContract::MODE_LOOP_SMOOTH));
-        m_transitionEngine.startContract(nsTransition::TransitionContract(m_fatBtn3, nsGui::FatButton::TRANSITION_POSITION, std::chrono::seconds(2), {250, 200}, nsTransition::TransitionContract::MODE_LOOP_SMOOTH));
+            m_transitionEngine.startContract(nsTransition::TransitionContract(m_fatBtn3, nsGui::FatButton::TRANSITION_FIRST_RGB, std::chrono::seconds(2), {255, 255, 255}, nsTransition::TransitionContract::MODE_LOOP_SMOOTH));
+            m_transitionEngine.startContract(nsTransition::TransitionContract(m_fatBtn3, nsGui::FatButton::TRANSITION_POSITION, std::chrono::seconds(2), {250, 200}, nsTransition::TransitionContract::MODE_LOOP_SMOOTH));
+
+            m_stoptrans = true;
+        }
+        else
+        {
+            m_transitionEngine.finishEveryTransition(nsTransition::Transition::FINISH_START);
+        }
     }
 } // processEvent()
 

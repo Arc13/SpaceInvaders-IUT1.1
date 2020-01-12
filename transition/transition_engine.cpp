@@ -26,4 +26,25 @@ void TRANSITIONENGINE::startContract(const TransitionContract &contract)
     m_transitionList.push_back(Transition(contract));
 } // startContract()
 
+void TRANSITIONENGINE::finishEveryTransition(const Transition::TransitionFinishModes &finishMode)
+{
+    // Mark every transition as finished
+    for (Transition &transition : m_transitionList)
+    {
+        transition.finish(finishMode);
+    }
+} // finishEveryTransition()
+
+void TRANSITIONENGINE::finishEveryTransitionOfTarget(const ITransitionable &transitionable, const Transition::TransitionFinishModes &finishMode)
+{
+    for (Transition &transition : m_transitionList)
+    {
+        // Check if the address of the target is the same one as the address of transitionable
+        if (&(transition.getTarget()) == &transitionable)
+        {
+            transition.finish(finishMode);
+        }
+    }
+}  // finishEveryTransitionOfTarget()
+
 #undef TRANSITIONENGINE

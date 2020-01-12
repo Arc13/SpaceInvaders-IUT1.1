@@ -18,7 +18,7 @@ TRANSITIONCONTRACT::TransitionContract(ITransitionable& target, const int &id,
 const int& TRANSITIONCONTRACT::getId() const
 {
     return m_id;
-} // what()
+} // getId()
 
 const TRANSITIONCONTRACT::TransitionMode& TRANSITIONCONTRACT::getTransitionMode() const
 {
@@ -48,6 +48,6 @@ void TRANSITIONCONTRACT::setDestinationCallback(const std::function<void ()> &ca
 const nsTransition::ITransitionable& TRANSITIONCONTRACT::getTarget() const
 {
     return m_target;
-} // where()
+} // getTarget()
 
 #undef TRANSITIONCONTRACT

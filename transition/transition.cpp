@@ -36,9 +36,23 @@ const bool &TRANSITION::isReversed() const
     return m_reverse;
 } // isReversed()
 
-void TRANSITION::finish()
+void TRANSITION::finish(const TransitionFinishModes &finishMode)
 {
     m_finished = true;
+
+    switch (finishMode)
+    {
+        case TRANSITION::TransitionFinishModes::FINISH_START:
+            m_target.setValues(m_id, m_beginning);
+
+            break;
+        case TRANSITION::TransitionFinishModes::FINISH_DESTINATION:
+            m_target.setValues(m_id, m_destination);
+
+            break;
+        default:
+            break;
+    }
 } // finish()
 
 const bool& TRANSITION::isFinished() const
@@ -48,6 +62,10 @@ const bool& TRANSITION::isFinished() const
 
 void TRANSITION::updateValues()
 {
+    // Prevent further progress if this transition is marked finished
+    if (m_finished)
+        return;
+
     // Get the elapsed progress and clamp it between 0 and 1
     float elapsedProgress = m_elapsed / m_duration;
     elapsedProgress = std::max(0.f, std::min(elapsedProgress, 1.f));

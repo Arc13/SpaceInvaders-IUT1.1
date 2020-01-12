@@ -2,7 +2,7 @@
  * @file transition_engine.h
  * @brief An engine for the transition system
  * @author SOLLIER Alexandre
- * @version 1.0
+ * @version 1.1
  * @date 10 janvier 2020
  */
 
@@ -41,6 +41,19 @@ public:
      * @fn void startContract(const TransitionContract &contract);
      */
     void startContract(const TransitionContract &contract);
+
+    /**
+     * @brief Finishes every transition of the list
+     * @fn void finishEveryTransition();
+     */
+    void finishEveryTransition(const Transition::TransitionFinishModes &finishMode = Transition::FINISH_DESTINATION);
+
+    /**
+     * @brief Finishes every transition of the list matching the target
+     * @param[in] transitionable : The target that will stop being transitioned
+     * @fn void finishEveryTransitionOfTarget(const ITransitionable &transitionable);
+     */
+    void finishEveryTransitionOfTarget(const ITransitionable &transitionable, const Transition::TransitionFinishModes &finishMode = Transition::FINISH_DESTINATION);
 
 private:
     /**
