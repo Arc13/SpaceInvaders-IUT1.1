@@ -33,7 +33,7 @@ void MAINMENU::processEvent(const nsEvent::Event_t &event)
         std::cout << "keyboard: " << event.eventData.keyboardData.x << ", " << event.eventData.keyboardData.y << std::endl;
 
         nsTransition::TransitionContract ctr = nsTransition::TransitionContract(m_fatBtn, nsGui::FatButton::TRANSITION_FIRST_RGB, std::chrono::seconds(2), {255, 255, 255});
-        ctr.setFinishCallback([]() {
+        ctr.setDestinationCallback([]() {
             std::cout << "First transition has finished!" << std::endl;
         });
         m_transitionEngine.startContract(ctr);

@@ -40,9 +40,9 @@ const TRANSITIONCONTRACT::SystemDuration_t &TRANSITIONCONTRACT::getDuration() co
     return m_duration;
 } // getDuration()
 
-void TRANSITIONCONTRACT::setFinishCallback(const std::function<void ()> &callback)
+void TRANSITIONCONTRACT::setDestinationCallback(const std::function<void ()> &callback)
 {
-    m_finishCallback = callback;
+    m_destinationCallback = callback;
 } // setFinishCallback()
 
 const nsTransition::ITransitionable& TRANSITIONCONTRACT::getTarget() const

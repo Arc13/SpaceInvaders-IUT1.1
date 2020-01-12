@@ -100,9 +100,9 @@ void TRANSITION::handleEndlife()
     }
 
     // Call the finish callback if set
-    if (m_finishCallback)
+    if (m_destinationCallback)
     {
-        m_finishCallback();
+        m_destinationCallback();
     }
 } // handleEndlife()
 

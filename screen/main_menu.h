@@ -26,6 +26,10 @@ namespace nsScreen {
 class MainMenu : public IScreen
 {
 public:
+    /**
+     * @brief Constructor for the MainMenu class
+     * @fn MainMenu();
+     */
     MainMenu();
 
     virtual void processEvent(const nsEvent::Event_t &event) override;

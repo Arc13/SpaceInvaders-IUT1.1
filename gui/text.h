@@ -43,22 +43,22 @@ protected:
     virtual void draw() override;
 
     /**
-     * @brief position : Position of the text on the window
+     * @brief m_position : Position of the text on the window
      */
     Vec2D m_position;
 
     /**
-     * @brief content : Content of the text
+     * @brief m_content : Content of the text
      */
     std::string m_content;
 
     /**
-     * @brief textColor : Color of the text
+     * @brief m_textColor : Color of the text
      */
     RGBAcolor m_textColor;
 
     /**
-     * @brief textFont : Font of the text
+     * @brief m_textFont : Font of the text
      */
     GlutFont m_textFont;
 };

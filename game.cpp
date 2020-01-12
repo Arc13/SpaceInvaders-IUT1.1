@@ -19,6 +19,9 @@
 #include "screen/screen_id_map.h"
 #include "screen/main_menu.h"
 
+/**
+ * @brief FPS_LIMIT : The framerate limit for the game
+ */
 #define FPS_LIMIT 60
 
 using namespace std;
