@@ -1,3 +1,11 @@
+/**
+ * @file transition_engine.cpp
+ * @brief An engine for the transition system
+ * @author SOLLIER Alexandre
+ * @version 1.1
+ * @date 10 janvier 2020
+ */
+
 #include "transition_engine.h"
 
 #define TRANSITIONENGINE nsTransition::TransitionEngine

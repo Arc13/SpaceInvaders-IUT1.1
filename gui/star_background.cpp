@@ -1,9 +1,9 @@
-/*!
- * \file gui_star_background.h
- * \brief A nice star background with blink effects
- * \author SOLLIER Alexandre
- * \version 1.0
- * \date 06 janvier 2020
+/**
+ * @file star_background.cpp
+ * @brief A nice star background with blink effects
+ * @author SOLLIER Alexandre
+ * @version 1.0
+ * @date 06 janvier 2020
  */
 
 #include "star_background.h"

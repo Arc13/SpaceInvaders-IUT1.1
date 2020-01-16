@@ -1,9 +1,9 @@
-/*!
- * \file gui_text.cpp
- * \brief Text that can be displayed to a MinGL Window
- * \author SOLLIER Alexandre
- * \version 1.0
- * \date 28 décembre 2019
+/**
+ * @file text.cpp
+ * @brief Text that can be displayed to a MinGL Window
+ * @author SOLLIER Alexandre
+ * @version 1.1
+ * @date 28 décembre 2019
  */
 
 #include "text.h"

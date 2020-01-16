@@ -1,3 +1,11 @@
+/**
+ * @file transition.cpp
+ * @brief A playing transition
+ * @author SOLLIER Alexandre
+ * @version 1.1
+ * @date 10 janvier 2020
+ */
+
 #include "transition.h"
 
 #include <algorithm>

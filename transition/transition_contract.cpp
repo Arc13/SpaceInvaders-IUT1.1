@@ -1,3 +1,11 @@
+/**
+ * @file transition_contract.cpp
+ * @brief Parameters for a transition
+ * @author SOLLIER Alexandre
+ * @version 1.1
+ * @date 10 janvier 2020
+ */
+
 #include "transition_contract.h"
 
 #define TRANSITIONCONTRACT nsTransition::TransitionContract

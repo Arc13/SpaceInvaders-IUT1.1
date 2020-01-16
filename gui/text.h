@@ -2,7 +2,7 @@
  * @file text.h
  * @brief Text that can be displayed to a MinGL Window
  * @author SOLLIER Alexandre
- * @version 1.0
+ * @version 1.1
  * @date 28 décembre 2019
  */
 

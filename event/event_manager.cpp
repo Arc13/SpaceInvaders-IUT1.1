@@ -1,3 +1,11 @@
+/**
+ * @file event_manager.cpp
+ * @brief The event manager for user inputs
+ * @author SOLLIER Alexandre
+ * @version 1.0
+ * @date 09 janvier 2020
+ */
+
 #include "event_manager.h"
 
 #define EVENTMANAGER nsEvent::EventManager

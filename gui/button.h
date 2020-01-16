@@ -2,8 +2,8 @@
  * @file button.h
  * @brief An object providing a rectangle with centered text inside
  * @author SOLLIER Alexandre
- * @version 1.0
- * @date 06 janvier 2020
+ * @version 1.1
+ * @date 16 janvier 2020
  */
 
 #ifndef BUTTON_H

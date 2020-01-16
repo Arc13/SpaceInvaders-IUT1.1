@@ -1,3 +1,11 @@
+/**
+ * @file screen_id_map.cpp
+ * @brief Provides mapping between ScreenIdentifiers and IScreen derived classes
+ * @author SOLLIER Alexandre
+ * @version 1.0
+ * @date 09 janvier 2020
+ */
+
 #include "screen_id_map.h"
 
 #include "main_menu.h"

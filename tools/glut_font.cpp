@@ -1,9 +1,9 @@
-/*!
- * \file glut_font.cpp
- * \brief Utility class to get fonts that Glut provides
- * \author SOLLIER Alexandre
- * \version 1.0
- * \date 28 décembre 2019
+/**
+ * @file glut_font.cpp
+ * @brief Utility class to get fonts that Glut provides
+ * @author SOLLIER Alexandre
+ * @version 1.0
+ * @date 28 décembre 2019
  */
 
 #include "tools/glut_font.h"
