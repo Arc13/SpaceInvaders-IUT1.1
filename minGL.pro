@@ -40,7 +40,7 @@ INCLUDEPATH += /usr/include/GL/
 QMAKE_CXXFLAGS += -Wall
 
 HEADERS += \
-    event/event.h \
+    event/event.hpp \
     event/event_manager.h \
     figs/basefig.h \
     figs/circle.h \

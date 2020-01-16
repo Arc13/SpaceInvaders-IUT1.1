@@ -11,7 +11,7 @@
 
 #include <queue>
 
-#include "event.h"
+#include "event.hpp"
 
 namespace nsEvent {
 

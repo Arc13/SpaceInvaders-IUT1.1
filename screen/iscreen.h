@@ -14,7 +14,7 @@
 
 #include "screen_identifiers.h"
 
-#include "../event/event.h"
+#include "../event/event.hpp"
 #include "../graph/idrawable.h"
 #include "../graph/mingl.h"
 /**

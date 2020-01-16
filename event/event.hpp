@@ -1,13 +1,13 @@
 /**
- * @file event.h
+ * @file event.hpp
  * @brief Collection for various event types and data
  * @author SOLLIER Alexandre
  * @version 1.0
  * @date 09 janvier 2020
  */
 
-#ifndef EVENT_H
-#define EVENT_H
+#ifndef EVENT_HPP
+#define EVENT_HPP
 
 /**
  * @namespace nsEvent
@@ -152,4 +152,4 @@ struct Event_t {
 
 } // namespace nsEvent
 
-#endif // EVENT_H
+#endif // EVENT_HPP
