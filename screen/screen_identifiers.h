@@ -17,7 +17,8 @@ namespace nsScreen {
 enum ScreenIdentifiers {
     ID_None, /**< No screen */
 
-    ID_MainMenu, /**< The main menu screen */
+    ID_TitleMenu, /**< The title screen */
+    ID_MainGame, /**< The game screen */
 };
 
 } // namespace nsScreen

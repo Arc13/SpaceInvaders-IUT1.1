@@ -14,12 +14,14 @@ SOURCES += main.cpp \
     game.cpp \
     graph/mingl.cpp \
     graph/rgbacolor.cpp \
+    gridmanager/manage.cpp \
     gui/button.cpp \
     gui/star_background.cpp \
     gui/text.cpp \
     screen/iscreen.cpp \
-    screen/main_menu.cpp \
+    screen/main_game.cpp \
     screen/screen_id_map.cpp \
+    screen/title_menu.cpp \
     tools/CException.cxx \
     tools/glut_font.cpp \
     tools/myexception.cpp \
@@ -54,13 +56,17 @@ HEADERS += \
     graph/mingl.h \
     graph/rgbacolor.h \
     graph/vec2d.h \
+    gridmanager/manage.h \
+    gridmanager/manage_const.h \
+    gridmanager/manage_type.h \
     gui/button.h \
     gui/star_background.h \
     gui/text.h \
     screen/iscreen.h \
-    screen/main_menu.h \
+    screen/main_game.h \
     screen/screen_id_map.h \
     screen/screen_identifiers.h \
+    screen/title_menu.h \
     tools/CException.h \
     tools/CException.hxx \
     tools/CstCodErr.h \

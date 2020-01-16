@@ -8,7 +8,8 @@
 
 #include "screen_id_map.h"
 
-#include "main_menu.h"
+#include "main_game.h"
+#include "title_menu.h"
 
 #include "../tools/myexception.h"
 
@@ -19,9 +20,10 @@ std::unique_ptr<nsScreen::IScreen> SCREENIDMAP::getScreenFromId(const nsScreen::
     // Check the ID and return the right Screen
     switch (screenId)
     {
-        case ScreenIdentifiers::ID_MainMenu:
-            return std::unique_ptr<IScreen>(new nsScreen::MainMenu());
-
+        case ScreenIdentifiers::ID_TitleMenu:
+            return std::unique_ptr<IScreen>(new nsScreen::TitleMenu());
+        case ScreenIdentifiers::ID_MainGame:
+            return std::unique_ptr<IScreen>(new nsScreen::MainGame());
         case ScreenIdentifiers::ID_None:
         default:
             throw MyException(nsUtil::kScreenNotFound);

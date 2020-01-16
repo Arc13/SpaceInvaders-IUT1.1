@@ -11,26 +11,26 @@
 
 #include "iscreen.h"
 
-#include "../transition/transition_engine.h"
-#include "../transition/transition_types.h"
-
 #include "../gui/button.h"
 #include "../gui/text.h"
+
+#include "../transition/transition_engine.h"
+#include "../transition/transition_types.h"
 
 namespace nsScreen {
 
 /**
- * @class MainMenu
- * @brief Set of elements representing the main menu of the game
+ * @class TitleMenu
+ * @brief Set of elements representing the title screen of the game
  */
-class MainMenu : public IScreen
+class TitleMenu : public IScreen
 {
 public:
     /**
-     * @brief Constructor for the MainMenu class
-     * @fn MainMenu();
+     * @brief Constructor for the TitleMenu class
+     * @fn TitleMenu();
      */
-    MainMenu();
+    TitleMenu();
 
     virtual void processEvent(const nsEvent::Event_t &event) override;
     virtual void update(const std::chrono::microseconds &delta) override;

@@ -6,13 +6,13 @@
  * @date 09 janvier 2020
  */
 
-#include "main_menu.h"
+#include "title_menu.h"
 
 #include <iostream>
 
-#define MAINMENU nsScreen::MainMenu
+#define TITLEMENU nsScreen::TitleMenu
 
-MAINMENU::MainMenu()
+TITLEMENU::TitleMenu()
     : m_playButtonHovered(false)
     , m_playButton("Jouer", Vec2D(220, 320), Vec2D(200, 60), RGBAcolor(86, 204, 242, 192), RGBAcolor(47, 128, 237, 192))
     , m_titleShown(false)
@@ -47,7 +47,7 @@ MAINMENU::MainMenu()
     }
 } // MainMenu()
 
-void MAINMENU::processEvent(const nsEvent::Event_t &event)
+void TITLEMENU::processEvent(const nsEvent::Event_t &event)
 {
     // Function called each time an event happend
     switch (event.eventType)
@@ -90,6 +90,7 @@ void MAINMENU::processEvent(const nsEvent::Event_t &event)
             if (mousePos >= m_playButton.getPosition() && mousePos <= m_playButton.getPosition() + m_playButton.getSize())
             {
                 // The user clicked on the play button
+                requestScreenChange(nsScreen::ScreenIdentifiers::ID_MainGame);
             }
 
             break;
@@ -99,7 +100,7 @@ void MAINMENU::processEvent(const nsEvent::Event_t &event)
     }
 } // processEvent()
 
-void MAINMENU::update(const std::chrono::microseconds &delta)
+void TITLEMENU::update(const std::chrono::microseconds &delta)
 {
     // Function called each frame, updates screen logic
     m_transitionEngine.update(delta);
@@ -121,7 +122,7 @@ void MAINMENU::update(const std::chrono::microseconds &delta)
     }
 } // update()
 
-void MAINMENU::draw(MinGL &window)
+void TITLEMENU::draw(MinGL &window)
 {
     // Function called each frame, draws screen elements
     window << m_playButton;
@@ -133,12 +134,12 @@ void MAINMENU::draw(MinGL &window)
     }
 } // draw()
 
-std::unique_ptr<IDrawable> MAINMENU::clone() const
+std::unique_ptr<IDrawable> TITLEMENU::clone() const
 {
-    return std::unique_ptr<MainMenu>(new MainMenu(*this));
+    return std::unique_ptr<TitleMenu>(new TitleMenu(*this));
 } // clone()
 
-void nsScreen::MainMenu::executeTitleAppearanceAnimation()
+void TITLEMENU::executeTitleAppearanceAnimation()
 {
     // Set every line of the title to an alpha of 192
     for (unsigned i = 0; i < m_titleText.size() - 1; ++i)
@@ -162,7 +163,7 @@ void nsScreen::MainMenu::executeTitleAppearanceAnimation()
     m_transitionEngine.startContract(lastContract);
 } // executeTitleAppearanceAnimation()
 
-void nsScreen::MainMenu::executeTitleHaloEffect()
+void TITLEMENU::executeTitleHaloEffect()
 {
     // Set every line of the title to a white color, temporarily
     for (unsigned i = 0; i < m_titleText.size(); ++i)
@@ -181,4 +182,4 @@ void nsScreen::MainMenu::executeTitleHaloEffect()
     }
 } // executeTitleHaloEffect()
 
-#undef MAINMENU
+#undef TITLEMENU
