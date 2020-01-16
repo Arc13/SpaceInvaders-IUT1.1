@@ -72,6 +72,7 @@ public:
 
     /**
      * @brief Marks this instance of Transition as finished, using the specified mode if any
+     * @param[in] finishMode : Mode used to finish the transition (Defaults to setting the destination values to the target)
      * @fn void finish();
      */
     void finish(const TransitionFinishModes &finishMode = TransitionFinishModes::FINISH_DESTINATION);

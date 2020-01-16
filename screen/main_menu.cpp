@@ -2,58 +2,92 @@
 
 #include <iostream>
 
-#include "gui/text.h"
-#include "gui/star_background.h"
-
-#include "figs/line.h"
-#include "figs/rectangle.h"
-#include "figs/triangle.h"
-#include "figs/circle.h"
-#include "figs/figure.h"
-
-#include "graph/rgbacolor.h"
-#include "graph/vec2d.h"
-
 #define MAINMENU nsScreen::MainMenu
 
 MAINMENU::MainMenu()
-    : m_fatBtn(Vec2D(50, 50), Vec2D(50, 50))
-    , m_fatBtn2(Vec2D(150, 50), Vec2D(50, 50))
-    , m_fatBtn3(Vec2D(250, 50), Vec2D(50, 50))
-    , m_stoptrans(false)
-{} // MainMenu()
+    : m_playButtonHovered(false)
+    , m_playButton("Jouer", Vec2D(220, 320), Vec2D(200, 60), RGBAcolor(86, 204, 242, 192), RGBAcolor(47, 128, 237, 192))
+    , m_titleShown(false)
+    , m_titleEnableAnimation(false)
+    , m_titleLastHaloTime(std::chrono::seconds::zero())
+{
+    // Push every line to the vector containing Text drawables
+    const std::vector<std::string> titleLines{" .d8888b.",
+                                              "d88P  Y88b",
+                                              "Y88b.",
+                                              " \"Y888b.  88888b.  8888b.  .d8888b .d88b.",
+                                              "    \"Y88b.888 \"88b    \"88bd88P\"   d8P  Y8b",
+                                              "      \"888888  888.d888888888     88888888",
+                                              "Y88b  d88P888 d88P888  888Y88b.   Y8b.",
+                                              " \"Y8888P\" 88888P\" \"Y888888 \"Y8888P \"Y8888",
+                                              "          888",
+                                              "          888",
+                                              "          888",
+                                              "",
+                                              " .d88888b.         888                        888",
+                                              "d88P\" \"Y88b        888                        888",
+                                              "888     888        888                        888",
+                                              "888     888888  888888888888  888 8888b.  .d88888 .d88b. 888d888.d8888b",
+                                              "888     888888  888888   888  888    \"88bd88\" 888d8P  Y8b888P\"  88K",
+                                              "888     888888  888888   Y88  88P.d888888888  88888888888888    \"Y8888b.",
+                                              "Y88b. .d88PY88b 888Y88b.  Y8bd8P 888  888Y88b 888Y8b.    888         X88 ",
+                                              " \"Y88888P\"  \"Y88888 \"Y888  Y88P  \"Y888888 \"Y88888 \"Y8888 888     88888P'"};
+
+    for (unsigned i = 0; i < titleLines.size(); ++i)
+    {
+        m_titleText.push_back(nsGui::Text(Vec2D(10 + 2*i, 20 + 13*i), titleLines[i], RGBAcolor(160, 160, 160, 0)));
+    }
+} // MainMenu()
 
 void MAINMENU::processEvent(const nsEvent::Event_t &event)
 {
     // Function called each time an event happend
-    if (event.eventType == nsEvent::MouseClick) {
-        std::cout << "click: " << event.eventData.clickData.x << ", " << event.eventData.clickData.y << std::endl;
-    } else if (event.eventType == nsEvent::MouseMove) {
-        //std::cout << "move: " << event.eventData.moveData.x << ", " << event.eventData.moveData.y << std::endl;
-    } else if (event.eventType == nsEvent::Keyboard) {
-        if (!m_stoptrans)
+    switch (event.eventType)
+    {
+        case nsEvent::EventType_t::MouseMove:
         {
-            std::cout << "keyboard: " << event.eventData.keyboardData.x << ", " << event.eventData.keyboardData.y << std::endl;
+            const Vec2D mousePos(event.eventData.moveData.x, event.eventData.moveData.y);
+            if (!m_playButtonHovered && mousePos >= m_playButton.getPosition() && mousePos <= m_playButton.getPosition() + m_playButton.getSize())
+            {
+                // Mouse moved where the play button is located, set button transparency to 255
+                m_playButtonHovered = true;
+                m_transitionEngine.finishEveryTransitionOfTarget(m_playButton);
 
-            nsTransition::TransitionContract ctr = nsTransition::TransitionContract(m_fatBtn, nsGui::FatButton::TRANSITION_FIRST_RGB, std::chrono::seconds(2), {255, 255, 255});
-            ctr.setDestinationCallback([]() {
-                std::cout << "First transition has finished!" << std::endl;
-            });
-            m_transitionEngine.startContract(ctr);
-            m_transitionEngine.startContract(nsTransition::TransitionContract(m_fatBtn, nsGui::FatButton::TRANSITION_POSITION, std::chrono::seconds(2), {50, 200}));
+                m_transitionEngine.startContract(nsTransition::TransitionContract(m_playButton,
+                                                                                  nsGui::Button::TRANSITION_FIRST_ALPHA,
+                                                                                  std::chrono::milliseconds(500), {255}));
+                m_transitionEngine.startContract(nsTransition::TransitionContract(m_playButton,
+                                                                                  nsGui::Button::TRANSITION_SECOND_ALPHA,
+                                                                                  std::chrono::milliseconds(500), {255}));
+            }
+            else if (m_playButtonHovered && !(mousePos >= m_playButton.getPosition() && mousePos <= m_playButton.getPosition() + m_playButton.getSize()))
+            {
+                // Mouse moved outside of the play button location
+                m_playButtonHovered = false;
+                m_transitionEngine.finishEveryTransitionOfTarget(m_playButton);
 
-            m_transitionEngine.startContract(nsTransition::TransitionContract(m_fatBtn2, nsGui::FatButton::TRANSITION_FIRST_RGB, std::chrono::seconds(2), {255, 255, 255}, nsTransition::TransitionContract::MODE_LOOP));
-            m_transitionEngine.startContract(nsTransition::TransitionContract(m_fatBtn2, nsGui::FatButton::TRANSITION_POSITION, std::chrono::seconds(2), {150, 200}, nsTransition::TransitionContract::MODE_LOOP));
+                m_transitionEngine.startContract(nsTransition::TransitionContract(m_playButton,
+                                                                                  nsGui::Button::TRANSITION_FIRST_ALPHA,
+                                                                                  std::chrono::milliseconds(500), {192}));
+                m_transitionEngine.startContract(nsTransition::TransitionContract(m_playButton,
+                                                                                  nsGui::Button::TRANSITION_SECOND_ALPHA,
+                                                                                  std::chrono::milliseconds(500), {192}));
+            }
 
-            m_transitionEngine.startContract(nsTransition::TransitionContract(m_fatBtn3, nsGui::FatButton::TRANSITION_FIRST_RGB, std::chrono::seconds(2), {255, 255, 255}, nsTransition::TransitionContract::MODE_LOOP_SMOOTH));
-            m_transitionEngine.startContract(nsTransition::TransitionContract(m_fatBtn3, nsGui::FatButton::TRANSITION_POSITION, std::chrono::seconds(2), {250, 200}, nsTransition::TransitionContract::MODE_LOOP_SMOOTH));
-
-            m_stoptrans = true;
+            break;
         }
-        else
+        case nsEvent::EventType_t::MouseClick:
         {
-            m_transitionEngine.finishEveryTransition(nsTransition::Transition::FINISH_START);
+            const Vec2D mousePos(event.eventData.clickData.x, event.eventData.clickData.y);
+            if (mousePos >= m_playButton.getPosition() && mousePos <= m_playButton.getPosition() + m_playButton.getSize())
+            {
+                // The user clicked on the play button
+            }
+
+            break;
         }
+        default:
+            break;
     }
 } // processEvent()
 
@@ -61,29 +95,82 @@ void MAINMENU::update(const std::chrono::microseconds &delta)
 {
     // Function called each frame, updates screen logic
     m_transitionEngine.update(delta);
+
+    // This is the first update, we must show the game title
+    if (!m_titleShown)
+    {
+        m_titleShown = true;
+        executeTitleAppearanceAnimation();
+    }
+
+    // Manage the title halo effect
+    m_titleLastHaloTime += delta;
+    if (m_titleEnableAnimation && m_titleLastHaloTime >= std::chrono::seconds(4))
+    {
+        // The animation is enabled and enough time has passed
+        m_titleLastHaloTime = std::chrono::seconds::zero();
+        executeTitleHaloEffect();
+    }
 } // update()
 
 void MAINMENU::draw(MinGL &window)
 {
     // Function called each frame, draws screen elements
+    window << m_playButton;
 
-    // Inject to the window everything that must be drawn
-    window << nsGui::Text(Vec2D(10, 110), "BITMAP 8x13", KRed);
-    window << nsGui::Text(Vec2D(10, 125), "BITMAP 9x15", KRed, GlutFont::BITMAP_9_BY_15);
-    window << nsGui::Text(Vec2D(10, 140), "HELVETICA 10", KBlue, GlutFont::BITMAP_HELVETICA_10);
-    window << nsGui::Text(Vec2D(10, 155), "HELVETICA 12", KBlue, GlutFont::BITMAP_HELVETICA_12);
-    window << nsGui::Text(Vec2D(10, 175), "HELVETICA 18", KBlue, GlutFont::BITMAP_HELVETICA_18);
-    window << nsGui::Text(Vec2D(10, 195), "TIMES NEW ROMAN 10", KGreen, GlutFont::BITMAP_TIMES_ROMAN_10);
-    window << nsGui::Text(Vec2D(10, 215), "TIMES NEW ROMAN 24", KGreen, GlutFont::BITMAP_TIMES_ROMAN_24);
-
-    window << Rectangle(Vec2D(280, 280), Vec2D(300, 300), KBlue, KPurple);
-    window << Circle(Vec2D(150, 150), 40, KYellow, KRed);
-    window << Line(Vec2D(400, 400), Vec2D(500, 400), KRed);
-    window << Triangle(Vec2D(100, 100), Vec2D(150, 100), Vec2D(100, 150), KCyan, KRed);
-
-    window << m_fatBtn;
-    window << m_fatBtn2;
-    window << m_fatBtn3;
+    // Draw every line of the title
+    for (const nsGui::Text &line : m_titleText)
+    {
+        window << line;
+    }
 } // draw()
+
+std::unique_ptr<IDrawable> MAINMENU::clone() const
+{
+    return std::unique_ptr<MainMenu>(new MainMenu(*this));
+} // clone()
+
+void nsScreen::MainMenu::executeTitleAppearanceAnimation()
+{
+    // Set every line of the title to an alpha of 192
+    for (unsigned i = 0; i < m_titleText.size() - 1; ++i)
+    {
+        m_transitionEngine.startContract(nsTransition::TransitionContract(m_titleText[i],
+                                                                          nsGui::Text::TRANSITION_COLOR_ALPHA,
+                                                                          std::chrono::milliseconds(1000), {192},
+                                                                          std::chrono::milliseconds(50) * i));
+    }
+
+    // When the last animation is done, we can enable the "halo" animation
+    const unsigned lastTextIndex = m_titleText.size() - 1;
+    nsTransition::TransitionContract lastContract(m_titleText[lastTextIndex],
+                                                  nsGui::Text::TRANSITION_COLOR_ALPHA,
+                                                  std::chrono::milliseconds(1000), {192},
+                                                  std::chrono::milliseconds(50) * lastTextIndex);
+    lastContract.setDestinationCallback([&]() {
+        m_titleEnableAnimation = true;
+        m_titleLastHaloTime = std::chrono::seconds::zero();
+    });
+    m_transitionEngine.startContract(lastContract);
+} // executeTitleAppearanceAnimation()
+
+void nsScreen::MainMenu::executeTitleHaloEffect()
+{
+    // Set every line of the title to a white color, temporarily
+    for (unsigned i = 0; i < m_titleText.size(); ++i)
+    {
+        m_transitionEngine.startContract(nsTransition::TransitionContract(m_titleText[i],
+                                                                          nsGui::Text::TRANSITION_COLOR_RGB,
+                                                                          std::chrono::milliseconds(150), {255, 255, 255},
+                                                                          std::chrono::milliseconds(50) * i,
+                                                                          nsTransition::TransitionContract::MODE_FINITE_REVERSE));
+
+        m_transitionEngine.startContract(nsTransition::TransitionContract(m_titleText[i],
+                                                                          nsGui::Text::TRANSITION_COLOR_ALPHA,
+                                                                          std::chrono::milliseconds(150), {255},
+                                                                          std::chrono::milliseconds(50) * i,
+                                                                          nsTransition::TransitionContract::MODE_FINITE_REVERSE));
+    }
+} // executeTitleHaloEffect()
 
 #undef MAINMENU

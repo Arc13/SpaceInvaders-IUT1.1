@@ -12,7 +12,7 @@
 class Figure : public BaseFig
 {
 protected:
-    virtual void draw() override;
+    virtual void draw(MinGL &window) override;
     std::vector<std::shared_ptr<BaseFig>> vFig;
 
 public:

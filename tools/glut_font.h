@@ -9,6 +9,10 @@
 #ifndef GLUT_FONTS_H
 #define GLUT_FONTS_H
 
+/**
+ * @class GlutFont
+ * @brief Class listing every font provided by Glut, to use with the Text object
+ */
 class GlutFont
 {
 public:

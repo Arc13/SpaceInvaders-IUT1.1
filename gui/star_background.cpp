@@ -10,17 +10,18 @@
 
 #define STARBACKGROUND nsGui::StarBackground
 
-STARBACKGROUND::StarBackground(const unsigned &starCount_, const Vec2D &size_, const RGBAcolor &unlitColor_, const RGBAcolor &litColor_, const float &litProbability_)
-    : m_unlitColor(unlitColor_)
-    , m_litColor(litColor_)
-    , m_litProbability(litProbability_)
+STARBACKGROUND::StarBackground(const unsigned &starCount, const Vec2D &size,
+                               const RGBAcolor &unlitColor, const RGBAcolor &litColor, const float &litProbability)
+    : m_unlitColor(unlitColor)
+    , m_litColor(litColor)
+    , m_litProbability(litProbability)
 {
     // Initialise the RNG seed
     srand(time(NULL));
 
-    for (unsigned i = 0; i < starCount_; ++i) {
+    for (unsigned i = 0; i < starCount; ++i) {
         // Put a new star at random coordinates, unlit by default, in the star vector
-        m_stars.push_back({Vec2D(rand() % size_.x, rand() % size_.y), false});
+        m_stars.push_back({Vec2D(rand() % size.x, rand() % size.y), false});
     }
 } // StarBackground()
 
@@ -29,7 +30,7 @@ std::unique_ptr<IDrawable> STARBACKGROUND::clone() const
     return std::unique_ptr<StarBackground>(new StarBackground(*this));
 }
 
-void STARBACKGROUND::draw()
+void STARBACKGROUND::draw(MinGL &window)
 {
     // Draw the stars as points
     glBegin(GL_POINTS);

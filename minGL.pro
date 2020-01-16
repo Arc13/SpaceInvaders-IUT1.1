@@ -14,7 +14,7 @@ SOURCES += main.cpp \
     game.cpp \
     graph/mingl.cpp \
     graph/rgbacolor.cpp \
-    gui/fat_button.cpp \
+    gui/button.cpp \
     gui/star_background.cpp \
     gui/text.cpp \
     screen/iscreen.cpp \
@@ -54,7 +54,7 @@ HEADERS += \
     graph/mingl.h \
     graph/rgbacolor.h \
     graph/vec2d.h \
-    gui/fat_button.h \
+    gui/button.h \
     gui/star_background.h \
     gui/text.h \
     screen/iscreen.h \
@@ -75,4 +75,5 @@ HEADERS += \
     transition/itransitionable.h \
     transition/transition.h \
     transition/transition_contract.h \
-    transition/transition_engine.h
+    transition/transition_engine.h \
+    transition/transition_types.h

@@ -7,7 +7,7 @@
 using namespace std;
 using namespace nsUtil;
 
-void Line::draw()
+void Line::draw(MinGL &window)
 {
     // On met la couleur de la ligne
     const RGBAcolor inColor = getInColor();

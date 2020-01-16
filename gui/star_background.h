@@ -24,18 +24,18 @@ class StarBackground : public IminGlInjectable
 public:
     /**
      * @brief Constructor for the StarBackground class
-     * @param[in] starCount_ : Number of stars for this instance
-     * @param[in] size_ : Background size
-     * @param[in] unlitColor_ : Color of an unlit star
-     * @param[in] litColor_ : Color of a lit star
-     * @param[in] litProbability_ : Probability for a star to change its lit state
-     * @fn StarBackground(const unsigned &starCount_, const Vec2D &size_,
-                      const RGBcolor &unlitColor_ = RGBcolor(128, 128, 128), const RGBcolor &litColor_ = RGBcolor(192, 192, 192),
-                      const float &litProbability_ = 0.05);
+     * @param[in] starCount : Number of stars for this instance
+     * @param[in] size : Background size
+     * @param[in] unlitColor : Color of an unlit star (Defaults to gray)
+     * @param[in] litColor : Color of a lit star (Defaults to light gray)
+     * @param[in] litProbability : Probability for a star to change its lit state (Defaults to 5%)
+     * @fn StarBackground(const unsigned &starCount, const Vec2D &size,
+                      const RGBAcolor &unlitColor = RGBAcolor(128, 128, 128), const RGBAcolor &litColor = RGBAcolor(192, 192, 192),
+                      const float &litProbability = 0.05);
      */
-    StarBackground(const unsigned &starCount_, const Vec2D &size_,
-                      const RGBAcolor &unlitColor_ = RGBAcolor(128, 128, 128), const RGBAcolor &litColor_ = RGBAcolor(192, 192, 192),
-                      const float &litProbability_ = 0.05);
+    StarBackground(const unsigned &starCount, const Vec2D &size,
+                      const RGBAcolor &unlitColor = RGBAcolor(128, 128, 128), const RGBAcolor &litColor = RGBAcolor(192, 192, 192),
+                      const float &litProbability = 0.05);
 
     /**
      * @brief Updates the element
@@ -47,7 +47,7 @@ public:
     virtual std::unique_ptr<IDrawable> clone() const override;
 
 protected:
-    virtual void draw() override;
+    virtual void draw(MinGL &window) override;
 
 private:
     /**

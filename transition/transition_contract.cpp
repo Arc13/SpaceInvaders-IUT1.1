@@ -3,13 +3,15 @@
 #define TRANSITIONCONTRACT nsTransition::TransitionContract
 
 TRANSITIONCONTRACT::TransitionContract(ITransitionable& target, const int &id,
-                                       const std::chrono::seconds &duration, const std::vector<float> &destination,
+                                       const SystemDuration_t &duration, const std::vector<float> &destination,
+                                       const SystemDuration_t &delay,
                                        const TransitionMode &transitionMode)
     : m_id(id)
     , m_target(target)
     , m_transitionMode(transitionMode)
     , m_destination(destination)
     , m_duration(duration)
+    , m_delay(delay)
 {
     m_beginning.resize(destination.size());
     target.getValues(id, m_beginning);
@@ -35,7 +37,7 @@ const std::vector<float>& TRANSITIONCONTRACT::getDestination() const
     return m_destination;
 } // getDestination()
 
-const TRANSITIONCONTRACT::SystemDuration_t &TRANSITIONCONTRACT::getDuration() const
+const nsTransition::SystemDuration_t &TRANSITIONCONTRACT::getDuration() const
 {
     return m_duration;
 } // getDuration()

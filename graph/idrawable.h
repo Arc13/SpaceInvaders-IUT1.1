@@ -11,6 +11,12 @@
 
 #include <memory>
 
+class MinGL;
+
+/**
+ * @class IDrawable
+ * @brief Interface for a drawable object
+ */
 class IDrawable
 {
 public:
@@ -29,9 +35,10 @@ public:
 
     /**
      * @brief Signature for the function to draw the object
-     * @fn virtual void draw();
+     * @param[in] window : The target window
+     * @fn virtual void draw(MinGL &window);
      */
-    virtual void draw() = 0;
+    virtual void draw(MinGL &window) = 0;
 };
 
 #endif // DRAWABLE_H

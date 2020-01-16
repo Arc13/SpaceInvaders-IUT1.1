@@ -13,7 +13,7 @@ public:
     Rectangle (const BaseFig &);
     virtual ~Rectangle() {}
 
-    virtual void draw() override;
+    virtual void draw(MinGL &window) override;
 
     // Opérateur de décalage +
     Rectangle operator + (const Vec2D & pos_) const {

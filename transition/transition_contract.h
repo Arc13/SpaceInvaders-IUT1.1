@@ -9,11 +9,11 @@
 #ifndef TRANSITION_CONTRACT_H
 #define TRANSITION_CONTRACT_H
 
-#include <chrono>
 #include <functional>
 #include <vector>
 
 #include "itransitionable.h"
+#include "transition_types.h"
 
 namespace nsTransition
 {
@@ -24,22 +24,13 @@ namespace nsTransition
  */
 class TransitionContract
 {
-public:
-    /**
-     * @brief SystemTimePoint_t : Type definition representing a time point based on the system clock
-     */
-    typedef std::chrono::time_point<std::chrono::system_clock> SystemTimePoint_t;
-
-    /**
-     * @brief SystemDuration_t : Type definition representing a duration as nanoseconds, stored as float
-     */
-    typedef std::chrono::duration<float, std::nano>            SystemDuration_t;
-
+public:    
     /**
      * @brief TransitionMode : List of all Transition modes
      */
     enum TransitionMode {
         MODE_FINITE, /**< This mode will mark the Transition as finished when the transitioned values reached the destination */
+        MODE_FINITE_REVERSE, /**< This mode will reverse the Transition and then mark it as terminated */
         MODE_LOOP, /**< This mode will reset the transitioned values to the beginning values, and then start over */
         MODE_LOOP_SMOOTH, /**< This mode will reverse the Transition each time it reached the destination */
     };
@@ -50,13 +41,16 @@ public:
      * @param[in] id : The ID of the values to apply a transition on
      * @param[in] duration : The duration the transition has to play
      * @param[in] destination : The end values
-     * @param[in] transitionMode : The mode this transition should play, defaults to a finite transition
+     * @param[in] delay : Delay before the transition starts (Defaults to zero)
+     * @param[in] transitionMode : The mode this transition should play (Defaults to a finite transition)
      * @fn TransitionContract(ITransitionable& target, const int &id,
-                       const std::chrono::seconds &duration, const std::vector<float> &destination,
+                       const SystemDuration_t &duration, const std::vector<float> &destination,
+                       const SystemDuration_t &delay = std::chrono::seconds::zero(),
                        const TransitionMode &transitionMode = TransitionMode::MODE_FINITE);
      */
     TransitionContract(ITransitionable& target, const int &id,
-                       const std::chrono::seconds &duration, const std::vector<float> &destination,
+                       const SystemDuration_t &duration, const std::vector<float> &destination,
+                       const SystemDuration_t &delay = std::chrono::seconds::zero(),
                        const TransitionMode &transitionMode = TransitionMode::MODE_FINITE);
 
     /**
@@ -149,6 +143,11 @@ protected:
      * @brief m_duration : The duration of the transition
      */
     SystemDuration_t m_duration;
+
+    /**
+     * @brief m_delay : Delay to wait before the transition starts
+     */
+    SystemDuration_t m_delay;
 
     /**
      * @brief m_duration : A pointer to the function to be called when the transition reaches the destination

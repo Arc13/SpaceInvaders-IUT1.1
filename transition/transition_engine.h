@@ -44,6 +44,7 @@ public:
 
     /**
      * @brief Finishes every transition of the list
+     * @param[in] finishMode : Mode used to finish the transitions (Defaults to setting the destination values to the target)
      * @fn void finishEveryTransition();
      */
     void finishEveryTransition(const Transition::TransitionFinishModes &finishMode = Transition::FINISH_DESTINATION);
@@ -51,6 +52,7 @@ public:
     /**
      * @brief Finishes every transition of the list matching the target
      * @param[in] transitionable : The target that will stop being transitioned
+     * @param[in] finishMode : Mode used to finish the transitions (Defaults to setting the destination values to the target)
      * @fn void finishEveryTransitionOfTarget(const ITransitionable &transitionable);
      */
     void finishEveryTransitionOfTarget(const ITransitionable &transitionable, const Transition::TransitionFinishModes &finishMode = Transition::FINISH_DESTINATION);

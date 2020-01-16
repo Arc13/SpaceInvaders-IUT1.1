@@ -26,6 +26,7 @@ public:
     /**
      * @brief Gets a pointer to an IScreen derived class from a screen ID
      * @param[in] screenId : The ID of the screen to get
+     * @return A unique pointer to the IScreen derived class
      * @fn static std::unique_ptr<IScreen> getScreenFromId(const ScreenIdentifiers &screenId);
      */
     static std::unique_ptr<IScreen> getScreenFromId(const ScreenIdentifiers &screenId);

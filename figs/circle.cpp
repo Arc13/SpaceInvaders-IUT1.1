@@ -6,7 +6,7 @@
 using namespace std;
 using namespace nsUtil;
 
-void Circle::draw()
+void Circle::draw(MinGL &window)
 {
     // Source: https://gist.github.com/linusthe3rd/803118
 

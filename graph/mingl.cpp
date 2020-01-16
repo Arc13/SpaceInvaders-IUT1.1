@@ -123,8 +123,9 @@ void MinGL::callDisplay()
     glRasterPos2i(0,0);
     glShadeModel(GL_FLAT);
 
-    for (const std::unique_ptr<IDrawable> &actualDrawable : drawStack) {
-        actualDrawable->draw();
+    for (unsigned i = 0; i < drawStack.size(); ++i)
+    {
+        drawStack[i]->draw(*this);
     }
     drawStack.clear();
 

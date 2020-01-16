@@ -16,8 +16,8 @@
 namespace nsEvent {
 
 /**
- * \class EventManager
- * \brief Manages a queue of incoming events
+ * @class EventManager
+ * @brief Manages a queue of incoming events
  */
 class EventManager
 {

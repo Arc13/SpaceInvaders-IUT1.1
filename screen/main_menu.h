@@ -11,11 +11,11 @@
 
 #include "iscreen.h"
 
-#include <iostream>
-
 #include "../transition/transition_engine.h"
+#include "../transition/transition_types.h"
 
-#include "gui/fat_button.h"
+#include "../gui/button.h"
+#include "../gui/text.h"
 
 namespace nsScreen {
 
@@ -35,15 +35,55 @@ public:
     virtual void processEvent(const nsEvent::Event_t &event) override;
     virtual void update(const std::chrono::microseconds &delta) override;
     virtual void draw(MinGL &window) override;
+    virtual std::unique_ptr<IDrawable> clone() const override;
 
 private:
+    /**
+     * @brief m_transitionEngine : An instance of the transition engine
+     */
     nsTransition::TransitionEngine m_transitionEngine;
 
-    nsGui::FatButton m_fatBtn;
-    nsGui::FatButton m_fatBtn2;
-    nsGui::FatButton m_fatBtn3;
+    /**
+     * @brief m_playButtonHovered : Set if the mouse cursor is on the play button
+     */
+    bool m_playButtonHovered;
 
-    bool m_stoptrans;
+    /**
+     * @brief m_playButton : The button to start the game
+     */
+    nsGui::Button m_playButton;
+
+    /**
+     * @brief Executes the title screen apparition animation
+     * @fn void executeTitleAppearanceAnimation();
+     */
+    void executeTitleAppearanceAnimation();
+
+    /**
+     * @brief Executes the title screen halo effect
+     * @fn void executeTitleHaloEffect();
+     */
+    void executeTitleHaloEffect();
+
+    /**
+     * @brief m_titleShown : Flag indicating if the title is currently shown
+     */
+    bool m_titleShown;
+
+    /**
+     * @brief m_titleEnableAnimation : Flag indicating if the title can have the halo effect
+     */
+    bool m_titleEnableAnimation;
+
+    /**
+     * @brief m_titleLastHaloTime : Time since the last halo effect occured
+     */
+    nsTransition::SystemDuration_t m_titleLastHaloTime;
+
+    /**
+     * @brief m_titleText : Vector containing all the lines of the title
+     */
+    std::vector<nsGui::Text> m_titleText;
 };
 
 } // namespace nsScreen

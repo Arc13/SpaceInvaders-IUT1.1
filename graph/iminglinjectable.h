@@ -12,8 +12,7 @@ class IminGlInjectable : public IDrawable
 public:
     virtual ~IminGlInjectable() {};
 
-    friend MinGL & operator << (MinGL & Window,
-                                const IminGlInjectable & Obj)
+    friend MinGL & operator << (MinGL & Window, const IminGlInjectable & Obj)
     {
         Window.addDrawable(std::unique_ptr<IDrawable>(Obj.clone()));
         return Window;

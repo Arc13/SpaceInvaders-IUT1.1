@@ -15,6 +15,7 @@
 #include "screen_identifiers.h"
 
 #include "../event/event.h"
+#include "../graph/idrawable.h"
 #include "../graph/mingl.h"
 /**
  * @namespace nsScreen
@@ -26,7 +27,7 @@ namespace nsScreen {
  * @class IScreen
  * @brief Interface for a screen taking the entire window
  */
-class IScreen
+class IScreen : public IDrawable
 {
 public:
     /**
@@ -50,14 +51,8 @@ public:
     virtual void update(const std::chrono::microseconds &delta) = 0;
 
     /**
-     * @brief Called every frame to draw the screen
-     * @param[in, out] window : The window to draw to
-     * @fn virtual void draw(MinGL &window);
-     */
-    virtual void draw(MinGL &window) = 0;
-
-    /**
      * @brief Gets the ID of the new screen that this screen requested to switch to
+     * @return A const reference to m_screenChange
      * @fn ScreenIdentifiers getRequestedScreenChange() const;
      */
     const ScreenIdentifiers& getRequestedScreenChange() const;

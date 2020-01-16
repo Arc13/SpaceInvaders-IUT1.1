@@ -6,19 +6,22 @@
 
 TRANSITION::Transition(const TransitionContract &contract)
     : TransitionContract(contract)
-    , m_startTime(std::chrono::high_resolution_clock::now())
+    , m_startTime(std::chrono::steady_clock::now() + m_delay)
     , m_elapsed(0)
     , m_reverse(false)
     , m_finished(false)
 {} // Transition()
 
-const TRANSITION::SystemDuration_t& TRANSITION::getElapsed() const
+const nsTransition::SystemDuration_t& TRANSITION::getElapsed() const
 {
     return m_elapsed;
 } // getElapsed()
 
-void TRANSITION::setElapsed(const TransitionContract::SystemDuration_t &elapsed)
+void TRANSITION::setElapsed(const nsTransition::SystemDuration_t &elapsed)
 {
+    // Don't allow to set the elapsed time if the start time is ahead of clock
+    if (std::chrono::steady_clock::now() < m_startTime) return;
+
     // Set the new elapsed time
     m_elapsed = elapsed;
 
@@ -26,7 +29,7 @@ void TRANSITION::setElapsed(const TransitionContract::SystemDuration_t &elapsed)
     updateValues();
 } // setElapsed()
 
-void TRANSITION::addToElapsed(const TransitionContract::SystemDuration_t &addedTime)
+void TRANSITION::addToElapsed(const nsTransition::SystemDuration_t &addedTime)
 {
     setElapsed(getElapsed() + addedTime);
 } // addToElapsed()
@@ -96,14 +99,29 @@ void TRANSITION::handleEndlife()
     {
         case TransitionContract::TransitionMode::MODE_FINITE:
             // In finite mode, the transition is terminated when it's done
-            finish();
+            finish(FINISH_DESTINATION);
+
+            break;
+        case TransitionContract::TransitionMode::MODE_FINITE_REVERSE:
+            // In finite reverse mode, the transition is reversed when done, and finished when reversed
+            if (!m_reverse)
+            {
+                m_reverse = true;
+
+                m_startTime = std::chrono::steady_clock::now();
+                m_elapsed = SystemDuration_t::zero();
+            }
+            else
+            {
+                finish(FINISH_START);
+            }
 
             break;
         case TransitionContract::TransitionMode::MODE_LOOP:
             // In loop mode, the target is set to its beginning values before going again
             m_target.setValues(m_id, m_beginning);
 
-            m_startTime = std::chrono::high_resolution_clock::now();
+            m_startTime = std::chrono::steady_clock::now();
             m_elapsed = SystemDuration_t::zero();
 
             break;
@@ -111,7 +129,7 @@ void TRANSITION::handleEndlife()
             // In loop smooth mode, we invert the reverse boolean before going again
             m_reverse = !m_reverse;
 
-            m_startTime = std::chrono::high_resolution_clock::now();
+            m_startTime = std::chrono::steady_clock::now();
             m_elapsed = SystemDuration_t::zero();
 
             break;

@@ -35,7 +35,7 @@ void displayFramerate(const std::chrono::microseconds &frameTime, MinGL &window)
 void game()
 {
     // Initialise the graphics and event systems
-    MinGL Window("Space Outvaders");
+    MinGL Window("Space Outvaders", Vec2D(640, 640));
     Window.initGlut();
     Window.initGraphic();
 
