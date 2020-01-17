@@ -1,24 +1,34 @@
 #include "main_game.h"
 
+#include <fstream>
 #include <iostream>
 
-#include "gridmanager/manage.h"
+#include "../game/manager.h"
+#include "../game/manager_const.h"
 
-#include "graph/rgbacolor.h"
-#include "graph/vec2d.h"
-#include "gridmanager/manage_const.h"
+#include "../graph/rgbacolor.h"
+#include "../graph/vec2d.h"
 
 #define GAME nsScreen::MainGame
 
 GAME::MainGame()
-    : m_ennemi(Vec2D(50, 50), Vec2D(100, 100), KRed)
-    , m_frtir (1000)
-    , m_frennemi (3000)
-    , m_frmissile (100)
-    , m_Vict (2)
+    : m_difficulty(nsGame::KNormalDifficulty)
+    , m_deplacementEnnemi(std::chrono::microseconds::zero())
+    , m_tir(std::chrono::microseconds::zero())
+    , m_missile(std::chrono::microseconds::zero())
+    , m_freqDeplacementEnnemi (3000)
+    , m_freqTir (1500)
+    , m_freqMissile (100)
+    , m_ennemiDeplacementDroite(true)
+    , m_vies(m_difficulty.lifeCount)
+    , m_texteViesTitre(Vec2D(5, 0), "Vies", RGBAcolor(128, 128, 128), nsGui::Text::ALIGNV_TOP)
+    , m_texteVies(Vec2D(5, 15), std::to_string(m_vies), RGBAcolor(192, 192, 192), nsGui::Text::ALIGNV_TOP, nsGui::Text::ALIGNH_LEFT, GlutFont::BITMAP_9_BY_15)
+    , m_score(0)
+    , m_texteScoreTitre(Vec2D(635, 0), "Score", RGBAcolor(128, 128, 128), nsGui::Text::ALIGNV_TOP, nsGui::Text::ALIGNH_RIGHT)
+    , m_textScore(Vec2D(635, 15), std::to_string(m_score), RGBAcolor(192, 192, 192), nsGui::Text::ALIGNV_TOP, nsGui::Text::ALIGNH_RIGHT, GlutFont::BITMAP_9_BY_15)
 {
     nsGame::InitSpace(m_space, m_objects);
-} // GAME()
+} // MainGame()
 
 void GAME::processEvent(const nsEvent::Event_t &event)
 {
@@ -35,7 +45,9 @@ void GAME::processEvent(const nsEvent::Event_t &event)
                     nsGame::MoveRight(m_space, m_objects[2]);
                     break;
                 case ' ':
-                    m_objects[3].push_back(m_objects[2][rand () % m_objects[2].size ()]);
+                    // On limite le tir a 1 par écran
+                    if (m_objects[3].size() == 0)
+                        m_objects[3].push_back(m_objects[2][rand () % m_objects[2].size ()]);
             }
 
             break;
@@ -52,49 +64,103 @@ void GAME::update(const std::chrono::microseconds &delta)
     nsGame::PutAllObjects (m_objects, m_space);
 
     m_deplacementEnnemi += delta;
-    if (m_deplacementEnnemi >= m_frennemi)
+    if (m_deplacementEnnemi >= m_freqDeplacementEnnemi * m_difficulty.frequencyModifier)
     {
-        nsGame::MoveDown (m_objects[0]);
         m_deplacementEnnemi = std::chrono::milliseconds::zero();
-    }
 
-    for (unsigned i = m_space.size(); --i > 0;)
-    {
-        for (unsigned j = m_space[i].size(); --j > 0;)
+        unsigned i = 0;
+        while (i < m_objects[0].size())
         {
-            if (m_space[i][j] == nsGame::KInsideInvader)
-                break;
+            // On cherche si un ennemi est sur une bordure
+            if (m_ennemiDeplacementDroite && m_objects[0][i].second == nsGame::KSizeSpace - 1) break;
+            if (!m_ennemiDeplacementDroite && m_objects[0][i].second == 0) break;
+
+            ++i;
+        }
+
+        if (i == m_objects[0].size())
+        {
+            // On a trouvé personne sur un bord
+
+            if (m_ennemiDeplacementDroite)
+                // On déplace tout le monde a droite
+                nsGame::MoveRight(m_space, m_objects[0]);
+            else
+                // On déplace tout le monde a gauche
+                nsGame::MoveLeft(m_objects[0]);
+        }
+        else
+        {
+            // On a trouvé quelqu'un sur un bord
+            nsGame::MoveDown(m_objects[0]);
+            m_ennemiDeplacementDroite = !m_ennemiDeplacementDroite;
         }
     }
+
     m_tir += delta;
-    if (m_tir >= m_frtir)
+    if (m_objects[0].size() > 0 && m_tir >= m_freqTir * m_difficulty.frequencyModifier)
     {
-        m_objects[1].push_back(m_objects[0][rand () % m_objects[0].size ()]);
         m_tir = std::chrono::milliseconds::zero();
+
+        const unsigned selectedColumn = rand() % m_objects[0].size();
+        nsGame::CPosition selectedInvader = m_objects[0][selectedColumn];
+
+        for (unsigned i = 0; i < m_objects[0].size(); ++i)
+        {
+            if (m_objects[0][i].first > selectedInvader.first)
+                selectedInvader = m_objects[0][i];
+        }
+
+        ++selectedInvader.first;
+        m_objects[1].push_back(selectedInvader);
     }
 
     m_missile += delta;
-    if (m_missile >= m_frmissile)
+    if (m_missile >= m_freqMissile * m_difficulty.frequencyModifier)
     {
-        nsGame::MoveDown (m_objects[1]);
         m_missile = std::chrono::milliseconds::zero();
+
+        // On fait descendre les missiles
+        nsGame::MoveDown (m_objects[1]);
+
+        // On fait monter les torpilles
+        nsGame::MoveUp (m_objects[3]);
     }
-    // On fait monter les torpilles
-    nsGame::MoveUp (m_objects[3]);
+
     // On gere les collisions
-    nsGame::ManageCollisions (m_objects);
+    unsigned Score;
+    nsGame::ManageCollisions (m_objects, Score);
+
+    m_score += Score * 10 * m_difficulty.scoreModifier;
+    m_textScore.setContent(std::to_string(m_score));
+
     // On supprime les missiles qui sortent de l'aire de jeu
     nsGame::DeleteMissiles (m_space, m_objects[1]);
+
     // On supprime les torpilles qui sortent de l'aire de jeu
     nsGame::DeleteTorpedos (m_objects[3]);
-    // On teste si quelqu'un a gagné
-    m_Vict = nsGame::Victory (m_space, m_objects);
 
-    if (m_Vict == 2 && m_frennemi > std::chrono::milliseconds(500) && m_frtir > std::chrono::milliseconds(100) && m_frmissile > std::chrono::milliseconds(10) )
+    // On teste si quelqu'un a gagné
+    unsigned Vict = nsGame::Victory (m_space, m_objects);
+    if (Vict == 1 || Vict == 3)
     {
-        m_frennemi -= std::chrono::milliseconds(1000);
-        m_frtir -= std::chrono::milliseconds(100);
-        m_frmissile -= std::chrono::milliseconds(10);
+        // Le joueur a gagné ou l'envahisseur est tout en bas
+        saveAndExit(Vict == 1);
+    }
+    else if (Vict == 2)
+    {
+        // L'envahisseur a gagné
+        if (m_vies > 0)
+        {
+            --m_vies;
+            m_texteVies.setContent(std::to_string(m_vies));
+
+            nsGame::AddPlayer(m_space, m_objects);
+        }
+        else
+        {
+            saveAndExit(false);
+        }
     }
 
 } // update()
@@ -108,30 +174,36 @@ void GAME::draw(MinGL &window)
     {
         for (unsigned j = 0; j < m_space[i].size(); ++j)
         {
+            const Vec2D actualPos(8 + 48*j, 56 + 48*i);
+            const Vec2D endPos = actualPos + Vec2D(48, 48);
             switch (m_space[i][j])
             {
                 case nsGame::KInsideInvader:
                     // Char for the invader
-                    window << Rectangle(Vec2D(32 + 32*j, 32 + 32*i), Vec2D(64 + 32*j, 64 + 32*i), KRed);
+                    window << Rectangle(actualPos, endPos, KRed);
                     break;
                 case nsGame::KInsideMe:
                     // Char for the player
-                window << Rectangle(Vec2D(32 + 32*j, 32 + 32*i), Vec2D(64 + 32*j, 64 + 32*i), KBlue);
+                    window << Rectangle(actualPos, endPos, KBlue);
 
                     break;
                 case nsGame::KTorpedo:
                     // Char for the torpedo (player weapon)
-                    window << Rectangle(Vec2D(32 + 32*j, 32 + 32*i), Vec2D(64 + 32*j, 64 + 32*i), KYellow);
+                    window << Rectangle(actualPos, endPos, KYellow);
 
                     break;
                 case nsGame::KMissile:
                     // Char for the missile (invader weapon)
-                    window << Rectangle(Vec2D(32 + 32*j, 32 + 32*i), Vec2D(64 + 32*j, 64 + 32*i), KPurple);
+                    window << Rectangle(actualPos, endPos, KPurple);
 
                     break;
             }
         }
     }
+
+    // On affiche les textes de la HUD
+    window << m_texteViesTitre << m_texteVies;
+    window << m_texteScoreTitre << m_textScore;
 
 } // draw()
 
@@ -139,5 +211,16 @@ std::unique_ptr<IDrawable> GAME::clone() const
 {
     return std::unique_ptr<MainGame>(new MainGame(*this));
 } // clone()
+
+void GAME::saveAndExit(const bool &playerWon)
+{
+    // On enregistre quelques données de la partie en cours
+    std::ofstream savefile("save.csv");
+    savefile << (playerWon ? 1 : 0) << "," << m_score;
+    savefile.close();
+
+    // On revient au menu principal
+    requestScreenChange(nsScreen::ScreenIdentifiers::ID_TitleMenu);
+} // saveAndExit()
 
 #undef GAME

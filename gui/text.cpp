@@ -74,10 +74,20 @@ int TEXT::getWidth() const
     return glutBitmapLength(m_textFont.convertForGlut(), reinterpret_cast<const unsigned char *>(m_content.c_str()));
 } // getWidth()
 
-int nsGui::Text::getHeight() const
+int TEXT::getHeight() const
 {
     return glutBitmapHeight(m_textFont.convertForGlut());
 } // getHeight()
+
+const std::string& TEXT::getContent() const
+{
+    return m_content;
+} // getContent()
+
+void nsGui::Text::setContent(const std::string &content)
+{
+    m_content = content;
+} // setContent()
 
 void TEXT::draw(MinGL &window)
 {

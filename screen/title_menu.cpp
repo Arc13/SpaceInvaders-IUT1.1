@@ -8,8 +8,6 @@
 
 #include "title_menu.h"
 
-#include <iostream>
-
 #define TITLEMENU nsScreen::TitleMenu
 
 TITLEMENU::TitleMenu()

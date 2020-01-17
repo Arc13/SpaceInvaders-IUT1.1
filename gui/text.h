@@ -90,6 +90,20 @@ public:
      */
     int getHeight() const;
 
+    /**
+     * @brief Gets the content of the Text
+     * @return A const reference to m_content
+     * @fn const std::string& getContent() const;
+     */
+    const std::string& getContent() const;
+
+    /**
+     * @brief Sets the new content of the Text
+     * @param[in] content : The new content
+     * @fn void setContent(const std::string &content);
+     */
+    void setContent(const std::string &content);
+
 protected:
     virtual void draw(MinGL &window) override;
 

@@ -89,11 +89,6 @@ namespace nsGame
     const char KMissile             = ':';  // missile
 
     /*!
-     * \brief Nombre de caractères qui forment l'envahisseur.
-     */
-    const unsigned KInvadersSize    =  14;   // nombre de caractères qui forment l'envahisseur
-
-    /*!
      * \brief Nombre de fois où l'envahisseur tire un missile par rapport à son déplacement.
      */
     const unsigned KMissileRatio = 2; // nombre de fois où l'envahisseur tire un missile par rapport à son déplacement
@@ -139,12 +134,22 @@ namespace nsGame
     /*!
      * \brief Nombre de colonnes de l'écran (de l'espace).
      */
-    const unsigned KSizeSpace  = 12;   // Nombre de colonnes de l'écran (de l'espace)
+    const unsigned KSizeSpace  = 13;   // Nombre de colonnes de l'écran (de l'espace)
+
+    /*!
+     * \brief Nombre de caractères qui forment l'envahisseur.
+     */
+    const unsigned KInvadersSize    =  KSizeSpace - 4;   // nombre de caractères qui forment l'envahisseur
+
+    /*!
+     * \brief Nombre de lignes que les envahisseurs envahissent.
+     */
+    const unsigned KInvadersLines   = 5;    // Nombre de lignes que les envahisseurs envahissent.
 
     /*!
      * \brief Numéro de colonne où commence l'envahisseur.
      */
-    const unsigned KBegInvader = 0;    // Numéro de colonne où commence l'envahisseur
+    const unsigned KBegInvader = 2;    // Numéro de colonne où commence l'envahisseur
 
     /*!
      * \brief Numéro de colonne où commence le joueur.
@@ -154,7 +159,12 @@ namespace nsGame
     /*!
      * \brief Alias vers une ligne vide de l'espace.
      */
-    const std::string KEmptyLine (KSizeLine, KEmpty);  // Une ligne vide de la matrice
-}//namespace
+    const std::string KEmptyLine (KSizeSpace, KEmpty);  // Une ligne vide de la matrice
+
+    /*!
+     * \brief Niveau maximal du jeu.
+     */
+    const unsigned KMaxLevel = 4; // Niveau maximal du jeu.
+} // namespace nsGame
 
 #endif // MYCONSTANT_H

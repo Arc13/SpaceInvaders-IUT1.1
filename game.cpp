@@ -49,7 +49,7 @@ void game()
     while (true)
     {
         // Gets system clock at the beginning of the loop
-        chrono::time_point<chrono::high_resolution_clock> start = chrono::high_resolution_clock::now();
+        chrono::time_point<chrono::steady_clock> start = chrono::steady_clock::now();
 
         // Clear screen each frame
         Window.clearScreen();
@@ -80,10 +80,10 @@ void game()
         Window.updateGraphic();
 
         // Wait a bit to limit the framerate and let the CPU relax
-        this_thread::sleep_for(chrono::milliseconds(1000 / FPS_LIMIT) - chrono::duration_cast<chrono::microseconds>(chrono::high_resolution_clock::now() - start));
+        this_thread::sleep_for(chrono::milliseconds(1000 / FPS_LIMIT) - chrono::duration_cast<chrono::microseconds>(chrono::steady_clock::now() - start));
 
         // Get system time at the end to compute rendering time
-        frameTime = chrono::duration_cast<chrono::microseconds>(chrono::high_resolution_clock::now() - start);
+        frameTime = chrono::duration_cast<chrono::microseconds>(chrono::steady_clock::now() - start);
 
     } // Game()
 }

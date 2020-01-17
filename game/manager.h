@@ -11,7 +11,12 @@
   * \bug Aucun connu
   */
 
-#include "manage_type.h"
+#include "manager_type.h"
+
+/**
+ * @namespace nsGame
+ * @brief Espace de nom pour les mécaniques de jeu
+ */
 namespace nsGame
 {
     /*!
@@ -33,9 +38,16 @@ namespace nsGame
     /*!
      * \brief Permet d'initialiser l'espace de jeu et de définir les coordonnées des objets à placer au lancement du jeu.
      * \param Space [out] Espace de jeu
-     * \param Obj [ou] Liste des objets à placer au début du jeu
+     * \param Obj [out] Liste des objets à placer au début du jeu
      */
     void InitSpace (CVString & Space, CAObject & Obj);
+
+    /*!
+     * \brief Rajoute un joueur dans les objets à placer.
+     * \param Space [out] Espace de jeu
+     * \param Obj [out] Liste des objets à placer au début du jeu
+     */
+    void AddPlayer (CVString & Space, CAObject & Obj);
 
     /*!
      * \brief Trouve le maximum d'un vecteur de CPosition de la coordonées en X (abscisse).
@@ -102,7 +114,7 @@ namespace nsGame
      * \param Objects [in, out] Vecteur des positions des objects à traiter
      * \param StarShips [in, out] Vecteur des positions des vaisseaux à traiter
      */
-    void CollisionBetweenObjectsAndShips (CVPosition & Objects, CVPosition & StarShips);
+    unsigned CollisionBetweenObjectsAndShips (CVPosition & Objects, CVPosition & StarShips);
 
     /*!
      * \brief Gère les collisions (multiples) entre les missiles et les tropilles
@@ -114,14 +126,15 @@ namespace nsGame
     /*!
      * \brief Gère toutes les collisions du jeu
      * \param [in, out] Obj Liste des objets du jeu
+     * \param [in, out] Score Nombre abstrait de vaisseaux touchés
      */
-    void ManageCollisions (CAObject & Obj);
+    void ManageCollisions (CAObject & Obj, unsigned &Score);
 
     /*!
      * \brief Teste si l'envahisseur ou si le joueur ont gagné.
      * \param Space [in] Espace de jeu
      * \param Obj [in] Liste des objets du jeu
-     * \return 0 si ni l'envahisseur ou le joueur ont gagné, 1 si c'est l'envahiseur et 2 si c'est le joueur
+     * \return 0 si ni l'envahisseur ou le joueur ont gagné, 1 si c'est le joueur, 2 si c'est l'envahisseur et 3 si l'envahisseur est tout en bas
      */
     unsigned Victory (const CVString & Space, const CAObject & Obj);
 

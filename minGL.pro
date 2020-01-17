@@ -14,7 +14,7 @@ SOURCES += main.cpp \
     game.cpp \
     graph/mingl.cpp \
     graph/rgbacolor.cpp \
-    gridmanager/manage.cpp \
+    game/manager.cpp \
     gui/button.cpp \
     gui/star_background.cpp \
     gui/text.cpp \
@@ -51,14 +51,15 @@ HEADERS += \
     figs/rectangle.h \
     figs/triangle.h \
     game.h \
+    game/difficulty.hpp \
     graph/idrawable.h \
     graph/libgraphique_fonts.h \
     graph/mingl.h \
     graph/rgbacolor.h \
     graph/vec2d.h \
-    gridmanager/manage.h \
-    gridmanager/manage_const.h \
-    gridmanager/manage_type.h \
+    game/manager.h \
+    game/manager_const.h \
+    game/manager_type.h \
     gui/button.h \
     gui/star_background.h \
     gui/text.h \

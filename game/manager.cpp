@@ -15,9 +15,9 @@
 #include <ctime> //time ()
 #include <termios.h> //termios
 #include <cstdio> // getchar
-#include "manage_type.h"
-#include "manage.h"
-#include "manage_const.h"
+#include "manager_type.h"
+#include "manager.h"
+#include "manager_const.h"
 using namespace std;
 using namespace nsGame;
 
@@ -28,35 +28,41 @@ namespace nsGame
     {
         for (const CPosition & Pos : VPos)
             Space[Pos.first][Pos.second] = Car;
-    }// PutCVPosition ()
+    } // PutCVPosition()
 
     void PutAllObjects (const CAObject & Obj, CVString & Space)
     {
         for (string & Line : Space)
             Line = KEmptyLine;
+
         PutCVPosition (Obj[0], KInsideInvader, Space);
         PutCVPosition (Obj[1], KMissile, Space);
         PutCVPosition (Obj[2], KInsideMe, Space);
         PutCVPosition (Obj[3], KTorpedo, Space);
-    }// PutAllObjects ()
+    } // PutAllObjects()
 
     void InitSpace (CVString & Space, CAObject & Obj)
     {
-        //l'espace de jeu
+        // L'espace de jeu
         Space.resize(KSizeLine);
         for (string & Line : Space)
             Line = KEmptyLine;
-        //les envahisseurs
-        Obj[0].resize(KInvadersSize);
-        for (unsigned i (0); i < Obj[0].size (); ++i)
-            Obj[0][i] = make_pair (0, i + KBegInvader);
 
-        //moi
+        // Les envahisseurs
+        Obj[0].resize(KInvadersSize * KInvadersLines);
+        for (unsigned i (0); i < Obj[0].size(); ++i)
+            Obj[0][i] = make_pair (i % KInvadersLines, KBegInvader + i % KInvadersSize);
+
+        // Le joueur
+        AddPlayer(Space, Obj);
+    } // InitSpace()
+
+    void AddPlayer(CVString &Space, CAObject &Obj)
+    {
         Obj[2].resize(KMySize);
         for (unsigned i(0); i < Obj[2].size(); ++i)
-            Obj[2][i] = make_pair (Space.size () -1, KBegMe +i);
-    } //InitSpace ()
-
+            Obj[2][i] = make_pair (Space.size() - 1, KBegMe + i);
+    } // AddPlayer()
 
     void MaxX (const CVPosition & VPos, CPosition & MaxPos)
     {
@@ -64,7 +70,7 @@ namespace nsGame
         for (unsigned i (1); i < VPos.size(); ++i)
             if (MaxPos.second < VPos[i].second)
                 MaxPos = VPos[i];
-    }// MaxX ()
+    } // MaxX()
 
     void MaxY (const CVPosition & VPos, CPosition & MaxPos)
     {
@@ -72,7 +78,7 @@ namespace nsGame
         for (unsigned i (1); i < VPos.size(); ++i)
             if (MaxPos.first < VPos[i].first)
                 MaxPos = VPos[i];
-    } // MaxY ()
+    } // MaxY()
 
 
     void MinX (const CVPosition & VPos, CPosition & MinPos)
@@ -81,40 +87,42 @@ namespace nsGame
         for (unsigned i (1); i < VPos.size(); ++i)
             if (MinPos.second > VPos[i].second)
                 MinPos = VPos[i];
-    }// MinX ()
+    } // MinX()
 
     bool MoveLeft (CVPosition & VPos)
     {
         CPosition MinPos;
         MinX (VPos, MinPos);
         if (0 == MinPos.second) return false;
+
         for (CPosition & Pos : VPos)
-            -- Pos.second;
+            --Pos.second;
         return true;
-    } // MoveLeft ()
+    } // MoveLeft()
 
     bool MoveRight (const CVString & Space, CVPosition & VPos)
     {
         CPosition MaxPos;
         MaxX (VPos, MaxPos);
-        if (Space.size() -1 == MaxPos.second) return false;
+        if (Space[MaxPos.first].size() - 1 == MaxPos.second) return false;
 
         for (CPosition & Pos : VPos)
-            ++ Pos.second;
+            ++Pos.second;
+
         return true;
-    } //MoveRight ()
+    } // MoveRight()
 
     void MoveDown (CVPosition & VPos)
     {
         for (CPosition & Pos : VPos)
             ++ Pos.first;
-    }// MoveDown ()
+    } // MoveDown()
 
     void MoveUp (CVPosition & VPos)
     {
         for (CPosition & Pos : VPos)
             -- Pos.first;
-    } //MoveUp ()
+    } //MoveUp()
 
     void ManageMe (const CVString & Space, CAObject &Obj)
     {
@@ -134,24 +142,29 @@ namespace nsGame
             Obj[3].push_back(Obj[2][rand () % Obj[2].size ()]);
             break;
         }
-    }// ManageMe ()
+    } // ManageMe()
 
-    void CollisionBetweenObjectsAndShips (CVPosition & Objects, CVPosition & StarShips)
+    unsigned CollisionBetweenObjectsAndShips (CVPosition & Objects, CVPosition & StarShips)
     {
+        unsigned colisionCounter = 0;
         for (unsigned i (0); i < Objects.size (); ++i)
         {
-            //collision entre les missiles et moi
+            // Collision entre les missiles et moi
             for (unsigned j (0); j < StarShips.size (); )
             {
                 if (Objects[i] == StarShips[j])
                 {
-                    StarShips.erase (StarShips.begin () +j);
-                    Objects.erase (Objects.begin () +i);
+                    colisionCounter += StarShips[j].first;
+
+                    StarShips.erase (StarShips.begin () + j);
+                    Objects.erase (Objects.begin () + i);
                 }
                 else ++j;
             }
         }
-    }//CollisionBetweenMissilesAndI ()
+
+        return colisionCounter;
+    } //CollisionBetweenMissilesAndI()
 
     void CollisionBetweenMissilesAndTorpedos (CVPosition & Missiles, CVPosition & Torpedos)
     {
@@ -176,22 +189,23 @@ namespace nsGame
 
             if (j == Torpedos.size ()) ++i;
         }
-    }//CollisionBetweenMissilesAndTorpedos ()
+    } //CollisionBetweenMissilesAndTorpedos()
 
-    void ManageCollisions (CAObject & Obj)
+    void ManageCollisions (CAObject & Obj, unsigned &Score)
     {
-        CollisionBetweenMissilesAndTorpedos (Obj[1], Obj[3]);
-        CollisionBetweenObjectsAndShips     (Obj[1], Obj[2]);
-        CollisionBetweenObjectsAndShips     (Obj[3], Obj[0]);
-    } //ManageCollisions
+        CollisionBetweenMissilesAndTorpedos         (Obj[1], Obj[3]);
+        CollisionBetweenObjectsAndShips             (Obj[1], Obj[2]);
+        Score = CollisionBetweenObjectsAndShips     (Obj[3], Obj[0]);
+    } // ManageCollisions()
 
     unsigned Victory (const CVString & Space, const CAObject & Obj)
     {
-        if (0 == Obj[0].size ()) return 2;
-        else if (0 == Obj[2].size() || Obj[0][0].first == Space.size()-1) return 1;
+        if (0 == Obj[0].size ()) return 1;
+        else if (0 == Obj[2].size()) return 2;
+        else if (Obj[0][Obj[0].size() - 1].first == Obj[2][0].first) return 3;
 
         return 0;
-    } //Victory ()
+    } // Victory()
 
     void DeleteMissiles (const CVString & Space, CVPosition & Missiles)
     {
@@ -201,7 +215,7 @@ namespace nsGame
                 Missiles.erase(Missiles.begin()+i);
             else ++i;
         }
-    }//DeleteMissiles ()
+    } // DeleteMissiles()
 
     void DeleteTorpedos (CVPosition & Torpedos)
     {
@@ -211,8 +225,7 @@ namespace nsGame
                 Torpedos.erase(Torpedos.begin()+i);
             else  ++i;
         }
-    } //DeleteTorpedos ()
-
+    } // DeleteTorpedos()
 
 }
 
