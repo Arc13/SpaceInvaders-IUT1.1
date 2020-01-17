@@ -12,13 +12,13 @@
 namespace nsScreen {
 
 /**
- * @brief ScreenIdentifiers : List of all Screen identifiers
+ * @brief ScreenIdentifiers : Liste de tout les identificateurs d'écran
  */
 enum ScreenIdentifiers {
-    ID_None, /**< No screen */
+    ID_None, /**< Aucun écran */
 
-    ID_TitleMenu, /**< The title screen */
-    ID_MainGame, /**< The game screen */
+    ID_TitleMenu, /**< L'écran titre */
+    ID_MainGame, /**< L'écran de jeu */
 };
 
 } // namespace nsScreen

@@ -10,8 +10,8 @@
 
 #include <freeglut_std.h>
 
-GlutFont::GlutFont(const GlutFont::GlutFonts &font_)
-    : m_font(font_)
+GlutFont::GlutFont(const GlutFont::GlutFonts &font)
+    : m_font(font)
 {} // GlutFont()
 
 void *GlutFont::convertForGlut() const

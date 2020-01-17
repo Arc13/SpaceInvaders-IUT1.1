@@ -17,35 +17,35 @@ namespace nsEvent {
 
 /**
  * @class EventManager
- * @brief Manages a queue of incoming events
+ * @brief Gère une queue d'événement entrants
  */
 class EventManager
 {
 public:
     /**
-     * @brief Checks if there's an event to be pulled
-     * @return Whether the queue has one or more element
+     * @brief Vérifie si un événement doit être traité
+     * @return Si la queue possède au moins un élément
      * @fn bool hasEvent();
      */
     bool hasEvent();
 
     /**
-     * @brief Pushes a new event to the queue
-     * @param[in] event : Event to push
+     * @brief Pousse un nouvel événement dans la queue
+     * @param[in] event : Evénement a pousser
      * @fn void pushEvent(const Event_t &event);
      */
     void pushEvent(const Event_t &event);
 
     /**
-     * @brief Pulls the oldest event, and then removes it from the queue
-     * @return A copy of the oldest event
+     * @brief Tire l'événement le plus ancien, et l'enlève de la queue
+     * @return Une copie du plus ancien événement
      * @fn const Event_t pullEvent();
      */
     const Event_t pullEvent();
 
 private:
     /**
-     * @brief m_eventQueue : Queue holding incoming events
+     * @brief m_eventQueue : Queue possèdant des événement entrants
      */
     std::queue<Event_t> m_eventQueue;
 };

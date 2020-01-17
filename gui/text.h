@@ -15,52 +15,52 @@
 
 /**
  * @namespace nsGui
- * @brief Namespace for complex GUI elements
+ * @brief Espace de nom pour des éléments d'interface complexes
  */
 namespace nsGui {
 
 /**
  * @class Text
- * @brief Manages the drawing of a text
+ * @brief Gère l'affichage d'un texte
  */
 class Text : public IminGlInjectable, public nsTransition::ITransitionable
 {
 public:
     /**
-     * @brief TransitionIds : List of every transition this object can execute
+     * @brief TransitionIds : Liste de toutes les transitions que cet élément peut exécuter
      */
     enum TransitionIds {
-        TRANSITION_COLOR_RGB, /**< Transition for the RGB color */
-        TRANSITION_COLOR_ALPHA, /**< Transition for the transparency */
-        TRANSITION_POSITION, /**< Transition for the position */
+        TRANSITION_COLOR_RGB, /**< Transition pour la couleur RGB */
+        TRANSITION_COLOR_ALPHA, /**< Transition pour la transparence */
+        TRANSITION_POSITION, /**< Transition pour la position */
     };
 
     /**
-     * @brief VerticalAlignment : List of every supported vertical alignment
+     * @brief VerticalAlignment : Liste de tout les alignements verticaux supportés
      */
     enum VerticalAlignment {
-        ALIGNV_TOP, /**< The text will be vertically aligned to the top */
-        ALIGNV_CENTER, /**< The text will be vertically aligned to the center */
-        ALIGNV_BOTTOM, /**< The text will be vertically aligned to the bottom */
+        ALIGNV_TOP, /**< Le texte sera aligné verticallement en haut */
+        ALIGNV_CENTER, /**< Le texte sera aligné verticallement au centre */
+        ALIGNV_BOTTOM, /**< Le texte sera aligné verticallement en bas */
     };
 
     /**
-     * @brief HorizontalAlignment : List of every supported horizontal alignment
+     * @brief HorizontalAlignment : Liste de tout les alignements horizontaux supportés
      */
     enum HorizontalAlignment {
-        ALIGNH_LEFT, /**< The text will be horizontally aligned to the left */
-        ALIGNH_CENTER, /**< The text will be horizontally aligned to the center */
-        ALIGNH_RIGHT, /**< The text will be horizontally aligned to the right */
+        ALIGNH_LEFT, /**< Le texte sera aligné horizontalement a gauche */
+        ALIGNH_CENTER, /**< Le texte sera aligné horizontalement au centre */
+        ALIGNH_RIGHT, /**< Le texte sera aligné horizontalement a droite */
     };
 
     /**
-     * @brief Constructor for the Text class
-     * @param[in] position : Position of the text on the window
-     * @param[in] content : Content of the text
-     * @param[in] textColor : Color of the text
-     * @param[in] verticalAlignment : Vertical alignment of the text (Defaults to a bottom alignment)
-     * @param[in] horizontalAlignment : Horizontal alignment of the text (Defaults to a left alignment)
-     * @param[in] textFont : Font of the text (Defaults to the Glut 8x13 Bitmap font)
+     * @brief Constructeur pour la classe Text
+     * @param[in] position : Position du texte
+     * @param[in] content : Contenu du texte
+     * @param[in] textColor : Couleur du texte
+     * @param[in] verticalAlignment : Alignement vertical du texte (Alignement en bas par défaut)
+     * @param[in] horizontalAlignment : Alignement horizontal du texte (Alignement a gauche par défaut)
+     * @param[in] textFont : Police du texte (8x13 Bitmap par défaut)
      * @fn Text(const Vec2D &position, const std::string &content,
          const RGBAcolor &textColor, const VerticalAlignment &verticalAlignment = ALIGNV_BOTTOM,
          const HorizontalAlignment &horizontalAlignment = ALIGNH_LEFT,
@@ -77,29 +77,29 @@ public:
     virtual void setValues(const int &id, const std::vector<float> &values) override;
 
     /**
-     * @brief Computes the width of this text
-     * @return The text width
+     * @brief Calcule la largeur de ce texte
+     * @return La largeur du texte
      * @fn int getWidth() const;
      */
     int getWidth() const;
 
     /**
-     * @brief Computes the height of this text
-     * @return The text height
+     * @brief Calcule la hauteur de ce texte
+     * @return La hauteur du texte
      * @fn int getHeight() const;
      */
     int getHeight() const;
 
     /**
-     * @brief Gets the content of the Text
-     * @return A const reference to m_content
+     * @brief Récupère le contenu du texte
+     * @return Une référence constante vers m_content
      * @fn const std::string& getContent() const;
      */
     const std::string& getContent() const;
 
     /**
-     * @brief Sets the new content of the Text
-     * @param[in] content : The new content
+     * @brief Définit le nouveau contenu du texte
+     * @param[in] content : Nouveau contenu
      * @fn void setContent(const std::string &content);
      */
     void setContent(const std::string &content);
@@ -109,32 +109,32 @@ protected:
 
 private:
     /**
-     * @brief m_position : Position of the text on the window
+     * @brief m_position : Position du texte
      */
     Vec2D m_position;
 
     /**
-     * @brief m_content : Content of the text
+     * @brief m_content : Contenu du texte
      */
     std::string m_content;
 
     /**
-     * @brief m_textColor : Color of the text
+     * @brief m_textColor : Couleur du texte
      */
     RGBAcolor m_textColor;
 
     /**
-     * @brief m_textFont : Font of the text
+     * @brief m_textFont : Police du texte
      */
     GlutFont m_textFont;
 
     /**
-     * @brief m_verticalAlignment : The vertical alignment of the text
+     * @brief m_verticalAlignment : Alignement vertical du texte
      */
     VerticalAlignment m_verticalAlignment;
 
     /**
-     * @brief m_horizontalAlignment : The horizontal alignment of the text
+     * @brief m_horizontalAlignment : Alignement horizontal du texte
      */
     HorizontalAlignment m_horizontalAlignment;
 };

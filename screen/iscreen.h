@@ -19,55 +19,55 @@
 #include "../graph/mingl.h"
 /**
  * @namespace nsScreen
- * @brief Namespace for related sets of GUI element
+ * @brief Espace de nom pour des écrans
  */
 namespace nsScreen {
 
 /**
  * @class IScreen
- * @brief Interface for a screen taking the entire window
+ * @brief Interface pour un écran, prenant l'entièreté de la fenêtre
  */
 class IScreen : public IDrawable
 {
 public:
     /**
-     * @brief Destructor for the IScreen class
+     * @brief Destructeur de la classe IScreen
      * @fn virtual ~IScreen() {}
      */
     virtual ~IScreen() {}
 
     /**
-     * @brief Called whenever an user input happens
-     * @param[in] event : The event that just happened
+     * @brief Appelée a chaque entrée utilisateur
+     * @param[in] event : L'événement qui vient de se produire
      * @fn virtual void processEvent(const nsEvent::Event &event);
      */
     virtual void processEvent(const nsEvent::Event_t &event) = 0;
 
     /**
-     * @brief Called every frame to update screen's logic
-     * @param[in] delta : Time that the previous frame took to render
+     * @brief Appelée a chaque image pour mettre a jour la logique
+     * @param[in] delta : Temps que la dernière image a mis pour faire son rendu
      * @fn virtual void update(const std::chrono::microseconds &delta);
      */
     virtual void update(const std::chrono::microseconds &delta) = 0;
 
     /**
-     * @brief Gets the ID of the new screen that this screen requested to switch to
-     * @return A const reference to m_screenChange
+     * @brief Récupère l'ID du nouvel écran vers lequel basculer
+     * @return Une référence const vers m_screenChange
      * @fn ScreenIdentifiers getRequestedScreenChange() const;
      */
     const ScreenIdentifiers& getRequestedScreenChange() const;
 
 protected:
     /**
-     * @brief Sets the ID of the new screen to switch to
-     * @param[in] screenId : The new screen ID
+     * @brief Définit l'ID de l'écran vers lequel basculer
+     * @param[in] screenId : L'ID du nouvel écran
      * @fn void requestScreenChange(const ScreenIdentifiers &screenId);
      */
     void requestScreenChange(const ScreenIdentifiers &screenId);
 
 private:
     /**
-     * @brief m_screenChange : Screen to switch to
+     * @brief m_screenChange : Ecran vers lequel basculer
      */
     ScreenIdentifiers m_screenChange = ScreenIdentifiers::ID_None;
 };

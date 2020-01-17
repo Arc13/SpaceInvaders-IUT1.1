@@ -18,40 +18,40 @@ namespace nsGui
 
 /**
  * @class Button
- * @brief Provides a colored background with text inside, to be used as a button
+ * @brief Fournit un fond coloré avec du texte centré a l'intérieur, a utiliser comme bouton
  */
 class Button : public IminGlInjectable, public nsTransition::ITransitionable
 {
 public:
     /**
-     * @brief TransitionIds : List of every transition this object can execute
+     * @brief TransitionIds : Liste de toutes les transitions que cet élément peut exécuter
      */
     enum TransitionIds {
-        TRANSITION_FIRST_RGB, /**< Transition for the first RGB color */
-        TRANSITION_SECOND_RGB, /**< Transition for the second RGB color (for gradients) */
-        TRANSITION_FIRST_ALPHA, /**< Transition for the first transparency */
-        TRANSITION_SECOND_ALPHA, /**< Transition for the second transparency (for gradients) */
-        TRANSITION_POSITION, /**< Transition for the position */
-        TRANSITION_SIZE, /**< Transition for the size */
+        TRANSITION_FIRST_RGB, /**< Transition pour la première couleur RGB */
+        TRANSITION_SECOND_RGB, /**< Transition pour la seconde couleur RGB (pour un dégradé) */
+        TRANSITION_FIRST_ALPHA, /**< Transition pour la première transparence */
+        TRANSITION_SECOND_ALPHA, /**< Transition pour la seconde transparence (pour un dégradé) */
+        TRANSITION_POSITION, /**< Transition pour la position */
+        TRANSITION_SIZE, /**< Transition pour la taille */
     };
 
     /**
-     * @brief Constructor for the Button class, using this will produce a Button with a gradient
-     * @param[in] text : Text inside this Button
-     * @param[in] position : Position of the Button
-     * @param[in] size : Size of the Button
-     * @param[in] firstColor : First color of the Button
-     * @param[in] secondColor : Second color of the Button
+     * @brief Constructeur pour la classe Button, utiliser celle-ci produira un dégradé
+     * @param[in] text : Texte a l'intérieur du Button
+     * @param[in] position : Position du Button
+     * @param[in] size : Size du Button
+     * @param[in] firstColor : Première couleur du Button
+     * @param[in] secondColor : Seconde couleur du Button
      * @fn Button(const std::string &text, const Vec2D &position, const Vec2D &size, const RGBAcolor &firstColor, const RGBAcolor &secondColor);
      */
     Button(const std::string &text, const Vec2D &position, const Vec2D &size, const RGBAcolor &firstColor, const RGBAcolor &secondColor);
 
     /**
-     * @brief Constructor for the Button class, using this will produce a flat Button
-     * @param[in] text : Text inside this Button
-     * @param[in] position : Position of the Button
-     * @param[in] size : Size of the Button
-     * @param[in] firstColor : First color of the Button
+     * @brief Constructeur pour la classe Button, utiliser celle-ci produira un bouton unicolore
+     * @param[in] text : Texte a l'intérieur du Button
+     * @param[in] position : Position du Button
+     * @param[in] size : Size du Button
+     * @param[in] firstColor : Première couleur du Button
      * @fn Button(const std::string &text, const Vec2D &position, const Vec2D &size, const RGBAcolor &firstColor);
      */
     Button(const std::string &text, const Vec2D &position, const Vec2D &size, const RGBAcolor &firstColor);
@@ -62,29 +62,29 @@ public:
     virtual void setValues(const int &id, const std::vector<float> &values) override;
 
     /**
-     * @brief Gets the position of the button
-     * @return A const reference to m_position
+     * @brief Récupère la position du bouton
+     * @return Une référence const vers m_position
      * @fn const Vec2D& getPosition() const;
      */
     const Vec2D& getPosition() const;
 
     /**
-     * @brief Sets the new position of the button
-     * @param[in] position : The new position
+     * @brief Définit la nouvelle position du bouton
+     * @param[in] position : Nouvelle position
      * @fn void setPosition(const Vec2D &position);
      */
     void setPosition(const Vec2D &position);
 
     /**
-     * @brief Gets the size of the button
-     * @return A const reference to m_size
+     * @brief Récupère la taille du bouton
+     * @return Une référence const vers m_size
      * @fn const Vec2D& getSize() const;
      */
     const Vec2D& getSize() const;
 
     /**
-     * @brief Sets the new size of the button
-     * @param[in] size : The new size
+     * @brief Définit la nouvelle taille du bouton
+     * @param[in] size : Nouvelle taille
      * @fn void setSize(const Vec2D &size);
      */
     void setSize(const Vec2D &size);
@@ -94,27 +94,27 @@ protected:
 
 private:
     /**
-     * @brief m_buttonText : The Text object of this Button
+     * @brief m_buttonText : L'objet Text de ce Button
      */
     Text m_buttonText;
 
     /**
-     * @brief m_firstColor : The first, leftmost color
+     * @brief m_firstColor : La première couleur, la plus a gauche
      */
     RGBAcolor m_firstColor;
 
     /**
-     * @brief m_secondColor : The second, rightmost color
+     * @brief m_secondColor : La seconde couleur, la plus a droite
      */
     RGBAcolor m_secondColor;
 
     /**
-     * @brief m_position : The position of this Button
+     * @brief m_position : Position de ce Button
      */
     Vec2D m_position;
 
     /**
-     * @brief m_position : The size of this Button
+     * @brief m_position : Taille de ce Button
      */
     Vec2D m_size;
 };

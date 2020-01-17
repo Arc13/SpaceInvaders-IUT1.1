@@ -18,15 +18,15 @@ namespace nsScreen {
 
 /**
  * @class ScreenIdMap
- * @brief Converts Screen ID to a Screen
+ * @brief Convertit un ID d'écran vers un pointeur unique
  */
 class ScreenIdMap
 {
 public:
     /**
-     * @brief Gets a pointer to an IScreen derived class from a screen ID
-     * @param[in] screenId : The ID of the screen to get
-     * @return A unique pointer to the IScreen derived class
+     * @brief Récupère un pointeur unique d'une classe dérivée d'IScreen depuis un ID
+     * @param[in] screenId : L'ID de l'écran
+     * @return Un pointeur unique vers la classe dérivée d'IScreen
      * @fn static std::unique_ptr<IScreen> getScreenFromId(const ScreenIdentifiers &screenId);
      */
     static std::unique_ptr<IScreen> getScreenFromId(const ScreenIdentifiers &screenId);

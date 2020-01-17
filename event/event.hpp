@@ -11,33 +11,33 @@
 
 /**
  * @namespace nsEvent
- * @brief Namespace for event management
+ * @brief Espace de nom pour la gestion d'événements
  */
 namespace nsEvent {
 
 /**
- * @brief EventType_t : List of all Event types
+ * @brief EventType_t : Liste de tout les types d'événements
  */
 enum EventType_t {
-    MouseClick, /**< A mouse button state changed */
-    MouseMove /**< The mouse moved */,
-    MouseDrag, /**< The mouse moved while one of its button was pressed */
+    MouseClick, /**< L'utilisateur a cliqué sur un des boutons de la souris */
+    MouseMove /**< Le curseur s'est déplacé */,
+    MouseDrag, /**< Le curseur s'est déplacé pendant qu'un des boutons de la souris était pressé */
 
-    Keyboard, /**< A key on the keyboard was pressed */
-    KeyboardSpecial, /**< A special key on the keyboard was pressed */
+    Keyboard, /**< Une touche du clavier a été pressée */
+    KeyboardSpecial, /**< Une touche spéciale du clavier a été presséed */
 };
 
 /**
  * @struct MouseClickData_t
- * @brief Holds data for a MouseClick event
+ * @brief Possède des données pour un événement MouseClick
  */
 struct MouseClickData_t {
     /**
-     * @brief Constructor for the MouseClickData_t struct
-     * @param[in] button_ : Mouse button
-     * @param[in] state_ : State of the button
-     * @param[in] x_ : X coordinate of the mouse cursor
-     * @param[in] y_ : Y coordinate of the mouse cursor
+     * @brief Constructeur pour la structure MouseClickData_t
+     * @param[in] button_ : Bouton de la souris
+     * @param[in] state_ : Etat du bouton
+     * @param[in] x_ : Coordonnée X du curseur
+     * @param[in] y_ : Coordonnée Y du curseur
      * @fn MouseClickData_t(const int &button_, const int &state_, const int &x_, const int &y_);
      */
     MouseClickData_t(const int &button_, const int &state_, const int &x_, const int &y_)
@@ -47,21 +47,21 @@ struct MouseClickData_t {
         , y(y_)
     {}
 
-    int button; /**< Numerical ID of the button */
-    int state; /**< New state of the button */
-    int x; /**< X coordinate of the click, relative to the top-left corner of the window */
-    int y; /**< Y coordinate of the click, relative to the top-left corner of the window */
+    int button; /**< ID numérique du bouton */
+    int state; /**< Nouvel état du bouton */
+    int x; /**< Coordonnée X du curseur, relative au coin supérieur-gauche de la fenêtre */
+    int y; /**< Coordonnée Y du curseur, relative au coin supérieur-gauche de la fenêtre */
 };
 
 /**
  * @struct MouseMoveData_t
- * @brief Holds data for a MouseMove/MouseDrag event
+ * @brief Possède des données pour un événement MouseMove/MouseDrag
  */
 struct MouseMoveData_t {
     /**
-     * @brief Constructor for the MouseMoveData_t struct
-     * @param[in] x_ : X coordinate of the mouse cursor
-     * @param[in] y_ : Y coordinate of the mouse cursor
+     * @brief Constructeur pour la structure MouseMoveData_t
+     * @param[in] x_ : Coordonnée X du curseur
+     * @param[in] y_ : Coordonnée Y du curseur
      * @fn MouseMoveData_t(const int &x_, const int &y_);
      */
     MouseMoveData_t(const int &x_, const int &y_)
@@ -69,20 +69,20 @@ struct MouseMoveData_t {
         , y(y_)
     {}
 
-    int x; /**< X coordinate of the new mouse position, relative to the top-left corner of the window */
-    int y; /**< Y coordinate of the new mouse position, relative to the top-left corner of the window */
+    int x; /**< Coordonnée X du curseur, relative au coin supérieur-gauche de la fenêtre */
+    int y; /**< Coordonnée Y du curseur, relative au coin supérieur-gauche de la fenêtre */
 };
 
 /**
  * @struct KeyboardData_t
- * @brief Holds data for a Keyboard event
+ * @brief Possède des données pour un événement Keyboard
  */
 struct KeyboardData_t {
     /**
-     * @brief Constructor for the KeyboardData_t struct
-     * @param[in] key_ : Character of the key
-     * @param[in] x_ : X coordinate of the mouse cursor
-     * @param[in] y_ : Y coordinate of the mouse cursor
+     * @brief Constructeur pour la structure KeyboardData_t
+     * @param[in] key_ : Caractère de la touche
+     * @param[in] x_ : Coordonnée X du curseur
+     * @param[in] y_ : Coordonnée Y du curseur
      * @fn KeyboardData_t(const unsigned char &key_, const int &x_, const int &y_);
      */
     KeyboardData_t(const unsigned char &key_, const int &x_, const int &y_)
@@ -91,21 +91,21 @@ struct KeyboardData_t {
         , y(y_)
     {}
 
-    unsigned char key; /**< The character of the pressed key */
-    int x; /**< X coordinate of the mouse position, relative to the top-left corner of the window */
-    int y; /**< Y coordinate of the mouse position, relative to the top-left corner of the window */
+    unsigned char key; /**< Le caractère de la touche pressée */
+    int x; /**< Coordonnée X du curseur, relative au coin supérieur-gauche de la fenêtre */
+    int y; /**< Coordonnée Y du curseur, relative au coin supérieur-gauche de la fenêtre */
 };
 
 /**
  * @struct KeyboardSpecialData_t
- * @brief Holds data for a KeyboardSpecial event
+ * @brief Possède des données pour un événement KeyboardSpecial
  */
 struct KeyboardSpecialData_t {
     /**
-     * @brief Constructor for the KeyboardSpecialData_t struct
-     * @param[in] key_ : ID of the special key
-     * @param[in] x_ : X coordinate of the mouse cursor
-     * @param[in] y_ : Y coordinate of the mouse cursor
+     * @brief Constructeur pour la structure KeyboardSpecialData_t
+     * @param[in] key_ : ID de la touche spéciale
+     * @param[in] x_ : Coordonnée X du curseur
+     * @param[in] y_ : Coordonnée Y du curseur
      * @fn KeyboardSpecialData_t(const int &key_, const int &x_, const int &y_);
      */
     KeyboardSpecialData_t(const int &key_, const int &x_, const int &y_)
@@ -114,31 +114,31 @@ struct KeyboardSpecialData_t {
         , y(y_)
     {}
 
-    int key; /**< The ID of the pressed special key */
-    int x; /**< X coordinate of the mouse position, relative to the top-left corner of the window */
-    int y; /**< Y coordinate of the mouse position, relative to the top-left corner of the window */
+    int key; /**< L'ID de la touche spéciale qui à été pressée */
+    int x; /**< Coordonnée X du curseur, relative au coin supérieur-gauche de la fenêtre */
+    int y; /**< Coordonnée Y du curseur, relative au coin supérieur-gauche de la fenêtre */
 };
 
 /**
  * @union EventData_t
- * @brief Union containing the data for an event
+ * @brief Union contenant les données d'un événement
  */
 union EventData_t {
-    MouseClickData_t clickData; /**< Data for a MouseClick event */
-    MouseMoveData_t moveData; /**< Data for a MouseMove/MouseDrag event */
-    KeyboardData_t keyboardData; /**< Data for a Keyboard event */
-    KeyboardSpecialData_t keyboardSpecialData; /**< Data for a KeyboardSpecial event */
+    MouseClickData_t clickData; /**< Données pour un événement MouseClick */
+    MouseMoveData_t moveData; /**< Données pour un événment MouseMove/MouseDrag */
+    KeyboardData_t keyboardData; /**< Données pour un événement Keyboard */
+    KeyboardSpecialData_t keyboardSpecialData; /**< Données pour un événement KeyboardSpecial */
 };
 
 /**
  * @struct Event_t
- * @brief Holds data for an event
+ * @brief Possède des données pour un événement
  */
 struct Event_t {
     /**
-     * @brief Constructor for the Event_t struct
-     * @param[in] eventType_ : Event type
-     * @param[in] eventData_ : Event data
+     * @brief Constructeur pour la structure Event_t
+     * @param[in] eventType_ : Type d'événement
+     * @param[in] eventData_ : Données d'événement
      * @fn Event_t(const EventType_t &eventType_, const EventData_t &eventData_);
      */
     Event_t(const EventType_t &eventType_, const EventData_t &eventData_)
@@ -146,8 +146,8 @@ struct Event_t {
         , eventData(eventData_)
     {}
 
-    EventType_t eventType; /**< Type of the event */
-    EventData_t eventData; /**< Data of the event */
+    EventType_t eventType; /**< Type de l'événement */
+    EventData_t eventData; /**< Données de l'événement */
 };
 
 } // namespace nsEvent

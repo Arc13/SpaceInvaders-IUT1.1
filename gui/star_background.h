@@ -17,18 +17,18 @@ namespace nsGui {
 
 /**
  * @class StarBackground
- * @brief Manages the drawing and animation of the stars
+ * @brief Gère l'affichage et l'animation d'un fond étoilé
  */
 class StarBackground : public IminGlInjectable
 {
 public:
     /**
-     * @brief Constructor for the StarBackground class
-     * @param[in] starCount : Number of stars for this instance
-     * @param[in] size : Background size
-     * @param[in] unlitColor : Color of an unlit star (Defaults to gray)
-     * @param[in] litColor : Color of a lit star (Defaults to light gray)
-     * @param[in] litProbability : Probability for a star to change its lit state (Defaults to 5%)
+     * @brief Constructeur pour la classe StarBackground
+     * @param[in] starCount : Nombre d'étoiles pour cette instance
+     * @param[in] size : Taille du fond
+     * @param[in] unlitColor : Couleur pour une étoile éteinte (Gris par défaut)
+     * @param[in] litColor : Couleur pour une étoile allumée (Gris clair par défaut)
+     * @param[in] litProbability : Probabilité pour une étoile de s'allumer/s'éteindre (5% par défaut)
      * @fn StarBackground(const unsigned &starCount, const Vec2D &size,
                       const RGBAcolor &unlitColor = RGBAcolor(128, 128, 128), const RGBAcolor &litColor = RGBAcolor(192, 192, 192),
                       const float &litProbability = 0.05);
@@ -38,8 +38,8 @@ public:
                       const float &litProbability = 0.05);
 
     /**
-     * @brief Updates the element
-     * @param[in] delta: Time that the previous frame took to render
+     * @brief Met à jour l'élément
+     * @param[in] delta: Temps que la dernière image a mis pour faire son rendu
      * @fn void update(float delta);
      */
     void update(float delta);
@@ -51,30 +51,30 @@ protected:
 
 private:
     /**
-     * @brief A structure that represents a single star
+     * @brief Une structure représentant une étoile
      */
     typedef struct {
-        Vec2D pos; /**< The position of the star */
-        bool isLit; /**< Is the star brighter? */
+        Vec2D pos; /**< Position de l'étoile */
+        bool isLit; /**< Etat d'allumage de l'étoile */
     } Star_t;
 
     /**
-     * @brief m_stars : Holds the star for this instance
+     * @brief m_stars : Vecteur d'étoiles de cette instance
      */
     std::vector<Star_t> m_stars;
 
     /**
-     * @brief m_unlitColor : The color for an unlit star
+     * @brief m_unlitColor : Couleur d'une étoile éteinte
      */
     const RGBAcolor m_unlitColor;
 
     /**
-     * @brief m_litColor : The color for a lit star
+     * @brief m_litColor : Couleur d'une étoile allumée
      */
     const RGBAcolor m_litColor;
 
     /**
-     * @brief m_litProbability : The probability for a star to lit/unlit itself
+     * @brief m_litProbability : Probabilité pour une étoile de s'allumer/s'éteindre
      */
     const float m_litProbability;
 };

@@ -13,109 +13,109 @@
 
 /**
  * @namespace nsTransition
- * @brief Namespace for the transition engine and its components
+ * @brief Espace de nom pour le moteur de transition et ses composants
  */
 namespace nsTransition
 {
 
 /**
  * @class Transition
- * @brief A class containing a TransitionContract that is being played
+ * @brief Une classe représentant un TransitionContract en cours de lecture
  */
 class Transition : public TransitionContract
 {
 public:
     /**
-     * @brief TransitionMode : List of all Transition finish modes
+     * @brief TransitionMode : Liste de tout les modes de fin de la Transition
      */
     enum TransitionFinishModes {
-        FINISH_START, /**< This finish mode will set the target values to its start values */
-        FINISH_CURRENT, /**< This finish mode will not touch the current values of the target */
-        FINISH_DESTINATION, /**< This finish mode will set the target values to its destination values */
+        FINISH_START, /**< Ce mode de fin met les valeurs de la cible a celles de départ */
+        FINISH_CURRENT, /**< Ce mode de fin ne touche pas aux valeurs actuelles de la cible */
+        FINISH_DESTINATION, /**< Ce mode de fin met les valeurs de la cible a celles d'arrivé */
     };
 
     /**
-     * @brief Constructor for the Transition class
-     * @param[in] contract : Contract used to initialise this Transition
+     * @brief Constructeur pour la classe Transition
+     * @param[in] contract : Contrat utilisé pour initialiser cette Transition
      * @fn Transition(const TransitionContract &contract);
      */
     Transition(const TransitionContract &contract);
 
     /**
-     * @brief Returns the amount of time elapsed for this Transition
-     * @return A const reference to m_elapsed
+     * @brief Retourne le temps écoulé pour cette Transition
+     * @return Une référence const vers m_elapsed
      * @fn const SystemDuration_t& getElapsed() const;
      */
     const SystemDuration_t& getElapsed() const;
 
     /**
-     * @brief Sets the amount of time elapsed for this Transition,
-     * and then updates the values being transitioned
-     * @param[in] elapsed : The new elapsed time
+     * @brief Définit un nouveau temps écoulé pour cette Transition,
+     * puis met a jour les valeurs de la cible
+     * @param[in] elapsed : Nouveau temps écoulé
      * @fn void setElapsed(const SystemDuration_t &elapsed);
      */
     void setElapsed(const SystemDuration_t &elapsed);
 
     /**
-     * @brief Adds a duration to the current elapsed time
-     * @param[in] addedTime : The time to add to the current elapsed time
+     * @brief Rajoute une durée au temps écoulé actuel
+     * @param[in] addedTime : Durée a rajouter
      * @fn void addToElapsed(const SystemDuration_t &addedTime);
      */
     void addToElapsed(const SystemDuration_t &addedTime);
 
     /**
-     * @brief Returns whether this transition is playing backwards
-     * @return A const reference to m_reverse
+     * @brief Indique si cette Transition est en train de se jouer a l'envers
+     * @return Une référence const vers m_reverse
      * @fn const bool& isReversed() const;
      */
     const bool& isReversed() const;
 
     /**
-     * @brief Marks this instance of Transition as finished, using the specified mode if any
-     * @param[in] finishMode : Mode used to finish the transition (Defaults to setting the destination values to the target)
+     * @brief Marque cette Transition comme terminée, en utilisant le mode spécifié
+     * @param[in] finishMode : Mode utilisé pour finir cette Transition (Valeurs d'arrivé par défaut)
      * @fn void finish();
      */
     void finish(const TransitionFinishModes &finishMode = TransitionFinishModes::FINISH_DESTINATION);
 
     /**
-     * @brief Returns whether this instance of Transition is marked as finished
-     * @return A const reference to m_finished
+     * @brief Indique si cette Transition est marquée comme terminée
+     * @return Une référence const vers m_finished
      * @fn const bool& isFinished() const;
      */
     const bool& isFinished() const;
 
 private:
     /**
-     * @brief m_startTime : Holds the time when this transition started
+     * @brief m_startTime : Stocke le temps du début de cette Transition
      */
     SystemTimePoint_t m_startTime;
 
     /**
-     * @brief m_elapsed : Holds the elapsed time since this transition started
+     * @brief m_elapsed : Stocke le temps écoulé
      */
     SystemDuration_t m_elapsed;
 
     /**
-     * @brief m_reverse : Set to true if this transition is playing backwards
-     * i.e. playing from the end to the beginning values
+     * @brief m_reverse : Flag set si cette Transition se joue a l'envers
+     * i.e. se jouant des valeurs d'arrivé vers celles de départ
      */
     bool m_reverse;
 
     /**
-     * @brief m_finished : Whether this Transition should be considered finished
-     * The TransitionEngine would remove such Transition from its list
+     * @brief m_finished : Flag set si cette Transition doit être considérée terminée
+     * Le moteur de transition utilisé doit enlever une telle Transition de sa liste
      */
     bool m_finished;
 
     /**
-     * @brief Computes and sets the new values to the target,
-     * based from the elapsed time, the duration and the start time
+     * @brief Calcule et définit les nouvelles valeurs a la cible,
+     * basé sur le temps écoulé, la durée de la transition et le temps de départ
      * @fn void updateValues();
      */
     void updateValues();
 
     /**
-     * @brief Called whenever this Transition has reached the destination values
+     * @brief Appelé quand cette Transition s'est terminée
      * @fn void handleEndlife();
      */
     void handleEndlife();

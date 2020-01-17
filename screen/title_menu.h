@@ -21,13 +21,13 @@ namespace nsScreen {
 
 /**
  * @class TitleMenu
- * @brief Set of elements representing the title screen of the game
+ * @brief Elements représentant l'écran titre
  */
 class TitleMenu : public IScreen
 {
 public:
     /**
-     * @brief Constructor for the TitleMenu class
+     * @brief Constructeur pour la classe TitleMenu
      * @fn TitleMenu();
      */
     TitleMenu();
@@ -39,49 +39,49 @@ public:
 
 private:
     /**
-     * @brief m_transitionEngine : An instance of the transition engine
+     * @brief m_transitionEngine : Une instance du moteur de transition
      */
     nsTransition::TransitionEngine m_transitionEngine;
 
     /**
-     * @brief m_playButtonHovered : Set if the mouse cursor is on the play button
+     * @brief m_playButtonHovered : Actif si le curseur est sur le bouton Jouer
      */
     bool m_playButtonHovered;
 
     /**
-     * @brief m_playButton : The button to start the game
+     * @brief m_playButton : Le bouton pour démarrer le jeu
      */
     nsGui::Button m_playButton;
 
     /**
-     * @brief Executes the title screen apparition animation
+     * @brief Exécute la séquence d'apparition du titre
      * @fn void executeTitleAppearanceAnimation();
      */
     void executeTitleAppearanceAnimation();
 
     /**
-     * @brief Executes the title screen halo effect
+     * @brief Exécute l'effet "halo" du titre
      * @fn void executeTitleHaloEffect();
      */
     void executeTitleHaloEffect();
 
     /**
-     * @brief m_titleShown : Flag indicating if the title is currently shown
+     * @brief m_titleShown : Actif si le titre est affiché
      */
     bool m_titleShown;
 
     /**
-     * @brief m_titleEnableAnimation : Flag indicating if the title can have the halo effect
+     * @brief m_titleEnableAnimation : Actif si l'effet "halo" est autorisé
      */
     bool m_titleEnableAnimation;
 
     /**
-     * @brief m_titleLastHaloTime : Time since the last halo effect occured
+     * @brief m_titleLastHaloTime : Temps depuis le dernier effet "halo"
      */
     nsTransition::SystemDuration_t m_titleLastHaloTime;
 
     /**
-     * @brief m_titleText : Vector containing all the lines of the title
+     * @brief m_titleText : Vecteur contentant toutes les lignes du titre
      */
     std::vector<nsGui::Text> m_titleText;
 };

@@ -11,42 +11,42 @@
 
 /**
  * @class GlutFont
- * @brief Class listing every font provided by Glut, to use with the Text object
+ * @brief Classe listant toute les polices rendues disponibles par Glut, a utiliser avec Text
  */
 class GlutFont
 {
 public:
     /**
-     * @brief GlutFonts : List of all Glut fonts
+     * @brief GlutFonts : Liste de toutes les polices Glut
      */
     enum GlutFonts
     {
-        BITMAP_8_BY_13, /**< 8x13 Bitmap font */
-        BITMAP_9_BY_15, /**< 9x15 Bitmap font */
-        BITMAP_TIMES_ROMAN_10, /**< 10px Times New Roman font */
-        BITMAP_TIMES_ROMAN_24, /**< 24px Times New Roman font */
-        BITMAP_HELVETICA_10, /**< 10px Helvetica font */
-        BITMAP_HELVETICA_12, /**< 12px Helvetica font */
-        BITMAP_HELVETICA_18, /**< 18px Helvetica font */
+        BITMAP_8_BY_13, /**< Police 8x13 Bitmap */
+        BITMAP_9_BY_15, /**< Police 9x15 Bitmap */
+        BITMAP_TIMES_ROMAN_10, /**< Police 10px Times New Roman */
+        BITMAP_TIMES_ROMAN_24, /**< Police 24px Times New Roman */
+        BITMAP_HELVETICA_10, /**< Police 10px Helvetica */
+        BITMAP_HELVETICA_12, /**< Police 12px Helvetica */
+        BITMAP_HELVETICA_18, /**< Police 18px Helvetica */
     };
 
     /**
-     * @brief Constructor for the GlutFont class
-     * @param[in] font_ : Font represented by this instance
-     * @fn GlutFont(const GlutFonts &font_);
+     * @brief Constructeur pour la classe GlutFont
+     * @param[in] font_ : Police représentée par cette instance
+     * @fn GlutFont(const GlutFonts &font);
      */
-    GlutFont(const GlutFonts &font_);
+    GlutFont(const GlutFonts &font);
 
     /**
-     * @brief Gets the font identifier to be used with Glut
-     * @return A Glut font identifier
+     * @brief Récupère l'identificateur de police utilisable par Glut
+     * @return Un identificateur de police Glut
      * @fn void *convertForGlut() const;
      */
     void *convertForGlut() const;
 
 private:
     /**
-     * @brief font : Font represented by this instance
+     * @brief m_font : Police représentée par cette instance
      */
     GlutFonts m_font;
 };

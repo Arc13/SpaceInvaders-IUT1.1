@@ -20,51 +20,51 @@ namespace nsTransition
 
 /**
  * @class TransitionEngine
- * @brief A class implementing an engine to support multiple transitions at once
+ * @brief Une classe implémentant un moteur de transition supportant plusieurs transitions a la fois
  */
 class TransitionEngine
 {
 public:
     /**
-     * @brief Updates every Transition in the list
-     * @param[in] delta : Time that the previous frame took to render
+     * @brief Met a jour toutes les transitions dans la liste
+     * @param[in] delta : Temps que la dernière image a mis pour faire son rendu
      * @fn void update(const std::chrono::microseconds &delta);
      *
-     * This function adds the value of delta to the elapsed time of the transitions,
-     * and checks for any finished transition to remove.
+     * Cette fonction rajoute la valeur de delta aux temps écoulés des différentes transitions,
+     * et supprime les transitions terminées de la liste.
      */
     void update(const std::chrono::microseconds &delta);
 
     /**
-     * @brief Starts a contract
-     * @param[in] contract : Transition contract to start in this engine
+     * @brief Démarre un contrat
+     * @param[in] contract : Contrat de transition a démarrer
      * @fn void startContract(const TransitionContract &contract);
      */
     void startContract(const TransitionContract &contract);
 
     /**
-     * @brief Finishes every transition of the list
-     * @param[in] finishMode : Mode used to finish the transitions (Defaults to setting the destination values to the target)
+     * @brief Termine toutes les transitions de la liste
+     * @param[in] finishMode : finishMode : Mode utilisé pour finir cette Transition (Valeurs d'arrivé par défaut)
      * @fn void finishEveryTransition();
      */
     void finishEveryTransition(const Transition::TransitionFinishModes &finishMode = Transition::FINISH_DESTINATION);
 
     /**
-     * @brief Finishes every transition of the list matching the target
-     * @param[in] transitionable : The target that will stop being transitioned
-     * @param[in] finishMode : Mode used to finish the transitions (Defaults to setting the destination values to the target)
+     * @brief Termine toutes les transitions d'une certaine cible de la liste
+     * @param[in] transitionable : La cible où arrêter les transitions
+     * @param[in] finishMode : finishMode : Mode utilisé pour finir cette Transition (Valeurs d'arrivé par défaut)
      * @fn void finishEveryTransitionOfTarget(const ITransitionable &transitionable);
      */
     void finishEveryTransitionOfTarget(const ITransitionable &transitionable, const Transition::TransitionFinishModes &finishMode = Transition::FINISH_DESTINATION);
 
 private:
     /**
-     * @brief TransitionVector_t : Type definition representing a list of Transition
+     * @brief TransitionVector_t : Définition de type représentant une liste de transition
      */
     typedef std::list<Transition> TransitionVector_t;
 
     /**
-     * @brief m_transitionList : The list of transition this engine is taking care of
+     * @brief m_transitionList : Liste des transitions que ce moteur gère
      */
     TransitionVector_t m_transitionList;
 };
