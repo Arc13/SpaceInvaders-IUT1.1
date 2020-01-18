@@ -25,7 +25,7 @@ void TOPSCORES::processEvent(const nsEvent::Event_t &event)
         case nsEvent::EventType_t::MouseClick:
         {
             const Vec2D mousePos(event.eventData.clickData.x, event.eventData.clickData.y);
-            if (mousePos >= m_mainMenuButton.getPosition() && mousePos <= m_mainMenuButton.getPosition() + m_mainMenuButton.getSize())
+            if (mousePos.isInside(m_mainMenuButton.getPosition(), m_mainMenuButton.getPosition() + m_mainMenuButton.getSize()))
             {
                 // L'utilisateur a cliqué sur le bouton du menu titre
                 requestScreenChange(nsScreen::ScreenIdentifiers::ID_TitleMenu);
@@ -52,3 +52,5 @@ std::unique_ptr<IDrawable> TOPSCORES::clone() const
 {
     return std::unique_ptr<TopScores>(new TopScores(*this));
 }
+
+#undef TOPSCORES

@@ -5,10 +5,10 @@
 
 struct Vec2D
 {
-    unsigned x, y;
+    int x, y;
 
     // Constructeurs
-    Vec2D(const unsigned & x_ = 0, const unsigned & y_ = 0)
+    Vec2D(const int & x_ = 0, const int & y_ = 0)
       : x(x_)
       , y(y_)
     {}
@@ -93,14 +93,27 @@ struct Vec2D
       return (p1 == min(p1, p2));
     }
 
-    unsigned & getAbs()
+    int & getAbs()
     {
       return x;
     }
 
-    unsigned & getOrd()
+    int & getOrd()
     {
       return y;
+    }
+
+    bool isInside(Vec2D firstCorner, Vec2D secondCorner) const
+    {
+        // On inverse les coordonnées si nécessaire
+        if (secondCorner.x < firstCorner.x)
+            std::swap(secondCorner.x, firstCorner.x);
+
+        if (secondCorner.y < firstCorner.y)
+            std::swap(secondCorner.y, firstCorner.y);
+
+        // On retourne si notre vecteur est entre ces deux coins
+        return (operator>=(firstCorner) && operator<=(secondCorner));
     }
 
     friend std::ostream &operator <<(std::ostream &os, const Vec2D &vec)

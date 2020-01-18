@@ -79,16 +79,31 @@ public:
     /**
      * @brief Calcule la largeur de ce texte
      * @return La largeur du texte
-     * @fn int getWidth() const;
+     * @fn int computeWidth() const;
      */
-    int getWidth() const;
+    int computeWidth() const;
 
     /**
      * @brief Calcule la hauteur de ce texte
      * @return La hauteur du texte
-     * @fn int getHeight() const;
+     * @fn int computeHeight() const;
      */
-    int getHeight() const;
+    int computeHeight() const;
+
+    /**
+     * @brief Calcule la position visible du texte, calculée avec l'alignement vertical et horizontal
+     * @return La position visible, en haut a gauche
+     * @fn Vec2D computeVisibleposition() const;
+     */
+    Vec2D computeVisiblePosition() const;
+
+
+    /**
+     * @brief Calcule la position de fin visible du texte, calculée avec l'alignement vertical et horizontal
+     * @return La position visible, en bas a droite
+     * @fn Vec2D computeVisibleEndPosition() const;
+     */
+    Vec2D computeVisibleEndPosition() const;
 
     /**
      * @brief Récupère le contenu du texte

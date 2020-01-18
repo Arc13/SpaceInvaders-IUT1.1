@@ -19,6 +19,7 @@ enum ScreenIdentifiers {
 
     ID_TitleMenu, /**< L'écran titre */
     ID_TopScores, /**< L'écran des top scores */
+    ID_Config, /**< L'écran de l'utilitaire de configuration */
 
     ID_MainGame, /**< L'écran de jeu */
     ID_EndGame, /**< L'écran d'enregistrement du score */

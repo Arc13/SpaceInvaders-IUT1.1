@@ -8,7 +8,7 @@
   *
   * */
 
-#include "commande.h"
+#include "config.h"
 
 #include <iostream>
 #include <vector>
@@ -25,7 +25,7 @@
 using namespace std;
 typedef vector<char> TableauCommande ;
 
-void WhriteCommande (TableauCommande & Commande)
+void nsConfig::WriteCommande (TableauCommande & Commande)
 {
     ofstream FichierCommande ;
     FichierCommande.open(NomFichierCommande, ofstream::out);
@@ -35,7 +35,7 @@ void WhriteCommande (TableauCommande & Commande)
     }
 }
 
-void ChangerCommande (MinGL &window)
+void nsConfig::ChangerCommande (MinGL &window)
 {
     TableauCommande Commande (0) ;
     Commande = ReadCommande(Commande);
@@ -56,7 +56,7 @@ void ChangerCommande (MinGL &window)
     window << nsGui::Text(Vec2D(window.getWindowSize().x/4, 150), Str.str(), KRed, GlutFont::BITMAP_HELVETICA_12);
     cin >> Commande[2];
 
-    WhriteCommande(Commande);
+    WriteCommande(Commande);
 
     Str << "Voici vos nouvelles commandes : " << endl ;
     window << nsGui::Text(Vec2D(window.getWindowSize().x/4, 150), Str.str(), KRed, GlutFont::BITMAP_HELVETICA_12);
@@ -64,15 +64,16 @@ void ChangerCommande (MinGL &window)
     AfficheCommande(window);
 }
 
-TableauCommande InitCommande (TableauCommande & Commande)
+TableauCommande nsConfig::InitCommande (TableauCommande & Commande)
 {
-    Commande.push_back(KDefaultRigthKey);
+    Commande.push_back(KDefaultRightKey);
     Commande.push_back(KDefaultLeftKey);
     Commande.push_back(KDefaultFirekey);
+    Commande.push_back(KDefaultDifficulty);
     return Commande ;
 }
 
-TableauCommande ReadCommande (TableauCommande & Commande)
+TableauCommande nsConfig::ReadCommande (TableauCommande & Commande)
 {
     unsigned Cpt = 0 ;
     while (true)
@@ -87,7 +88,7 @@ TableauCommande ReadCommande (TableauCommande & Commande)
         if (!FichierCommande.is_open())
         {
             Commande = InitCommande(Commande);
-            WhriteCommande(Commande);
+            WriteCommande(Commande);
             cerr << "Le fichier " << NomFichierCommande << " est manquant, un nouveau avec les parametres par default à été créer" << endl;
             ++Cpt ;
         }
@@ -106,7 +107,7 @@ TableauCommande ReadCommande (TableauCommande & Commande)
     return Commande ;
 }
 
-void AfficheCommande (MinGL &window)
+void nsConfig::AfficheCommande (MinGL &window)
 {
     TableauCommande Commande (0) ;
     Commande = ReadCommande(Commande);

@@ -9,7 +9,7 @@
 #ifndef DIFFICULTY_H
 #define DIFFICULTY_H
 
-#include <map>
+#include <vector>
 
 #include "../tools/myexception.h"
 
@@ -29,14 +29,12 @@ struct Difficulty {
      * @fn Difficulty(const unsigned &id_, const float &frequencyModifier_,
                const unsigned &lifeCount_, const float &scoreModifier_);
      */
-    Difficulty(const unsigned &id_, const float &frequencyModifier_,
+    Difficulty(const float &frequencyModifier_,
                const unsigned &lifeCount_, const float &scoreModifier_)
-        : id(id_)
-        , frequencyModifier(frequencyModifier_)
+        : frequencyModifier(frequencyModifier_)
         , lifeCount(lifeCount_)
         , scoreModifier(scoreModifier_) {}
 
-    const unsigned id; /**< ID de cette difficulté */
     const float frequencyModifier; /**< Multiplicateur pour les différentes fréquences en-jeu */
     const unsigned lifeCount; /**< Nombre de vie du joueur */
     const float scoreModifier; /**< Multiplicateur pour le score */
@@ -45,25 +43,45 @@ struct Difficulty {
 /**
  * @brief La difficulté normale, avec tout les multiplicateur a 1.
  */
-const Difficulty KNormalDifficulty(0, 1, 3, 1);
+const Difficulty KNormalDifficulty(1, 3, 1);
 
 /**
  * @brief La difficulté facile, avec des fréquences basses et un grand nombre de vie,
  * mais un multiplicateur de score bas.
  */
-const Difficulty KEasyDifficulty(1, 1.5, 5, 0.4);
+const Difficulty KEasyDifficulty(1.5, 5, 0.4);
 
 /**
  * @brief La difficulté difficilé, avec des fréquences hautes et un petit nombre de vie,
  * mais un multiplicateur de score haut.
  */
-const Difficulty KHardDifficulty(2, 0.5, 1, 2);
+const Difficulty KHardDifficulty(0.5, 1, 2);
 
 /**
  * @brief La difficulté insane, avec des fréquences très hautes et une seule vie,
  * mais un multiplicateur de score très grand.
  */
-const Difficulty KInsaneDifficulty(3, 0.3, 0, 3);
+const Difficulty KInsaneDifficulty(0.3, 0, 3);
+
+/**
+ * @brief PredefinedDifficulty : Liste de toutes les difficultés prédéfinies
+ */
+enum PredefinedDifficulty {
+    DIFFICULTY_EASY, /**< Difficulté facile */
+    DIFFICULTY_NORMAL, /**< Difficulté normale */
+    DIFFICULTY_HARD, /**< Difficulté difficile */
+    DIFFICULTY_INSANE, /**< Difficulté impossible */
+};
+
+/**
+ * @brief KDifficultyName : Vecteur contenant le nom des difficultés prédéfinies
+ */
+const std::vector<std::string> KDifficultyName = {
+    "Facile",
+    "Normal",
+    "Difficile",
+    "Impossible"
+};
 
 }
 

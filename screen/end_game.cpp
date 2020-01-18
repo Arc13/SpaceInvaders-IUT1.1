@@ -22,7 +22,7 @@ ENDGAME::EndGame()
     , m_nameTitle(Vec2D(320, 200), "Entrez votre nom:", RGBAcolor(128, 128, 128), GlutFont::BITMAP_8_BY_13, nsGui::Text::ALIGNH_CENTER)
     , m_nameText(Vec2D(320, 220), "", RGBAcolor(192, 192, 192), GlutFont::BITMAP_9_BY_15, nsGui::Text::ALIGNH_CENTER)
     , m_mainMenuButton("Menu principal", Vec2D(10, 580), Vec2D(150, 50), RGBAcolor(51, 51, 51, 164))
-    , m_topScoreButton("Top scores", Vec2D(480, 580), Vec2D(150, 50), RGBAcolor(51, 51, 51, 164))
+    , m_topScoreButton("Classement", Vec2D(480, 580), Vec2D(150, 50), RGBAcolor(51, 51, 51, 164))
     , m_scoreSaved(false)
     , m_scoreSavedText(Vec2D(320, 320), "", KRed, GlutFont::BITMAP_9_BY_15, nsGui::Text::ALIGNH_CENTER)
     , m_hasWon(false)
@@ -94,12 +94,12 @@ void ENDGAME::processEvent(const nsEvent::Event_t &event)
             if (m_enteringName) return;
 
             const Vec2D mousePos(event.eventData.clickData.x, event.eventData.clickData.y);
-            if (mousePos >= m_mainMenuButton.getPosition() && mousePos <= m_mainMenuButton.getPosition() + m_mainMenuButton.getSize())
+            if (mousePos.isInside(m_mainMenuButton.getPosition(), m_mainMenuButton.getPosition() + m_mainMenuButton.getSize()))
             {
                 // L'utilisateur a cliqué sur le bouton du menu titre
                 requestScreenChange(nsScreen::ScreenIdentifiers::ID_TitleMenu);
             }
-            else if (mousePos >= m_topScoreButton.getPosition() && mousePos <= m_topScoreButton.getPosition() + m_topScoreButton.getSize())
+            else if (mousePos.isInside(m_topScoreButton.getPosition(), m_topScoreButton.getPosition() + m_topScoreButton.getSize()))
             {
                 // L'utilisateur a cliqué sur le bouton des top scores
                 requestScreenChange(nsScreen::ScreenIdentifiers::ID_TopScores);

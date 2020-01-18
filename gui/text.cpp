@@ -69,15 +69,55 @@ void TEXT::setValues(const int &id, const std::vector<float> &values)
     }
 } // setValues()
 
-int TEXT::getWidth() const
+int TEXT::computeWidth() const
 {
     return glutBitmapLength(m_textFont.convertForGlut(), reinterpret_cast<const unsigned char *>(m_content.c_str()));
-} // getWidth()
+} // computeWidth()
 
-int TEXT::getHeight() const
+int TEXT::computeHeight() const
 {
     return glutBitmapHeight(m_textFont.convertForGlut());
-} // getHeight()
+} // computeHeight()
+
+Vec2D TEXT::computeVisiblePosition() const
+{
+    int posX = m_position.x;
+    switch (m_horizontalAlignment)
+    {
+        case TEXT::ALIGNH_RIGHT:
+            posX -= computeWidth();
+
+            break;
+        case TEXT::ALIGNH_CENTER:
+            posX -= computeWidth() / 2;
+
+            break;
+        default:
+            break;
+    }
+
+    int posY = m_position.y;
+    switch (m_verticalAlignment)
+    {
+        case TEXT::ALIGNV_TOP:
+            posY += computeHeight();
+
+            break;
+        case TEXT::ALIGNV_CENTER:
+            posY += computeHeight() / 2;
+
+            break;
+        default:
+            break;
+    }
+
+    return Vec2D(posX, posY);
+} // computeVisiblePosition()
+
+Vec2D TEXT::computeVisibleEndPosition() const
+{
+    return computeVisiblePosition() + Vec2D(computeWidth(), -computeHeight());
+} // computeVisibleEndPosition()
 
 const std::string& TEXT::getContent() const
 {
@@ -95,37 +135,8 @@ void TEXT::draw(MinGL &window)
     glColor4ub(m_textColor.Red, m_textColor.Green, m_textColor.Blue, m_textColor.Alpha);
 
     // Set the text position according to its alignment
-    int posX = m_position.x;
-    switch (m_horizontalAlignment)
-    {
-        case TEXT::ALIGNH_RIGHT:
-            posX -= getWidth();
-
-            break;
-        case TEXT::ALIGNH_CENTER:
-            posX -= getWidth() / 2;
-
-            break;
-        default:
-            break;
-    }
-
-    int posY = m_position.y;
-    switch (m_verticalAlignment)
-    {
-        case TEXT::ALIGNV_TOP:
-            posY += getHeight();
-
-            break;
-        case TEXT::ALIGNV_CENTER:
-            posY += getHeight() / 2;
-
-            break;
-        default:
-            break;
-    }
-
-    glRasterPos2i(posX, posY);
+    const Vec2D visiblePos = computeVisiblePosition();
+    glRasterPos2i(visiblePos.x, visiblePos.y);
 
     glutBitmapString(m_textFont.convertForGlut(), reinterpret_cast<const unsigned char *>(m_content.c_str()));
 } // draw()

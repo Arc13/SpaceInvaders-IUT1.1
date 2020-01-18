@@ -13,7 +13,8 @@
 TITLEMENU::TitleMenu()
     : m_playButtonHovered(false)
     , m_playButton("Jouer", Vec2D(200, 320), Vec2D(240, 60), RGBAcolor(86, 204, 242, 192), RGBAcolor(47, 128, 237, 192))
-    , m_topScoreButton("Top scores", Vec2D(245, 400), Vec2D(150, 50), RGBAcolor(51, 51, 51, 164))
+    , m_topScoreButton("Classement", Vec2D(245, 400), Vec2D(150, 50), RGBAcolor(51, 51, 51, 164))
+    , m_configButton("Options", Vec2D(245, 460), Vec2D(150, 50), RGBAcolor(51, 51, 51, 164))
     , m_titleShown(false)
     , m_titleEnableAnimation(false)
     , m_titleLastHaloTime(std::chrono::seconds::zero())
@@ -54,7 +55,7 @@ void TITLEMENU::processEvent(const nsEvent::Event_t &event)
         case nsEvent::EventType_t::MouseMove:
         {
             const Vec2D mousePos(event.eventData.moveData.x, event.eventData.moveData.y);
-            if (!m_playButtonHovered && mousePos >= m_playButton.getPosition() && mousePos <= m_playButton.getPosition() + m_playButton.getSize())
+            if (!m_playButtonHovered && mousePos.isInside(m_playButton.getPosition(), m_playButton.getPosition() + m_playButton.getSize()))
             {
                 // Mouse moved where the play button is located, set button transparency to 255
                 m_playButtonHovered = true;
@@ -67,7 +68,7 @@ void TITLEMENU::processEvent(const nsEvent::Event_t &event)
                                                                                   nsGui::Button::TRANSITION_SECOND_ALPHA,
                                                                                   std::chrono::milliseconds(500), {255}));
             }
-            else if (m_playButtonHovered && !(mousePos >= m_playButton.getPosition() && mousePos <= m_playButton.getPosition() + m_playButton.getSize()))
+            else if (m_playButtonHovered && !mousePos.isInside(m_playButton.getPosition(), m_playButton.getPosition() + m_playButton.getSize()))
             {
                 // Mouse moved outside of the play button location
                 m_playButtonHovered = false;
@@ -86,15 +87,20 @@ void TITLEMENU::processEvent(const nsEvent::Event_t &event)
         case nsEvent::EventType_t::MouseClick:
         {
             const Vec2D mousePos(event.eventData.clickData.x, event.eventData.clickData.y);
-            if (mousePos >= m_playButton.getPosition() && mousePos <= m_playButton.getPosition() + m_playButton.getSize())
+            if (mousePos.isInside(m_playButton.getPosition(), m_playButton.getPosition() + m_playButton.getSize()))
             {
                 // The user clicked on the play button
                 requestScreenChange(nsScreen::ScreenIdentifiers::ID_MainGame);
             }
-            else if (mousePos >= m_topScoreButton.getPosition() && mousePos <= m_topScoreButton.getPosition() + m_topScoreButton.getSize())
+            else if (mousePos.isInside(m_topScoreButton.getPosition(), m_topScoreButton.getPosition() + m_topScoreButton.getSize()))
             {
                 // The user clicked on the top scores button
                 requestScreenChange(nsScreen::ScreenIdentifiers::ID_TopScores);
+            }
+            else if (mousePos.isInside(m_configButton.getPosition(), m_configButton.getPosition() + m_configButton.getSize()))
+            {
+                // The user clicked on the top scores button
+                requestScreenChange(nsScreen::ScreenIdentifiers::ID_Config);
             }
 
             break;
@@ -131,11 +137,16 @@ void TITLEMENU::draw(MinGL &window)
     // Function called each frame, draws screen elements
     window << m_playButton;
     window << m_topScoreButton;
+    window << m_configButton;
 
     // Draw every line of the title
     for (const nsGui::Text &line : m_titleText)
     {
         window << line;
+    }
+
+    for (unsigned i = 0; i < 256; ++i) {
+        window << nsGui::Text(Vec2D(i*9, 610), std::string(1, char(20)), KWhite, GlutFont::BITMAP_9_BY_15);
     }
 } // draw()
 

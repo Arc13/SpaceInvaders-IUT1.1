@@ -21,22 +21,35 @@
 #include "graph/vec2d.h"
 
 /**
+ * @namespace nsConfig
+ * @brief Espace de nom pour le gestionnaire de configuration utilisateur
+ */
+namespace nsConfig {
+
+/**
  * @brief TableauCommande is a vector of char, is a vector content the 3 commands
  */
 typedef std::vector<char> TableauCommande ;
 
 /**
- * @brief KDefaultRigthKey is w buy default
+ * @brief KDefaultRigthKey is d buy default
  */
-const char KDefaultRigthKey ('w');
+const char KDefaultRightKey ('d');
+
 /**
- * @brief KDefaultLeftKey is x buy default
+ * @brief KDefaultLeftKey is q buy default
  */
-const char KDefaultLeftKey ('x');
+const char KDefaultLeftKey ('q');
+
 /**
  * @brief KDefaultFirekey is ' ' buy default
  */
 const char KDefaultFirekey (' ');
+
+/**
+ * @brief KDefaultFirekey is ' ' buy default
+ */
+const char KDefaultDifficulty ('0');
 
 /**
  *@brief KTabDirection is for decripting to the user the command key
@@ -46,7 +59,7 @@ const std::vector<std::string> KTabDirection {("' : pour aller à droite "),("' 
 /**
  * @brief NomFichierCommande is the name of the file command
  */
-const std::string NomFichierCommande ("Commande.txt");
+const std::string NomFichierCommande ("Config.txt");
 
 /**
  * @brief ReadCommande is for Read the Key command on the FichierCommande file
@@ -56,10 +69,10 @@ const std::string NomFichierCommande ("Commande.txt");
 TableauCommande ReadCommande (TableauCommande & Commande);
 
 /**
- * @brief WhriteCommande is for whrite the key command on the FichierCommande file
+ * @brief WriteCommande is for whrite the key command on the FichierCommande file
  * @param Commande is content the key command
  */
-void WhriteCommande (TableauCommande & Commande);
+void WriteCommande (TableauCommande & Commande);
 
 /**
  * @brief InitCommande is for init the command is the FichierCommande disapear
@@ -77,5 +90,7 @@ void AfficheCommande (MinGL &window);
  * @brief ChangerCommande
  */
 void ChangerCommande (MinGL &window);
+
+}
 
 #endif // COMMANDE_H

@@ -54,9 +54,14 @@ private:
     nsGui::Button m_playButton;
 
     /**
-     * @brief m_topScoreButton : Le bouton pour afficher les top scores
+     * @brief m_topScoreButton : Le bouton pour afficher le leaderboard
      */
     nsGui::Button m_topScoreButton;
+
+    /**
+     * @brief m_configButton : Le bouton pour afficher l'utilitaire de configuration
+     */
+    nsGui::Button m_configButton;
 
     /**
      * @brief Exécute la séquence d'apparition du titre

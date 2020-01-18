@@ -76,7 +76,7 @@ void nsScore::InitJoueur (TableauNom & MeilleursNom)
 
 void nsScore::AfficheTopScores (MinGL &window, const TableauScore & MeilleursScores, const TableauNom & MeilleursNom)
 {
-    window << nsGui::Text(Vec2D(window.getWindowSize().x / 2, 130), "Top scores",
+    window << nsGui::Text(Vec2D(window.getWindowSize().x / 2, 130), "Classement",
                           RGBAcolor(128, 128, 128), GlutFont::BITMAP_HELVETICA_18, nsGui::Text::ALIGNH_CENTER);
 
     for (unsigned  i = 0 ; i < MeilleursScores.size(); ++i)
