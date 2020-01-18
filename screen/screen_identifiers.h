@@ -18,6 +18,8 @@ enum ScreenIdentifiers {
     ID_None, /**< Aucun écran */
 
     ID_TitleMenu, /**< L'écran titre */
+    ID_TopScores, /**< L'écran des top scores */
+
     ID_MainGame, /**< L'écran de jeu */
     ID_EndGame, /**< L'écran d'enregistrement du score */
 };

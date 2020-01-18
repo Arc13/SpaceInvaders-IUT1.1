@@ -54,6 +54,11 @@ private:
     nsGui::Button m_playButton;
 
     /**
+     * @brief m_topScoreButton : Le bouton pour afficher les top scores
+     */
+    nsGui::Button m_topScoreButton;
+
+    /**
      * @brief Exécute la séquence d'apparition du titre
      * @fn void executeTitleAppearanceAnimation();
      */

@@ -24,6 +24,7 @@ SOURCES += main.cpp \
     screen/main_game.cpp \
     screen/screen_id_map.cpp \
     screen/title_menu.cpp \
+    screen/top_scores.cpp \
     tools/CException.cxx \
     tools/glut_font.cpp \
     tools/myexception.cpp \

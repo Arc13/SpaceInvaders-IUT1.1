@@ -98,6 +98,11 @@ void ENDGAME::processEvent(const nsEvent::Event_t &event)
                 // L'utilisateur a cliqué sur le bouton du menu titre
                 requestScreenChange(nsScreen::ScreenIdentifiers::ID_TitleMenu);
             }
+            else if (mousePos >= m_topScoreButton.getPosition() && mousePos <= m_topScoreButton.getPosition() + m_topScoreButton.getSize())
+            {
+                // L'utilisateur a cliqué sur le bouton des top scores
+                requestScreenChange(nsScreen::ScreenIdentifiers::ID_TopScores);
+            }
         }
         default:
             break;

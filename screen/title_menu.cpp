@@ -12,7 +12,8 @@
 
 TITLEMENU::TitleMenu()
     : m_playButtonHovered(false)
-    , m_playButton("Jouer", Vec2D(220, 320), Vec2D(200, 60), RGBAcolor(86, 204, 242, 192), RGBAcolor(47, 128, 237, 192))
+    , m_playButton("Jouer", Vec2D(200, 320), Vec2D(240, 60), RGBAcolor(86, 204, 242, 192), RGBAcolor(47, 128, 237, 192))
+    , m_topScoreButton("Top scores", Vec2D(245, 400), Vec2D(150, 50), RGBAcolor(51, 51, 51, 164))
     , m_titleShown(false)
     , m_titleEnableAnimation(false)
     , m_titleLastHaloTime(std::chrono::seconds::zero())
@@ -90,6 +91,11 @@ void TITLEMENU::processEvent(const nsEvent::Event_t &event)
                 // The user clicked on the play button
                 requestScreenChange(nsScreen::ScreenIdentifiers::ID_MainGame);
             }
+            else if (mousePos >= m_topScoreButton.getPosition() && mousePos <= m_topScoreButton.getPosition() + m_topScoreButton.getSize())
+            {
+                // The user clicked on the top scores button
+                requestScreenChange(nsScreen::ScreenIdentifiers::ID_TopScores);
+            }
 
             break;
         }
@@ -124,6 +130,7 @@ void TITLEMENU::draw(MinGL &window)
 {
     // Function called each frame, draws screen elements
     window << m_playButton;
+    window << m_topScoreButton;
 
     // Draw every line of the title
     for (const nsGui::Text &line : m_titleText)

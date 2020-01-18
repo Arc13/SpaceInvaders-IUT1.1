@@ -80,11 +80,15 @@ TableauNom nsScore::InitJoueur (TableauNom & MeilleursNom)
 
 void nsScore::AfficheScore (const TableauScore & MeilleursScores, const TableauNom & TableauJoueur, MinGL &window )
 {
+    window << nsGui::Text(Vec2D(window.getWindowSize().x / 2, 160), "Top scores",
+                          RGBAcolor(128, 128, 128), GlutFont::BITMAP_9_BY_15, nsGui::Text::ALIGNH_CENTER);
+
     for (unsigned  i = 0 ; i < MeilleursScores.size(); ++i)
     {
         stringstream Str;
-        Str <<setw(5) << i+1 << ". " << setw(5) << MeilleursScores[i] << setw(25) << TableauJoueur[i] ;
-        window << nsGui::Text(Vec2D(window.getWindowSize().x/4, 20*i+150), Str.str(), KBlue, GlutFont::BITMAP_HELVETICA_12);
+        Str << setw(5) << i + 1 << ". " << setw(5) << MeilleursScores[i] << setw(25) << TableauJoueur[i];
+        window << nsGui::Text(Vec2D(window.getWindowSize().x / 2, 20 * i + 200), Str.str(),
+                              KBlue, GlutFont::BITMAP_HELVETICA_12, nsGui::Text::ALIGNH_CENTER);
 
     }
 }// Affiche les scores

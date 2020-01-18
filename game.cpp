@@ -19,8 +19,6 @@
 #include "screen/screen_id_map.h"
 #include "screen/title_menu.h"
 
-#include "screen/end_game.h"
-
 /**
  * @brief FPS_LIMIT : The framerate limit for the game
  */
@@ -42,7 +40,7 @@ void game()
     Window.initGraphic();
 
     // Initialise the screen management
-    std::unique_ptr<nsScreen::IScreen> currentScreen = std::unique_ptr<nsScreen::EndGame>(new nsScreen::EndGame());
+    std::unique_ptr<nsScreen::IScreen> currentScreen = std::unique_ptr<nsScreen::TitleMenu>(new nsScreen::TitleMenu());
 
     // Create the star background for the entire screen
     nsGui::StarBackground starBackground(300, Window.getWindowSize());
