@@ -18,8 +18,9 @@
 
 ENDGAME::EndGame()
     : m_enteringName(true)
+    , m_name()
     , m_nameTitle(Vec2D(320, 200), "Entrez votre nom:", RGBAcolor(128, 128, 128), GlutFont::BITMAP_8_BY_13, nsGui::Text::ALIGNH_CENTER)
-    , m_nameText(Vec2D(320, 220), m_name, RGBAcolor(192, 192, 192), GlutFont::BITMAP_9_BY_15, nsGui::Text::ALIGNH_CENTER)
+    , m_nameText(Vec2D(320, 220), "", RGBAcolor(192, 192, 192), GlutFont::BITMAP_9_BY_15, nsGui::Text::ALIGNH_CENTER)
     , m_mainMenuButton("Menu principal", Vec2D(10, 580), Vec2D(150, 50), RGBAcolor(51, 51, 51, 164))
     , m_topScoreButton("Top scores", Vec2D(480, 580), Vec2D(150, 50), RGBAcolor(51, 51, 51, 164))
     , m_scoreSaved(false)

@@ -29,9 +29,9 @@ public:
 private:
     bool m_enteringName;
 
+    std::string m_name;
     nsGui::Text m_nameTitle;
     nsGui::Text m_nameText;
-    std::string m_name;
 
     nsGui::Button m_mainMenuButton;
     nsGui::Button m_topScoreButton;

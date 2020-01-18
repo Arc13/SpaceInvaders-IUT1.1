@@ -111,7 +111,7 @@ void GAME::update(const std::chrono::microseconds &delta)
 
         for (unsigned i = 0; i < m_objects[0].size(); ++i)
         {
-            if (m_objects[0][i].first > selectedInvader.first)
+            if (m_objects[0][i].second == selectedInvader.second && m_objects[0][i].first > selectedInvader.first)
                 selectedInvader = m_objects[0][i];
         }
 
@@ -146,10 +146,12 @@ void GAME::update(const std::chrono::microseconds &delta)
 
     // On teste si quelqu'un a gagné
     unsigned Vict = nsGame::Victory (m_space, m_objects);
-    if (Vict == 1 || Vict == 3)
+    if (Vict == 1)
     {
         // Le joueur a gagné ou l'envahisseur est tout en bas
-        saveAndExit(Vict == 1);
+        m_score += m_vies * (500 * m_difficulty.scoreModifier);
+
+        saveAndExit(true);
     }
     else if (Vict == 2)
     {
@@ -165,6 +167,11 @@ void GAME::update(const std::chrono::microseconds &delta)
         {
             saveAndExit(false);
         }
+    }
+    else if (Vict > 0)
+    {
+        // Dans tous les autres cas de victoire
+        saveAndExit(false);
     }
 
 } // update()
