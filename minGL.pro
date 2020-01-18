@@ -18,6 +18,7 @@ SOURCES += main.cpp \
     gui/button.cpp \
     gui/star_background.cpp \
     gui/text.cpp \
+    score/score_mgr.cpp \
     screen/iscreen.cpp \
     screen/main_game.cpp \
     screen/screen_id_map.cpp \
@@ -63,6 +64,8 @@ HEADERS += \
     gui/button.h \
     gui/star_background.h \
     gui/text.h \
+    score/score_mgr.h \
+    score/score_mgr.hxx \
     screen/iscreen.h \
     screen/main_game.h \
     screen/screen_id_map.h \
