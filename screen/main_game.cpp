@@ -31,6 +31,9 @@ GAME::MainGame()
     , m_textScore(Vec2D(635, 15), std::to_string(m_score), RGBAcolor(192, 192, 192),
                   GlutFont::BITMAP_9_BY_15, nsGui::Text::ALIGNH_RIGHT, nsGui::Text::ALIGNV_TOP)
 {
+    nsConfig::ReadCommande(m_configuration);
+    setDifficultyFromConfig();
+
     nsGame::InitSpace(m_space, m_objects);
 } // MainGame()
 
@@ -40,21 +43,28 @@ void GAME::processEvent(const nsEvent::Event_t &event)
     switch (event.eventType)
     {
         case nsEvent::EventType_t::Keyboard:
-            switch (event.eventData.keyboardData.key)
+        {
+            const char key = event.eventData.keyboardData.key;
+            if (key == m_configuration[0])
             {
-                case 'q':
-                    nsGame::MoveLeft(m_objects[2]);
-                    break;
-                case 'd':
-                    nsGame::MoveRight(m_space, m_objects[2]);
-                    break;
-                case ' ':
-                    // On limite le tir a 1 par écran
-                    if (m_objects[3].size() == 0)
-                        m_objects[3].push_back(m_objects[2][rand () % m_objects[2].size ()]);
+                // Touche de droite
+                nsGame::MoveRight(m_space, m_objects[2]);
+            }
+            else if (key == m_configuration[1])
+            {
+                // Touche de gauche
+                nsGame::MoveLeft(m_objects[2]);
+            }
+            else if (key == m_configuration[2])
+            {
+                // Touche de tir
+                // On limite le tir a 1 par écran
+                if (m_objects[3].size() == 0)
+                    m_objects[3].push_back(m_objects[2][rand () % m_objects[2].size ()]);
             }
 
             break;
+        }
         default:
             break;
     }
@@ -233,5 +243,29 @@ void GAME::saveAndExit(const bool &playerWon)
     // On va vers l'écran d'enregistrement du score
     requestScreenChange(nsScreen::ScreenIdentifiers::ID_EndGame);
 } // saveAndExit()
+
+void GAME::setDifficultyFromConfig()
+{
+    switch (m_configuration[3])
+    {
+        case '0':
+            m_difficulty = nsGame::KEasyDifficulty;
+            break;
+        case '1':
+            m_difficulty = nsGame::KNormalDifficulty;
+            break;
+        case '2':
+            m_difficulty = nsGame::KHardDifficulty;
+            break;
+        case '3':
+            m_difficulty = nsGame::KInsaneDifficulty;
+            break;
+        default:
+            break;
+    }
+
+    m_vies = m_difficulty.lifeCount;
+    m_texteVies.setContent(std::to_string(m_vies));
+} // setDifficultyFromConfig()
 
 #undef GAME

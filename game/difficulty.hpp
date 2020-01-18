@@ -20,6 +20,10 @@ namespace nsGame {
  * @brief Possède des données de difficulté pour une instance de MainGame
  */
 struct Difficulty {
+    float frequencyModifier; /**< Multiplicateur pour les différentes fréquences en-jeu */
+    unsigned lifeCount; /**< Nombre de vie du joueur */
+    float scoreModifier; /**< Multiplicateur pour le score */
+
     /**
      * @brief Constructeur pour la structure Difficulty
      * @param[in] id_ : ID de cette Difficulty
@@ -34,10 +38,6 @@ struct Difficulty {
         : frequencyModifier(frequencyModifier_)
         , lifeCount(lifeCount_)
         , scoreModifier(scoreModifier_) {}
-
-    const float frequencyModifier; /**< Multiplicateur pour les différentes fréquences en-jeu */
-    const unsigned lifeCount; /**< Nombre de vie du joueur */
-    const float scoreModifier; /**< Multiplicateur pour le score */
 };
 
 /**

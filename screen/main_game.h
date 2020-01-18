@@ -5,6 +5,7 @@
 
 #include <iostream>
 
+#include "../config/config.h"
 #include "../figs/rectangle.h"
 #include "../transition/transition_engine.h"
 
@@ -35,6 +36,11 @@ public:
     virtual std::unique_ptr<IDrawable> clone() const override;
 
 private:
+    /**
+     * @brief m_configuration : Tableau de configuration de la partie
+     */
+    nsConfig::TableauCommande m_configuration;
+
     /**
      * @brief m_difficulty : Difficulté pour cette session de jeu
      */
@@ -121,6 +127,12 @@ private:
      * @fn void saveAndExit(const bool &playerWon);
      */
     void saveAndExit(const bool &playerWon);
+
+    /**
+     * @brief Règle la difficulté selon la configuration
+     * @fn void setDifficultyFromConfig();
+     */
+    void setDifficultyFromConfig();
 };
 
 } // namespace nsScreen
