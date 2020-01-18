@@ -8,6 +8,7 @@
 
 #include "screen_id_map.h"
 
+#include "end_game.h"
 #include "main_game.h"
 #include "title_menu.h"
 
@@ -24,6 +25,8 @@ std::unique_ptr<nsScreen::IScreen> SCREENIDMAP::getScreenFromId(const nsScreen::
             return std::unique_ptr<IScreen>(new nsScreen::TitleMenu());
         case ScreenIdentifiers::ID_MainGame:
             return std::unique_ptr<IScreen>(new nsScreen::MainGame());
+        case ScreenIdentifiers::ID_EndGame:
+            return std::unique_ptr<IScreen>(new nsScreen::EndGame());
         case ScreenIdentifiers::ID_None:
         default:
             throw MyException(nsUtil::kScreenNotFound);

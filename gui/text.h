@@ -59,17 +59,17 @@ public:
      * @param[in] content : Contenu du texte
      * @param[in] textColor : Couleur du texte
      * @param[in] textFont : Police du texte (8x13 Bitmap par défaut)
-     * @param[in] verticalAlignment : Alignement vertical du texte (Alignement en bas par défaut)
      * @param[in] horizontalAlignment : Alignement horizontal du texte (Alignement a gauche par défaut)
+     * @param[in] verticalAlignment : Alignement vertical du texte (Alignement en bas par défaut)
      * @fn Text(const Vec2D &position, const std::string &content,
          const RGBAcolor &textColor, const GlutFont::GlutFonts &textFont = GlutFont::GlutFonts::BITMAP_8_BY_13,
-         const VerticalAlignment &verticalAlignment = ALIGNV_BOTTOM,
-         const HorizontalAlignment &horizontalAlignment = ALIGNH_LEFT);
+         const HorizontalAlignment &horizontalAlignment = ALIGNH_LEFT,
+         const VerticalAlignment &verticalAlignment = ALIGNV_BOTTOM);
      */
     Text(const Vec2D &position, const std::string &content,
          const RGBAcolor &textColor, const GlutFont::GlutFonts &textFont = GlutFont::GlutFonts::BITMAP_8_BY_13,
-         const VerticalAlignment &verticalAlignment = ALIGNV_BOTTOM,
-         const HorizontalAlignment &horizontalAlignment = ALIGNH_LEFT);
+         const HorizontalAlignment &horizontalAlignment = ALIGNH_LEFT,
+         const VerticalAlignment &verticalAlignment = ALIGNV_BOTTOM);
 
     virtual std::unique_ptr<IDrawable> clone() const override;
 
@@ -129,14 +129,14 @@ private:
     GlutFont m_textFont;
 
     /**
-     * @brief m_verticalAlignment : Alignement vertical du texte
-     */
-    VerticalAlignment m_verticalAlignment;
-
-    /**
      * @brief m_horizontalAlignment : Alignement horizontal du texte
      */
     HorizontalAlignment m_horizontalAlignment;
+
+    /**
+     * @brief m_verticalAlignment : Alignement vertical du texte
+     */
+    VerticalAlignment m_verticalAlignment;
 };
 
 } // namespace nsGui

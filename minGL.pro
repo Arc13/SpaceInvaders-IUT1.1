@@ -19,6 +19,7 @@ SOURCES += main.cpp \
     gui/star_background.cpp \
     gui/text.cpp \
     score/score_mgr.cpp \
+    screen/end_game.cpp \
     screen/iscreen.cpp \
     screen/main_game.cpp \
     screen/screen_id_map.cpp \
@@ -66,11 +67,13 @@ HEADERS += \
     gui/text.h \
     score/score_mgr.h \
     score/score_mgr.hxx \
+    screen/end_game.h \
     screen/iscreen.h \
     screen/main_game.h \
     screen/screen_id_map.h \
     screen/screen_identifiers.h \
     screen/title_menu.h \
+    screen/top_scores.h \
     tools/CException.h \
     tools/CException.hxx \
     tools/CstCodErr.h \

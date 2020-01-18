@@ -12,14 +12,14 @@
 
 TEXT::Text(const Vec2D &position, const std::string &content,
            const RGBAcolor &textColor, const GlutFont::GlutFonts &textFont,
-           const VerticalAlignment &verticalAlignment,
-           const HorizontalAlignment &horizontalAlignment)
+           const HorizontalAlignment &horizontalAlignment,
+           const VerticalAlignment &verticalAlignment)
     : m_position(position)
     , m_content(content)
     , m_textColor(textColor)
     , m_textFont(textFont)
-    , m_verticalAlignment(verticalAlignment)
     , m_horizontalAlignment(horizontalAlignment)
+    , m_verticalAlignment(verticalAlignment)
 {} // Text()
 
 std::unique_ptr<IDrawable> TEXT::clone() const

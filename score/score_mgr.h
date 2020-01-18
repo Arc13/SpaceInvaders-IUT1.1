@@ -13,6 +13,11 @@
 #include "graph/rgbacolor.h"
 #include "graph/vec2d.h"
 
+/**
+ * @namespace nsScore
+ * @brief Espace de nom pour le gestionnaire de scores
+ */
+namespace nsScore {
 
 /**
  * @brief TableauScore is a vector of sting for content score's player
@@ -130,6 +135,8 @@ bool EnregistrerScoreFinPartie (const std::string &NomJoueur, const T & ScoreJou
  * @fn void DebutDeJeu ();
  */
 void AfficherTopScores (MinGL &window);
+
+}
 
 #include "score_mgr.hxx"
 

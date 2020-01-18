@@ -19,6 +19,7 @@ enum ScreenIdentifiers {
 
     ID_TitleMenu, /**< L'écran titre */
     ID_MainGame, /**< L'écran de jeu */
+    ID_EndGame, /**< L'écran d'enregistrement du score */
 };
 
 } // namespace nsScreen

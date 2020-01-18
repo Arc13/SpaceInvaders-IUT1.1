@@ -39,8 +39,9 @@ namespace nsUtil
         kNoCircle       = 306,
         kTypeNotFound   = 307,
 
-        kScreenNotFound = 400,
+        kScreenNotFound     = 400,
         kDifficultyNotFound = 401,
+        kFileNotFound       = 402,
     };
 
     const std::map <unsigned, std::string> kError
@@ -54,7 +55,8 @@ namespace nsUtil
         {kNoCircle, "Nombre incorrect de points pour la construction d'un cercle"},
         {kTypeNotFound, "Instanciation impossible: Pas le bon type"},
         {kScreenNotFound, "Impossible de trouver l'écran via son identifiant."},
-        {kDifficultyNotFound, "Impossible de trouver la difficulté spécifiée."}
+        {kDifficultyNotFound, "Impossible de trouver la difficulté spécifiée."},
+        {kFileNotFound, "Le fichier spécifié est introuvable."}
     };
 } // namespace nsUtil
 

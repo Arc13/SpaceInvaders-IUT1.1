@@ -22,14 +22,14 @@ GAME::MainGame()
     , m_ennemiDeplacementDroite(true)
     , m_vies(m_difficulty.lifeCount)
     , m_texteViesTitre(Vec2D(5, 0), "Vies", RGBAcolor(128, 128, 128),
-                       GlutFont::BITMAP_8_BY_13, nsGui::Text::ALIGNV_TOP)
+                       GlutFont::BITMAP_8_BY_13, nsGui::Text::ALIGNH_LEFT, nsGui::Text::ALIGNV_TOP)
     , m_texteVies(Vec2D(5, 15), std::to_string(m_vies), RGBAcolor(192, 192, 192),
-                  GlutFont::BITMAP_9_BY_15, nsGui::Text::ALIGNV_TOP, nsGui::Text::ALIGNH_LEFT)
+                  GlutFont::BITMAP_9_BY_15, nsGui::Text::ALIGNH_LEFT, nsGui::Text::ALIGNV_TOP)
     , m_score(0)
     , m_texteScoreTitre(Vec2D(635, 0), "Score", RGBAcolor(128, 128, 128),
-                        GlutFont::BITMAP_8_BY_13, nsGui::Text::ALIGNV_TOP, nsGui::Text::ALIGNH_RIGHT)
+                        GlutFont::BITMAP_8_BY_13, nsGui::Text::ALIGNH_RIGHT, nsGui::Text::ALIGNV_TOP)
     , m_textScore(Vec2D(635, 15), std::to_string(m_score), RGBAcolor(192, 192, 192),
-                  GlutFont::BITMAP_9_BY_15, nsGui::Text::ALIGNV_TOP, nsGui::Text::ALIGNH_RIGHT)
+                  GlutFont::BITMAP_9_BY_15, nsGui::Text::ALIGNH_RIGHT, nsGui::Text::ALIGNV_TOP)
 {
     nsGame::InitSpace(m_space, m_objects);
 } // MainGame()
@@ -219,12 +219,12 @@ std::unique_ptr<IDrawable> GAME::clone() const
 void GAME::saveAndExit(const bool &playerWon)
 {
     // On enregistre quelques données de la partie en cours
-    std::ofstream savefile("save.csv");
-    savefile << (playerWon ? 1 : 0) << "," << m_score;
+    std::ofstream savefile("last_session.csv");
+    savefile << playerWon << "," << m_score;
     savefile.close();
 
-    // On revient au menu principal
-    requestScreenChange(nsScreen::ScreenIdentifiers::ID_TitleMenu);
+    // On va vers l'écran d'enregistrement du score
+    requestScreenChange(nsScreen::ScreenIdentifiers::ID_EndGame);
 } // saveAndExit()
 
 #undef GAME

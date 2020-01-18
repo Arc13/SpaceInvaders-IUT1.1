@@ -13,7 +13,7 @@
 using namespace std;
 
 template <typename T>
-void WriteScore (T & MeilleursScores, const string NomFichier)
+void nsScore::WriteScore (T & MeilleursScores, const string NomFichier)
 {
 
     ofstream FichierScore ;
@@ -25,7 +25,7 @@ void WriteScore (T & MeilleursScores, const string NomFichier)
 }//Pour enregistré les scores dans le txt
 
 template<typename T>
-bool InclureScore (TableauScore & MeilleursScores, const T & ScoreCourant,TableauNom & TableauJoueur , const string & NomJoueur)
+bool nsScore::InclureScore (TableauScore & MeilleursScores, const T & ScoreCourant,TableauNom & TableauJoueur , const string & NomJoueur)
 {
     bool Present (false);
     unsigned Indice = 0 ;
@@ -59,7 +59,7 @@ bool InclureScore (TableauScore & MeilleursScores, const T & ScoreCourant,Tablea
 } //si le score du joueur se doit d'etre present dans le tableau des meilleurs score cette fonction l'ajoute au bonne endroit
 
 template<typename T>
-bool EnregistrerScoreFinPartie (const std::string &NomJoueur, const T & ScoreJoueur)
+bool nsScore::EnregistrerScoreFinPartie (const std::string &NomJoueur, const T & ScoreJoueur)
 {
     ExistFichier();
     bool Inclut ;

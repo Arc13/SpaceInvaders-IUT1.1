@@ -17,6 +17,7 @@
 #include "../event/event.hpp"
 #include "../graph/idrawable.h"
 #include "../graph/mingl.h"
+
 /**
  * @namespace nsScreen
  * @brief Espace de nom pour des écrans

@@ -24,12 +24,11 @@
 #include "graph/rgbacolor.h"
 #include "graph/vec2d.h"
 
-
 using namespace std;
 typedef vector<unsigned> TableauScore ;
 typedef vector<string> TableauNom ;
 
-TableauScore ReadScore (TableauScore & MeilleursScores)
+TableauScore nsScore::ReadScore (TableauScore & MeilleursScores)
 {
     ifstream FichierScore ;
     FichierScore.open(NomFichierScore, ifstream::in);
@@ -45,7 +44,7 @@ TableauScore ReadScore (TableauScore & MeilleursScores)
     return MeilleursScores ;
 }//Fonction pour lire les scores du TXT
 
-TableauNom ReadNom (TableauNom & MeilleursNom)
+TableauNom nsScore::ReadNom (TableauNom & MeilleursNom)
 {
     ifstream FichierNom ;
     FichierNom.open(NomFichierJoueur, ifstream::in);
@@ -61,7 +60,7 @@ TableauNom ReadNom (TableauNom & MeilleursNom)
     return MeilleursNom ;
 }//Fonction pour lire les scores du TXT
 
-TableauScore InitScore (TableauScore & MeilleursScores)
+TableauScore nsScore::InitScore (TableauScore & MeilleursScores)
 {
     for (unsigned i = 0 ; i < MeilleursScores.size() ; ++i)
     {
@@ -70,7 +69,7 @@ TableauScore InitScore (TableauScore & MeilleursScores)
     return MeilleursScores ;
 }//fonction pour initialisé tout les scores a  dans le cas ou le fichier est perdu
 
-TableauNom InitJoueur (TableauNom & MeilleursNom)
+TableauNom nsScore::InitJoueur (TableauNom & MeilleursNom)
 {
     for (unsigned i = 0 ; i < MeilleursNom.size() ; ++i)
     {
@@ -79,7 +78,7 @@ TableauNom InitJoueur (TableauNom & MeilleursNom)
     return MeilleursNom ;
 }//fonction pour initialisé tout les scores a  dans le cas ou le fichier est perdu
 
-void AfficheScore (const TableauScore & MeilleursScores, const TableauNom & TableauJoueur, MinGL &window )
+void nsScore::AfficheScore (const TableauScore & MeilleursScores, const TableauNom & TableauJoueur, MinGL &window )
 {
     for (unsigned  i = 0 ; i < MeilleursScores.size(); ++i)
     {
@@ -90,7 +89,7 @@ void AfficheScore (const TableauScore & MeilleursScores, const TableauNom & Tabl
     }
 }// Affiche les scores
 
-TableauScore TriDesScores (TableauScore & MeilleursScores, TableauNom & TableauJoueur)
+TableauScore nsScore::TriDesScores (TableauScore & MeilleursScores, TableauNom & TableauJoueur)
 {
     vector<int> TabUn ;
     vector<string> TabDeux ;
@@ -119,7 +118,7 @@ TableauScore TriDesScores (TableauScore & MeilleursScores, TableauNom & TableauJ
     return MeilleursScores ;
 } // Met dans l'ordre les scores
 
-void ExistFichier ()
+void nsScore::ExistFichier ()
 {
     fstream FichierScore;
     FichierScore.open(NomFichierScore, ifstream::in);
@@ -141,7 +140,7 @@ void ExistFichier ()
     }
 }// si le fichier n'esxiste pas on le creer en prevenant l'user
 
-void AfficherTopScores (MinGL &window)
+void nsScore::AfficherTopScores (MinGL &window)
 {
     TableauScore MeilleursScores (0) ;
     TableauNom TableauJoueur (0);
