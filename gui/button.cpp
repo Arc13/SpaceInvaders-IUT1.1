@@ -12,7 +12,7 @@
 
 BUTTON::Button(const std::string &text, const Vec2D &position, const Vec2D &size, const RGBAcolor &firstColor, const RGBAcolor &secondColor)
     : m_buttonText(Vec2D(position.x + size.x / 2, position.y + size.y / 2 - 5), text, KWhite,
-                   nsGui::Text::ALIGNV_CENTER, nsGui::Text::ALIGNH_CENTER, GlutFont::BITMAP_HELVETICA_18)
+                   GlutFont::BITMAP_HELVETICA_18, nsGui::Text::ALIGNV_CENTER, nsGui::Text::ALIGNH_CENTER)
     , m_firstColor(firstColor)
     , m_secondColor(secondColor)
     , m_position(position)

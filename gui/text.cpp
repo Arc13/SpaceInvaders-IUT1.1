@@ -11,9 +11,9 @@
 #define TEXT nsGui::Text
 
 TEXT::Text(const Vec2D &position, const std::string &content,
-           const RGBAcolor &textColor, const VerticalAlignment &verticalAlignment,
-           const HorizontalAlignment &horizontalAlignment,
-           const GlutFont::GlutFonts &textFont)
+           const RGBAcolor &textColor, const GlutFont::GlutFonts &textFont,
+           const VerticalAlignment &verticalAlignment,
+           const HorizontalAlignment &horizontalAlignment)
     : m_position(position)
     , m_content(content)
     , m_textColor(textColor)

@@ -64,7 +64,7 @@ TableauNom ReadNom (TableauNom & MeilleursNom);
  * @fn template <typename T> void WhriteScore (T & MeilleursScores, const string NomFichier);
  */
 template <typename T>
-void WhriteScore (T & MeilleursScores, const std::string NomFichier);
+void WriteScore (T & MeilleursScores, const std::string NomFichier);
 
 /**
  * @brief If the file containing the scores disappears we create a new one thanks to the "ExistFichier" function which we initialize to 0
@@ -109,7 +109,7 @@ TableauScore TriDesScores (TableauScore & MeilleursScores, TableauNom & TableauJ
  * @fn template<typename T> bool InclureScore (TableauScore & MeilleursScores, const T & ScoreCourant,TableauNom & TableauJoueur , const string & NomJoueur);
  */
 template<typename T>
-bool InclureScore (TableauScore & MeilleursScores, const T & ScoreCourant,TableauNom & TableauJoueur , const std::string & NomJoueur, MinGL &window);
+bool InclureScore (TableauScore & MeilleursScores, const T & ScoreCourant,TableauNom & TableauJoueur , const std::string & NomJoueur);
 
 /**
  * @brief If the files do not exist, create them and initialize them using the "InitScore" and "InitJoueur" functions
@@ -123,12 +123,14 @@ void ExistFichier ();
  * @fn template<typename T> void FinDePartieScore (const T & ScoreJoueur);
  */
 template<typename T>
-void FinDePartieScore (const T & ScoreJoueur, MinGL &window, const std::string &NomJoueur);
+bool EnregistrerScoreFinPartie (const std::string &NomJoueur, const T & ScoreJoueur);
 
 /**
  * @This is the so-called function to display the scores from the main menu
  * @fn void DebutDeJeu ();
  */
-void DebutDeJeu (MinGL &window);
+void AfficherTopScores (MinGL &window);
+
 #include "score_mgr.hxx"
+
 #endif // SCORE_MGR_H

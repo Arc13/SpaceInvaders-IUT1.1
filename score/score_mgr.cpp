@@ -15,11 +15,11 @@
 #include <string>
 #include <sstream>
 
-#include"score_mgr.h"
-#include"score_mgr.hxx"
+#include "score_mgr.h"
+#include "score_mgr.hxx"
 
-#include "gui/text.h"
-#include "gui/star_background.h"
+#include "../gui/text.h"
+#include "../gui/star_background.h"
 
 #include "graph/rgbacolor.h"
 #include "graph/vec2d.h"
@@ -127,7 +127,7 @@ void ExistFichier ()
     {
         TableauScore MeilleursScores (TailleTableauScore) ;
         MeilleursScores = InitScore(MeilleursScores);
-        WhriteScore(MeilleursScores, NomFichierScore);
+        WriteScore(MeilleursScores, NomFichierScore);
         cerr << "Le fichier \"" << NomFichierScore <<  "\" n'a pas ete trouve sur l'ordinateur, un nouveau vierge a ete cree" << endl ;
     }
     fstream FichierJoueur;
@@ -136,12 +136,12 @@ void ExistFichier ()
     {
         TableauNom MeilleursNom (TailleTableauScore) ;
         MeilleursNom = InitJoueur(MeilleursNom);
-        WhriteScore(MeilleursNom, NomFichierJoueur);
+        WriteScore(MeilleursNom, NomFichierJoueur);
         cerr << "Le fichier \"" << NomFichierJoueur <<  "\" n'a pas ete trouve sur l'ordinateur, un nouveau vierge a ete cree" << endl ;
     }
 }// si le fichier n'esxiste pas on le creer en prevenant l'user
 
-void DebutDeJeu (MinGL &window)
+void AfficherTopScores (MinGL &window)
 {
     TableauScore MeilleursScores (0) ;
     TableauNom TableauJoueur (0);

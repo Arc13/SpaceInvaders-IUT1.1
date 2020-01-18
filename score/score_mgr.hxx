@@ -8,12 +8,12 @@
 #include <string>
 #include <sstream>
 
-#include"score_mgr.h"
+#include "score_mgr.h"
 
 using namespace std;
 
 template <typename T>
-void WhriteScore (T & MeilleursScores, const string NomFichier)
+void WriteScore (T & MeilleursScores, const string NomFichier)
 {
 
     ofstream FichierScore ;
@@ -25,7 +25,7 @@ void WhriteScore (T & MeilleursScores, const string NomFichier)
 }//Pour enregistré les scores dans le txt
 
 template<typename T>
-bool InclureScore (TableauScore & MeilleursScores, const T & ScoreCourant,TableauNom & TableauJoueur , const string & NomJoueur, MinGL &window)
+bool InclureScore (TableauScore & MeilleursScores, const T & ScoreCourant,TableauNom & TableauJoueur , const string & NomJoueur)
 {
     bool Present (false);
     unsigned Indice = 0 ;
@@ -34,22 +34,13 @@ bool InclureScore (TableauScore & MeilleursScores, const T & ScoreCourant,Tablea
         if (ScoreCourant >= MeilleursScores[i])
         {
             stringstream Str;
-            Str << "Bravo " << NomJoueur << " ton score est " << ScoreCourant << endl;
-            window << nsGui::Text(Vec2D(window.getWindowSize().x/4, 20+150), Str.str(), KRed, GlutFont::BITMAP_HELVETICA_12);
             Present = true ;
             Indice = i ;
             break ;
         }
     }
     if (Present == false)
-    {
-        stringstream Str;
-        Str << "Bravo " << NomJoueur << " ton score est " << ScoreCourant << endl
-            << "Mais il ne fait partie des 10 meilleurs il n'est donc pas enregistrer" ;
-        window << nsGui::Text(Vec2D(window.getWindowSize().x/4, 20+150), Str.str(), KRed, GlutFont::BITMAP_HELVETICA_12);
-
-        return false ;
-    }
+        return false;
 
     MeilleursScores[MeilleursScores.size()-1] = ScoreCourant ;
     TableauJoueur[TableauJoueur.size()-1] = NomJoueur ;
@@ -68,7 +59,7 @@ bool InclureScore (TableauScore & MeilleursScores, const T & ScoreCourant,Tablea
 } //si le score du joueur se doit d'etre present dans le tableau des meilleurs score cette fonction l'ajoute au bonne endroit
 
 template<typename T>
-void FinDePartieScore (const T & ScoreJoueur, MinGL &window, const std::string &NomJoueur)
+bool EnregistrerScoreFinPartie (const std::string &NomJoueur, const T & ScoreJoueur)
 {
     ExistFichier();
     bool Inclut ;
@@ -77,13 +68,14 @@ void FinDePartieScore (const T & ScoreJoueur, MinGL &window, const std::string &
     TableauNom TableauJoueur (0);
     MeilleursScores = ReadScore(MeilleursScores);
     TableauJoueur = ReadNom(TableauJoueur);
-    Inclut = InclureScore(MeilleursScores, ScoreJoueur,TableauJoueur, NomJoueur, window);
+    Inclut = InclureScore(MeilleursScores, ScoreJoueur,TableauJoueur, NomJoueur);
     MeilleursScores = TriDesScores(MeilleursScores, TableauJoueur);
     if (Inclut)
     {
-        WhriteScore(MeilleursScores, NomFichierScore);
-        WhriteScore(TableauJoueur, NomFichierJoueur);
+        WriteScore(MeilleursScores, NomFichierScore);
+        WriteScore(TableauJoueur, NomFichierJoueur);
     }
-    AfficheScore(MeilleursScores, TableauJoueur, window);
+
+    return Inclut;
 }
 #endif // SCORE_MGR_HXX
