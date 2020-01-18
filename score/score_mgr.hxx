@@ -25,7 +25,7 @@ void nsScore::WriteScore (T & MeilleursScores, const string NomFichier)
 }//Pour enregistré les scores dans le txt
 
 template<typename T>
-bool nsScore::InclureScore (TableauScore & MeilleursScores, const T & ScoreCourant,TableauNom & TableauJoueur , const string & NomJoueur)
+bool nsScore::InclureScore (TableauScore & MeilleursScores, const T & ScoreCourant, TableauNom & MeilleursNom , const string & NomJoueur)
 {
     bool Present (false);
     unsigned Indice = 0 ;
@@ -43,7 +43,7 @@ bool nsScore::InclureScore (TableauScore & MeilleursScores, const T & ScoreCoura
         return false;
 
     MeilleursScores[MeilleursScores.size()-1] = ScoreCourant ;
-    TableauJoueur[TableauJoueur.size()-1] = NomJoueur ;
+    MeilleursNom[MeilleursNom.size()-1] = NomJoueur ;
 
     if( Indice + 1 >= MeilleursScores.size())
     {
@@ -53,7 +53,7 @@ bool nsScore::InclureScore (TableauScore & MeilleursScores, const T & ScoreCoura
     for (unsigned i = Indice ; i < MeilleursScores.size(); ++i)
     {
         swap(MeilleursScores[i], MeilleursScores[MeilleursScores.size()-1]);
-        swap(TableauJoueur[i], TableauJoueur[TableauJoueur.size()-1]);
+        swap(MeilleursNom[i], MeilleursNom[MeilleursNom.size()-1]);
     }
     return true;
 } //si le score du joueur se doit d'etre present dans le tableau des meilleurs score cette fonction l'ajoute au bonne endroit
@@ -66,10 +66,10 @@ bool nsScore::EnregistrerScoreFinPartie (const std::string &NomJoueur, const T &
 
     TableauScore MeilleursScores (0);
     TableauNom TableauJoueur (0);
-    MeilleursScores = ReadScore(MeilleursScores);
-    TableauJoueur = ReadNom(TableauJoueur);
+    ReadScore(MeilleursScores);
+    ReadNom(TableauJoueur);
     Inclut = InclureScore(MeilleursScores, ScoreJoueur,TableauJoueur, NomJoueur);
-    MeilleursScores = TriDesScores(MeilleursScores, TableauJoueur);
+    TriDesScores(MeilleursScores, TableauJoueur);
     if (Inclut)
     {
         WriteScore(MeilleursScores, NomFichierScore);

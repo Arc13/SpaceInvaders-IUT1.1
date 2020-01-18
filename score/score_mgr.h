@@ -20,121 +20,122 @@
 namespace nsScore {
 
 /**
- * @brief TableauScore is a vector of sting for content score's player
- * @fn typedef vector<unsigned> TableauScore ;
+ * @brief Un vecteur d'unsigned qui contient le score des joueurs
  */
 typedef std::vector<unsigned> TableauScore ;
+
 /**
- * @brief TableauNom is a vector of sting for content player's name
- * @fn typedef vector<string> TableauNom ;
+ * @brief Un vecteur de string qui contient le nom des joueurs
  */
 typedef std::vector<std::string> TableauNom ;
 
 /**
- * @brief "NomFichierScore" is the file where we stock  the score
- * @fn const string NomFichierScore ("Score.txt");
+ * @brief Le nom du fichier où nous stockons les scores
  */
 const std::string NomFichierScore ("Score.txt");
+
 /**
- * @brief "NomFichierJoueur" is the file where we stock  the player's name
- * @fn const string NomFichierJoueur ("Joueur.txt");
+ * @brief Le nom du fichier où nous stockons le nom des joueurs
  */
 const std::string NomFichierJoueur ("Joueur.txt");
+
 /**
- * @brief "TailleTableau" is the size of the "TableauScore" and "TableauNom"
- * @fn const unsigned TailleTableauScore (10);
+ * @brief La taille d'un TableauScore et d'un TableauNom
+ *
+ * Ceci définit le nombre de score a enregistrer, et par conséquent le nombre de places sur le podium
  */
 const unsigned TailleTableauScore (10);
 
 /**
- * @brief Read the score in the "NomFichierScore" file for whrite un "MeilleursScores"
- * @param[in/out] MeilleursScores : It's a TableauScore wich content the 10 best scores
- * @param[out] TableauNom :  Return MeilleursScores
- * @fn TableauScore ReadScore (TableauScore & MeilleursScores);
+ * @brief Lis les scores depuis le fichier <NomFichierScore> et les places dans MeilleursScore
+ * @param[in, out] MeilleursScores : Le tableau qui contient les <TailleTableauScore> meilleurs scores
+ * @fn void ReadScore (TableauScore & MeilleursScores);
  */
-TableauScore ReadScore (TableauScore & MeilleursScores);
+void ReadScore (TableauScore & MeilleursScores);
 
 /**
- * @brief Read the score in the "NomFichierScore" file for whrite un "MeilleursScores"
- * @param[in/out] MeilleursScores : It's a TableauScore wich content the 10 best scores
- * @param[out] TableauNom :  Return MeilleursScores
- * @fn TableauScore ReadScore (TableauScore & MeilleursScores);
+ * @brief Lis le nom des joueurs depuis le fichier <NomFichierJoueur> et les places dans MeilleursNom
+ * @param[in, out] MeilleursNom : Le tableau qui contient les <TailleTableauScore> noms des meilleurs joueurs
+ * @fn void ReadNom (TableauNom & MeilleursNom);
  */
-TableauNom ReadNom (TableauNom & MeilleursNom);
+void ReadNom (TableauNom & MeilleursNom);
 
 /**
- * @brief Whrite the scores on the "NomFichier" file
- * @param[in] MeilleursScores : It's a TableauScore wich content the 10 best scores
- * @param[in/out] NomFichier : This is the name of the file in which we save the score
- * @fn template <typename T> void WhriteScore (T & MeilleursScores, const string NomFichier);
+ * @brief Ecris les scores dans le fichier NomFichier
+ * @param[in, out] MeilleursScores : Le tableau qui contient les <TailleTableauScore> meilleurs scores
+ * @param[in, out] NomFichier : Le nom du fichier où sauvegarder les scores
+ * @fn void WriteScore (T & MeilleursScores, const std::string NomFichier);
  */
 template <typename T>
 void WriteScore (T & MeilleursScores, const std::string NomFichier);
 
 /**
- * @brief If the file containing the scores disappears we create a new one thanks to the "ExistFichier" function which we initialize to 0
- * @param[in/out] MeilleursScores : It's a TableauScore wich content the 10 best scores
- * @param[out] TableauNom :  Return MeilleursScores
- * @fn TableauScore InitScore (TableauScore & MeilleursScores);
+ * @brief Initialise tous les scores de MeilleursScores a 0
+ * @param[in, out] MeilleursScores : Le tableau qui contient les <TailleTableauScore> meilleurs scores
+ * @fn void InitScore (TableauScore & MeilleursScores);
  */
-TableauScore InitScore (TableauScore & MeilleursScores);
+void InitScore (TableauScore & MeilleursScores);
 
 /**
- * @brief If the file containing the best players disappears we create a new one thanks to the "ExistFichier" function which we initialize to "Personne"
- * @param[in/out] MeilleursScores : It's a TableauScore wich content the 10 best scores
- * @param[out] TableauNom :  Return MeilleursScores
- * @fn TableauNom InitJoueur (TableauNom & MeilleursNom);
+ * @brief Initialise tous les noms des joueurs a "Personne"
+ * @param[in, out] MeilleursNom : Le tableau qui contient les <TailleTableauScore> noms des meilleurs joueurs
+ * @fn void InitJoueur (TableauNom & MeilleursNom);
  */
-TableauNom InitJoueur (TableauNom & MeilleursNom);
+void InitJoueur (TableauNom & MeilleursNom);
 
 /**
- * @brief Displays scores
- * @param[in/out] MeilleursScores : It's a TableauScore wich content the 10 best scores
- * @param[in/out] TableauJoueur : It's a TableauNom wich content the 10 best players
- * @fn void AfficheScore (TableauScore & MeilleursScores, TableauNom & TableauJoueur);
+ * @brief Affiche les <TailleTableauScore> meilleurs scores a la fenêtre passée en paramètre
+ * @param[in, out] window : La fenêtre d'affichage
+ * @param[in, out] MeilleursScores : Le tableau qui contient les <TailleTableauScore> meilleurs scores
+ * @param[in, out] MeilleursNom : Le tableau qui contient les <TailleTableauScore> noms des meilleurs joueurs
+ * @fn void AfficheTopScores (MinGL &window, const TableauScore & MeilleursScores, const TableauNom & MeilleursNom);
  */
-void AfficheScore (const TableauScore & MeilleursScores, const TableauNom & TableauJoueur, MinGL &window);
+void AfficheTopScores (MinGL &window, const TableauScore & MeilleursScores, const TableauNom & MeilleursNom);
 
 /**
- * @brief Sort the scores in descending order
- * @param[in/out] MeilleursScores : It's a TableauScore wich content the 10 best scores
- * @param[in/out] TableauJoueur : It's a TableauNom wich content the 10 best players
- * @param[out] TableauNom :  Return MeilleursScores
- * @fn TableauScore TriDesScores (TableauScore & MeilleursScores, TableauNom & TableauJoueur);
+ * @brief Trie les deux tableaux par ordre décroissant des scores
+ * @param[in, out] MeilleursScores : Le tableau qui contient les <TailleTableauScore> meilleurs scores
+ * @param[in, out] MeilleursNom : Le tableau qui contient les <TailleTableauScore> noms des meilleurs joueurs
+ * @fn void TriDesScores (TableauScore & MeilleursScores, TableauNom & TableauJoueur);
  */
-TableauScore TriDesScores (TableauScore & MeilleursScores, TableauNom & TableauJoueur);
+void TriDesScores (TableauScore & MeilleursScores, TableauNom & TableauJoueur);
 
 /**
- * @brief Allows to include a score is a player name in their associated vector
- * @param[in/out] MeilleursScores : It's a TableauScore wich content the 10 best scores
- * @param[in/out] TableauJoueur : It's a TableauNom wich content the 10 best players
- * @param[in] :ScoreCourant : The score that we include in the vector
- * @param[in] : NomJoueur : The player that we include in his vector
- * @param[out] : bool : we return a bouleen, because we need to know if the score is in the top 10 and therefore if it is included
- * @fn template<typename T> bool InclureScore (TableauScore & MeilleursScores, const T & ScoreCourant,TableauNom & TableauJoueur , const string & NomJoueur);
+ * @brief Insère un couple score et nom de joueur dans leurs vecteurs respectifs, en le triant
+ * @param[in, out] MeilleursScores : Le tableau qui contient les <TailleTableauScore> meilleurs scores
+ * @param[in] ScoreCourant : Le score a rajouter dans le vecteur
+ * @param[in, out] MeilleursNom : Le tableau qui contient les <TailleTableauScore> noms des meilleurs joueurs
+ * @param[in] NomJoueur : Le nom du joueur a rajouter dans le vecteur
+ * @return Un booléen indiquant si le score a bien été rajouté au classement.
+ * Si l'on renvoie false, cela veut dire que ScoreCourant est inférieur au plus petit score de MeilleursScores
+ * @fn bool InclureScore (TableauScore & MeilleursScores, const T & ScoreCourant, TableauNom & TableauJoueur , const std::string & NomJoueur);
  */
 template<typename T>
-bool InclureScore (TableauScore & MeilleursScores, const T & ScoreCourant,TableauNom & TableauJoueur , const std::string & NomJoueur);
+bool InclureScore (TableauScore & MeilleursScores, const T & ScoreCourant, TableauNom & MeilleursNom, const std::string & NomJoueur);
 
 /**
- * @brief If the files do not exist, create them and initialize them using the "InitScore" and "InitJoueur" functions
+ * @brief Créent les fichiers <NomFichierScore> et <NomFichierJoueur> s'ils n'existent pas, en initialisant leurs contenus avec respectivement les fonctions InitScore et InitJoueur
  * @fn void ExistFichier ();
  */
 void ExistFichier ();
 
 /**
- * @brief the so-called function when the player has finished a game
- * @param[in] :ScoreCourant : The score of the player when he finished a game
- * @fn template<typename T> void FinDePartieScore (const T & ScoreJoueur);
+ * @brief Enregistre le score et le nom du joueur en fin de partie
+ * @param[in] NomJoueur : Le nom du joueur a enregistrer
+ * @param[in] ScoreJoueur : Le score du joueur a enregistrer
+ * @return Un booléen indiquant si le score a bien été rajouté au classement.
+ * Si l'on renvoie false, cela veut dire que ScoreCourant est inférieur au plus petit score de MeilleursScores
+ * @fn bool EnregistrerScoreFinPartie (const std::string &NomJoueur, const T & ScoreJoueur);
  */
 template<typename T>
 bool EnregistrerScoreFinPartie (const std::string &NomJoueur, const T & ScoreJoueur);
 
 /**
- * @This is the so-called function to display the scores from the main menu
- * @fn void DebutDeJeu ();
+ * @brief Charge les scores depuis les fichiers, et les affichent a l'écran
+ * @param[in, out] window : La fenêtre d'affichage
+ * @fn void ChargerEtAfficherTopScores (MinGL &window);
  */
-void AfficherTopScores (MinGL &window);
+void ChargerEtAfficherTopScores (MinGL &window);
 
 }
 

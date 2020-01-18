@@ -35,7 +35,7 @@ public:
 
     /**
      * @brief Fonction pour afficher l'objet
-     * @param[in] window : La fenêtre d'affichage
+     * @param[in, out] window : La fenêtre d'affichage
      * @fn virtual void draw(MinGL &window);
      */
     virtual void draw(MinGL &window) = 0;

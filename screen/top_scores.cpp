@@ -43,7 +43,7 @@ void TOPSCORES::update(const std::chrono::microseconds &delta)
 
 void TOPSCORES::draw(MinGL &window)
 {
-    nsScore::AfficherTopScores(window);
+    nsScore::ChargerEtAfficherTopScores(window);
 
     window << m_mainMenuButton;
 }
