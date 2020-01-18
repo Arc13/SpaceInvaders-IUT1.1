@@ -45,11 +45,6 @@ nsGui::Sprite::Sprite(const std::vector<RGBAcolor> &pixelData, const uint32_t &r
 
 }
 
-void SPRITE::update(float delta)
-{
-
-}
-
 std::unique_ptr<IDrawable> SPRITE::clone() const
 {
     return std::unique_ptr<Sprite>(new Sprite(*this));
