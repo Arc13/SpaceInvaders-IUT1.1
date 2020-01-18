@@ -13,6 +13,7 @@
 #include "../game/manager_type.h"
 
 #include "../gui/button.h"
+#include "../gui/sprite.h"
 #include "../gui/text.h"
 
 namespace nsScreen {
@@ -120,6 +121,26 @@ private:
      * @brief m_objects : Objets dans l'espace de jeu
      */
     nsGame::CAObject m_objects;
+
+    /**
+     * @brief m_shipSprite : Le sprite du vaisseau du joueur
+     */
+    nsGui::Sprite m_shipSprite;
+
+    /**
+     * @brief m_shipWeaponSprite : Le sprite du missile du joueur
+     */
+    nsGui::Sprite m_shipWeaponSprite;
+
+    /**
+     * @brief m_invaderSprite : Le sprite des envahisseurs
+     */
+    nsGui::Sprite m_invaderSprite;
+
+    /**
+     * @brief m_invaderWeaponSprite : Le sprite des torpilles des envahisseurs
+     */
+    nsGui::Sprite m_invaderWeaponSprite;
 
     /**
      * @brief Sauvegarde et quitte le jeu

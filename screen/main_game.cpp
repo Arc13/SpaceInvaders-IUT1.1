@@ -30,6 +30,10 @@ GAME::MainGame()
                         GlutFont::BITMAP_8_BY_13, nsGui::Text::ALIGNH_RIGHT, nsGui::Text::ALIGNV_TOP)
     , m_textScore(Vec2D(635, 15), std::to_string(m_score), RGBAcolor(192, 192, 192),
                   GlutFont::BITMAP_9_BY_15, nsGui::Text::ALIGNH_RIGHT, nsGui::Text::ALIGNV_TOP)
+    , m_shipSprite("resources/ship.si2")
+    , m_shipWeaponSprite("resources/ship_weapon.si2")
+    , m_invaderSprite("resources/invader.si2")
+    , m_invaderWeaponSprite("resources/invader_weapon.si2")
 {
     nsConfig::ReadCommande(m_configuration);
     setDifficultyFromConfig();
@@ -196,26 +200,26 @@ void GAME::draw(MinGL &window)
         for (unsigned j = 0; j < m_space[i].size(); ++j)
         {
             const Vec2D actualPos(8 + 48*j, 56 + 48*i);
-            const Vec2D endPos = actualPos + Vec2D(48, 48);
             switch (m_space[i][j])
             {
                 case nsGame::KInsideInvader:
                     // Char for the invader
-                    window << Rectangle(actualPos, endPos, KRed);
+                    window << nsGui::Sprite(m_invaderSprite.getPixelData(), m_invaderSprite.getRowSize(), actualPos);
+
                     break;
                 case nsGame::KInsideMe:
                     // Char for the player
-                    window << Rectangle(actualPos, endPos, KBlue);
+                    window << nsGui::Sprite(m_shipSprite.getPixelData(), m_shipSprite.getRowSize(), actualPos);
 
                     break;
                 case nsGame::KTorpedo:
                     // Char for the torpedo (player weapon)
-                    window << Rectangle(actualPos, endPos, KYellow);
+                    window << nsGui::Sprite(m_shipWeaponSprite.getPixelData(), m_shipWeaponSprite.getRowSize(), actualPos);
 
                     break;
                 case nsGame::KMissile:
                     // Char for the missile (invader weapon)
-                    window << Rectangle(actualPos, endPos, KPurple);
+                    window << nsGui::Sprite(m_invaderWeaponSprite.getPixelData(), m_invaderWeaponSprite.getRowSize(), actualPos);
 
                     break;
             }

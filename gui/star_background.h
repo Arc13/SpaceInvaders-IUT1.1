@@ -45,8 +45,6 @@ public:
     void update(float delta);
 
     virtual std::unique_ptr<IDrawable> clone() const override;
-
-protected:
     virtual void draw(MinGL &window) override;
 
 private:

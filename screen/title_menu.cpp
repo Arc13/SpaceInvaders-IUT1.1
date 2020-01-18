@@ -144,10 +144,6 @@ void TITLEMENU::draw(MinGL &window)
     {
         window << line;
     }
-
-    for (unsigned i = 0; i < 256; ++i) {
-        window << nsGui::Text(Vec2D(i*9, 610), std::string(1, char(20)), KWhite, GlutFont::BITMAP_9_BY_15);
-    }
 } // draw()
 
 std::unique_ptr<IDrawable> TITLEMENU::clone() const

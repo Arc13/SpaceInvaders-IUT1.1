@@ -72,6 +72,7 @@ public:
          const VerticalAlignment &verticalAlignment = ALIGNV_BOTTOM);
 
     virtual std::unique_ptr<IDrawable> clone() const override;
+    virtual void draw(MinGL &window) override;
 
     virtual void getValues(const int &id, std::vector<float> &values) override;
     virtual void setValues(const int &id, const std::vector<float> &values) override;
@@ -97,7 +98,6 @@ public:
      */
     Vec2D computeVisiblePosition() const;
 
-
     /**
      * @brief Calcule la position de fin visible du texte, calculée avec l'alignement vertical et horizontal
      * @return La position visible, en bas a droite
@@ -118,9 +118,6 @@ public:
      * @fn void setContent(const std::string &content);
      */
     void setContent(const std::string &content);
-
-protected:
-    virtual void draw(MinGL &window) override;
 
 private:
     /**

@@ -57,6 +57,7 @@ public:
     Button(const std::string &text, const Vec2D &position, const Vec2D &size, const RGBAcolor &firstColor);
 
     virtual std::unique_ptr<IDrawable> clone() const override;
+    virtual void draw(MinGL &window) override;
 
     virtual void getValues(const int &id, std::vector<float> &values) override;
     virtual void setValues(const int &id, const std::vector<float> &values) override;
@@ -88,9 +89,6 @@ public:
      * @fn void setSize(const Vec2D &size);
      */
     void setSize(const Vec2D &size);
-
-protected:
-    virtual void draw(MinGL &window) override;
 
 private:
     /**

@@ -17,6 +17,7 @@ SOURCES += main.cpp \
     graph/rgbacolor.cpp \
     game/manager.cpp \
     gui/button.cpp \
+    gui/sprite.cpp \
     gui/star_background.cpp \
     gui/text.cpp \
     score/score_mgr.cpp \
@@ -67,6 +68,7 @@ HEADERS += \
     game/manager_const.h \
     game/manager_type.h \
     gui/button.h \
+    gui/sprite.h \
     gui/star_background.h \
     gui/text.h \
     score/score_mgr.h \
@@ -97,6 +99,7 @@ HEADERS += \
     transition/transition_types.h
 
 # https://retifrav.github.io/blog/2018/06/08/qmake-copy-files/
+# Pour copier les fichiers de ressources directement dans le répertoire de build
 # copies the given files to the destination directory
 defineTest(copyToDestDir) {
     files = $$1
