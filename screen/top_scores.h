@@ -15,6 +15,10 @@
 
 namespace nsScreen {
 
+/**
+ * @class TopScores
+ * @brief Ecran représentant le leaderboard
+ */
 class TopScores : public IScreen
 {
 public:
@@ -26,6 +30,9 @@ public:
     virtual std::unique_ptr<IDrawable> clone() const override;
 
 private:
+    /**
+     * @brief m_mainMenuButton : Bouton de retour vers le menu principal
+     */
     nsGui::Button m_mainMenuButton;
 };
 

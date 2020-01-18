@@ -18,7 +18,7 @@ namespace nsScreen {
 
 /**
  * @class MainGame
- * @brief Elements représentant le jeu
+ * @brief Ecran représentant le jeu
  */
 class MainGame : public IScreen
 {

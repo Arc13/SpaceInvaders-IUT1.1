@@ -4,6 +4,7 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
+    config/config.cpp \
     event/event_manager.cpp \
     figs/basefig.cpp \
     figs/circle.cpp \
@@ -45,6 +46,7 @@ INCLUDEPATH += /usr/include/GL/
 QMAKE_CXXFLAGS += -Wall
 
 HEADERS += \
+    config/config.h \
     event/event.hpp \
     event/event_manager.h \
     figs/basefig.h \

@@ -21,7 +21,7 @@ namespace nsScreen {
 
 /**
  * @class TitleMenu
- * @brief Elements représentant l'écran titre
+ * @brief Ecran représentant l'écran titre
  */
 class TitleMenu : public IScreen
 {
