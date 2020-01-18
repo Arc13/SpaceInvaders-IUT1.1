@@ -1,3 +1,11 @@
+/**
+ * @file config_utility.cpp
+ * @brief The configuration screen definition
+ * @author SOLLIER Alexandre
+ * @version 1.0
+ * @date 18 janvier 2020
+ */
+
 #include "config_utility.h"
 
 #include <sstream>

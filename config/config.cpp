@@ -25,7 +25,7 @@
 using namespace std;
 typedef vector<char> TableauCommande ;
 
-void nsConfig::WriteCommande (TableauCommande & Commande)
+void nsConfig::WriteCommande (const TableauCommande & Commande)
 {
     ofstream FichierCommande ;
     FichierCommande.open(NomFichierCommande, ofstream::out);
@@ -38,7 +38,7 @@ void nsConfig::WriteCommande (TableauCommande & Commande)
 void nsConfig::ChangerCommande (MinGL &window)
 {
     TableauCommande Commande (0) ;
-    Commande = ReadCommande(Commande);
+    ReadCommande(Commande);
     stringstream Str ;
 
     Str << "Quel commande pour aller a droite ? : " ;
@@ -64,16 +64,15 @@ void nsConfig::ChangerCommande (MinGL &window)
     AfficheCommande(window);
 }
 
-TableauCommande nsConfig::InitCommande (TableauCommande & Commande)
+void nsConfig::InitCommande (TableauCommande & Commande)
 {
     Commande.push_back(KDefaultRightKey);
     Commande.push_back(KDefaultLeftKey);
     Commande.push_back(KDefaultFirekey);
     Commande.push_back(KDefaultDifficulty);
-    return Commande ;
 }
 
-TableauCommande nsConfig::ReadCommande (TableauCommande & Commande)
+void nsConfig::ReadCommande (TableauCommande & Commande)
 {
     unsigned Cpt = 0 ;
     while (true)
@@ -87,7 +86,7 @@ TableauCommande nsConfig::ReadCommande (TableauCommande & Commande)
 
         if (!FichierCommande.is_open())
         {
-            Commande = InitCommande(Commande);
+            InitCommande(Commande);
             WriteCommande(Commande);
             cerr << "Le fichier " << NomFichierCommande << " est manquant, un nouveau avec les parametres par default à été créer" << endl;
             ++Cpt ;
@@ -104,13 +103,12 @@ TableauCommande nsConfig::ReadCommande (TableauCommande & Commande)
             break ;
         }
     }
-    return Commande ;
 }
 
 void nsConfig::AfficheCommande (MinGL &window)
 {
     TableauCommande Commande (0) ;
-    Commande = ReadCommande(Commande);
+    ReadCommande(Commande);
     for (unsigned  i = 0 ; i < Commande.size(); ++i)
     {
         stringstream Str ;

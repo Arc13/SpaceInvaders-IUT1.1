@@ -27,67 +27,74 @@
 namespace nsConfig {
 
 /**
- * @brief TableauCommande is a vector of char, is a vector content the 3 commands
+ * @brief TableauCommande est un vecteur de char, contenant la configuration utilisateur
  */
 typedef std::vector<char> TableauCommande ;
 
 /**
- * @brief KDefaultRigthKey is d buy default
+ * @brief KDefaultRightKey représente la touche directionnelle droite par défaut, 'd'
  */
 const char KDefaultRightKey ('d');
 
 /**
- * @brief KDefaultLeftKey is q buy default
+ * @brief KDefaultLeftKey représente la touche directionnelle gauche par défaut, 'q'
  */
 const char KDefaultLeftKey ('q');
 
 /**
- * @brief KDefaultFirekey is ' ' buy default
+ * @brief KDefaultFirekey représente la touche de tir par défaut, ' ' (Espace)
  */
 const char KDefaultFirekey (' ');
 
 /**
- * @brief KDefaultFirekey is ' ' buy default
+ * @brief KDefaultDifficulty représente la difficulté par défaut, normal
  */
-const char KDefaultDifficulty ('0');
+const char KDefaultDifficulty ('1');
 
 /**
- *@brief KTabDirection is for decripting to the user the command key
+ *@brief KTabDirection est une description des différentes touches
  */
 const std::vector<std::string> KTabDirection {("' : pour aller à droite "),("' : pour aller à gauche "),("' : pour tirer ")};
 
 /**
- * @brief NomFichierCommande is the name of the file command
+ * @brief NomFichierCommande est le nom du fichier de configuration
  */
 const std::string NomFichierCommande ("Config.txt");
 
 /**
- * @brief ReadCommande is for Read the Key command on the FichierCommande file
- * @param Commande is content the Key command
- * @return
+ * @brief Lis le fichier de configuration et place son contenu dans Commande
+ * @param[in, out] Commande : Tableau qui va contenir la configuration
+ * @fn void ReadCommande (TableauCommande & Commande);
  */
-TableauCommande ReadCommande (TableauCommande & Commande);
+void ReadCommande (TableauCommande & Commande);
 
 /**
- * @brief WriteCommande is for whrite the key command on the FichierCommande file
- * @param Commande is content the key command
+ * @brief Ecris le fichier de configuration selon la configuration contenue dans Commande
+ * @param[in] Commande : Tableau qui contient la configuration
+ * @fn void WriteCommande (const TableauCommande & Commande);
  */
-void WriteCommande (TableauCommande & Commande);
+void WriteCommande (const TableauCommande & Commande);
 
 /**
- * @brief InitCommande is for init the command is the FichierCommande disapear
- * @param Commande is content the key command
- * @return
+ * @brief Initialise le tableau de configuration Commande avec des valeurs par défaut
+ * @param[in, out] Commande : Tableau de configuration a initialiser
+ * @fn void InitCommande (TableauCommande & Commande);
  */
-TableauCommande InitCommande (TableauCommande & Commande);
+void InitCommande (TableauCommande & Commande);
 
 /**
- * @brief AfficheCommande is for display command key
+ * @brief Affiche les différentes touches a l'écran
+ * Déprécié par le panneau de configuration
+ * @param[in, out] window : La fenêtre d'affichage
+ * @fn void AfficheCommande (MinGL &window);
  */
 void AfficheCommande (MinGL &window);
 
 /**
- * @brief ChangerCommande
+ * @brief Change les contrôles de la configuration via le terminal
+ * Déprécié par le panneau de configuration
+ * @param[in, out] window : La fenêtre d'affichage
+ * @fn void ChangerCommande (MinGL &window);
  */
 void ChangerCommande (MinGL &window);
 
