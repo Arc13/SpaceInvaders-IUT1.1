@@ -56,6 +56,27 @@ public:
      */
     const std::vector<RGBAcolor>& getPixelData() const;
 
+    /**
+     * @brief Récupère la position du sprite
+     * @return Une référence const vers m_position
+     * @fn const Vec2D& getPosition() const;
+     */
+    const Vec2D& getPosition() const;
+
+    /**
+     * @brief Définit la nouvelle position du sprite
+     * @param[in] position : Nouvelle position
+     * @fn void setPosition(const Vec2D &position);
+     */
+    void setPosition(const Vec2D &position);
+
+    /**
+     * @brief Calcule la taille du sprite
+     * @return La taille calculée
+     * @fn Vec2D computeSize() const;
+     */
+    Vec2D computeSize() const;
+
 private:
     /**
      * @struct FileBegin

@@ -88,4 +88,19 @@ const std::vector<RGBAcolor>& SPRITE::getPixelData() const
     return m_pixelData;
 }
 
+const Vec2D& SPRITE::getPosition() const
+{
+    return m_position;
+}
+
+void SPRITE::setPosition(const Vec2D &position)
+{
+    m_position = position;
+}
+
+Vec2D SPRITE::computeSize() const
+{
+    return Vec2D(m_pixelData.size() / m_rowSize, m_rowSize);
+}
+
 #undef SPRITE
