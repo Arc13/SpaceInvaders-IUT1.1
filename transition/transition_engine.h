@@ -1,6 +1,6 @@
 /**
  * @file transition_engine.h
- * @brief An engine for the transition system
+ * @brief Un moteur pour le système de transition
  * @author SOLLIER Alexandre
  * @version 1.1
  * @date 10 janvier 2020

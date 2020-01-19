@@ -1,6 +1,6 @@
 /**
  * @file button.cpp
- * @brief An object providing a rectangle with centered text inside
+ * @brief Un objet qui fournit un rectangle avec du texte
  * @author SOLLIER Alexandre
  * @version 1.0
  * @date 06 janvier 2020

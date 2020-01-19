@@ -1,3 +1,11 @@
+/**
+ * @file score_mgr.hxx
+ * @brief Les fonctions de score
+ * @author LAUGIER Colin
+ * @version 1.0
+ * @date 09 janvier 2020
+ */
+
 #ifndef SCORE_MGR_HXX
 #define SCORE_MGR_HXX
 

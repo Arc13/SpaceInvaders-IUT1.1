@@ -17,7 +17,7 @@ public:
     BaseFig();
      ~BaseFig() {}
 
-    virtual void draw(MinGL &window) override {}
+    virtual void draw(MinGL &window) override;
 
     // Fonction de clonage
     virtual std::unique_ptr<IDrawable> clone() const override;

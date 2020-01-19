@@ -1,12 +1,14 @@
 /**
  * @file text.cpp
- * @brief Text that can be displayed to a MinGL Window
+ * @brief Texte pouvant être affiché dans une fenêtre minGL
  * @author SOLLIER Alexandre
  * @version 1.1
  * @date 28 décembre 2019
  */
 
 #include "text.h"
+
+#include "../macros.h"
 
 #define TEXT nsGui::Text
 
@@ -131,6 +133,8 @@ void nsGui::Text::setContent(const std::string &content)
 
 void TEXT::draw(MinGL &window)
 {
+    UNUSED(window);
+
     // Draw the text with the right color using Glut
     glColor4ub(m_textColor.Red, m_textColor.Green, m_textColor.Blue, m_textColor.Alpha);
 

@@ -1,6 +1,6 @@
 /**
  * @file star_background.h
- * @brief A nice star background with blink effects
+ * @brief Un joli ciel étoilé avec des effets de clignotement
  * @author SOLLIER Alexandre
  * @version 1.0
  * @date 06 janvier 2020

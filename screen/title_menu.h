@@ -1,6 +1,6 @@
 /**
  * @file main_menu.h
- * @brief The main menu screen definition
+ * @brief Definition du menu titre
  * @author SOLLIER Alexandre
  * @version 1.1
  * @date 09 janvier 2020

@@ -1,10 +1,10 @@
-/*!
-  * \file SpaceInvader_AC.cpp
-  * \author Alain Casali Marc Laporte
-  * \date 7 janvier 2016
-  * \brief Projet de C++ simulant un SpaceInvader
-  * \version 1.0
-  * \bug Aucun connu
+/**
+  * @file manager.cpp
+  * @author PALATUIK Alison
+  * @date 13 Janvier 2020
+  * @brief Fichier décrivant l'ensemble des alias vers les types utilisés dans le jeu
+  * @version 1.0
+  * @bug Aucun connu
   */
 
 #include <iostream>
@@ -198,7 +198,7 @@ namespace nsGame
         Score = CollisionBetweenObjectsAndShips     (Obj[3], Obj[0]);
     } // ManageCollisions()
 
-    unsigned Victory (const CVString & Space, const CAObject & Obj)
+    unsigned Victory (const CAObject & Obj)
     {
         if (0 == Obj[0].size ()) return 1;
         else if (0 == Obj[2].size()) return 2;

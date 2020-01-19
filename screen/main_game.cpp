@@ -1,3 +1,12 @@
+/**
+  * @file main_game.h
+  * @author PALATUIK Alison
+  * @date 13 Janvier 2020
+  * @brief Definition de l'écran de jeu principal
+  * @version 1.0
+  * @bug Aucun connu
+  */
+
 #include "main_game.h"
 
 #include <fstream>
@@ -159,7 +168,7 @@ void GAME::update(const std::chrono::microseconds &delta)
     nsGame::DeleteTorpedos (m_objects[3]);
 
     // On teste si quelqu'un a gagné
-    unsigned Vict = nsGame::Victory (m_space, m_objects);
+    unsigned Vict = nsGame::Victory (m_objects);
     if (Vict == 1)
     {
         // Le joueur a gagné ou l'envahisseur est tout en bas

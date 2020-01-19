@@ -1,6 +1,6 @@
 /**
  * @file difficulty.hpp
- * @brief Provides multiple difficulties to the game
+ * @brief Fourni plusieurs difficultés au jeu
  * @author SOLLIER Alexandre
  * @version 1.0
  * @date 17 janvier 2020

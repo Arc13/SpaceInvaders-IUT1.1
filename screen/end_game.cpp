@@ -1,6 +1,6 @@
 /**
  * @file end_game.cpp
- * @brief The screen shown at the end of the game
+ * @brief Definition de l'écran de fin de jeu
  * @author SOLLIER Alexandre
  * @version 1.0
  * @date 18 janvier 2020
@@ -11,6 +11,7 @@
 #include <fstream>
 #include <iomanip>
 
+#include "../macros.h"
 #include "../score/score_mgr.h"
 #include "../tools/myexception.h"
 
@@ -112,7 +113,7 @@ void ENDGAME::processEvent(const nsEvent::Event_t &event)
 
 void ENDGAME::update(const std::chrono::microseconds &delta)
 {
-
+    UNUSED(delta);
 } // update()
 
 void ENDGAME::draw(MinGL &window)

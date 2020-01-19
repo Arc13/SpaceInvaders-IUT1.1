@@ -1,6 +1,6 @@
 /**
  * @file top_scores.h
- * @brief The screen showing the 10 top scores
+ * @brief Definition de l'écran du classement
  * @author SOLLIER Alexandre
  * @version 1.0
  * @date 18 janvier 2020

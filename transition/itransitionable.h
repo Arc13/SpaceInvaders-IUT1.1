@@ -1,6 +1,6 @@
 /**
  * @file itransitionable.h
- * @brief Abstract class representing a transitionable element
+ * @brief Classe abstraite représentant un objet transitionable
  * @author SOLLIER Alexandre
  * @version 1.0
  * @date 10 janvier 2020

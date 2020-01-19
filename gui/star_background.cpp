@@ -1,12 +1,14 @@
 /**
  * @file star_background.cpp
- * @brief A nice star background with blink effects
+ * @brief Un joli ciel étoilé avec des effets de clignotement
  * @author SOLLIER Alexandre
  * @version 1.0
  * @date 06 janvier 2020
  */
 
 #include "star_background.h"
+
+#include "../macros.h"
 
 #define STARBACKGROUND nsGui::StarBackground
 
@@ -32,6 +34,8 @@ std::unique_ptr<IDrawable> STARBACKGROUND::clone() const
 
 void STARBACKGROUND::draw(MinGL &window)
 {
+    UNUSED(window);
+
     // Draw the stars as points
     glBegin(GL_POINTS);
 
@@ -47,6 +51,8 @@ void STARBACKGROUND::draw(MinGL &window)
 
 void STARBACKGROUND::update(float delta)
 {
+    UNUSED(delta);
+
     // For each star, generate a random number: 0 < n < 1
     // The star lit state will be inverted if 0 < n < m_litProbability
     for (Star_t &star: m_stars) {

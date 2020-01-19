@@ -1,12 +1,10 @@
 /**
-  *
-  * @author Laugier Colin
-  *
-  * @date 09/01/20
-  *
-  * @brief Les fonctions de scores
-  *
-  * */
+ * @file score_mgr.cpp
+ * @brief Les fonctions de score
+ * @author LAUGIER Colin
+ * @version 1.0
+ * @date 09 janvier 2020
+ */
 
 #include <iostream>
 #include <vector>

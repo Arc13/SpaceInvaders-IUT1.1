@@ -1,6 +1,6 @@
 /**
  * @file config_utility.h
- * @brief The configuration screen definition
+ * @brief Definition du gestionnaire de configuration
  * @author SOLLIER Alexandre
  * @version 1.0
  * @date 18 janvier 2020

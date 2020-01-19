@@ -1,5 +1,6 @@
 #include <cmath>
 
+#include "../macros.h"
 #include "../tools/CstCodErr.h"
 #include "circle.h"
 
@@ -8,6 +9,8 @@ using namespace nsUtil;
 
 void Circle::draw(MinGL &window)
 {
+    UNUSED(window);
+
     // Source: https://gist.github.com/linusthe3rd/803118
 
     int i;

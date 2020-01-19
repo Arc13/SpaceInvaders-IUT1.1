@@ -1,3 +1,11 @@
+/**
+ * @file sprite.h
+ * @brief Un objet permettant de charger une image depuis le disque
+ * @author AMBAUD Marc
+ * @version 1.0
+ * @date 13 janvier 2020
+ */
+
 #ifndef DISPLAY_SPRITE_H
 #define DISPLAY_SPRITE_H
 

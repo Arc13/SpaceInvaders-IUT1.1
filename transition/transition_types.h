@@ -1,6 +1,6 @@
 /**
  * @file transition_types.h
- * @brief Type definitions for the Transition system
+ * @brief Definition de types pour le système de transition
  * @author SOLLIER Alexandre
  * @version 1.0
  * @date 16 janvier 2020

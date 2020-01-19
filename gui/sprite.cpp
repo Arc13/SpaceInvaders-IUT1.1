@@ -1,9 +1,18 @@
+/**
+ * @file sprite.h
+ * @brief Un objet permettant de charger une image depuis le disque
+ * @author AMBAUD Marc
+ * @version 1.0
+ * @date 13 janvier 2020
+ */
+
 #include "sprite.h"
 
 #include <unistd.h>
 #include <fcntl.h>
 #include <iostream>
 
+#include "../macros.h"
 #include "../tools/myexception.h"
 
 #define SPRITE nsGui::Sprite
@@ -52,6 +61,8 @@ std::unique_ptr<IDrawable> SPRITE::clone() const
 
 void SPRITE::draw(MinGL &window)
 {
+    UNUSED(window);
+
     glBegin(GL_POINTS);
 
     for (unsigned i = 0; i < m_pixelData.size(); ++i)

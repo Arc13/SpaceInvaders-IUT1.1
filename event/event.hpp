@@ -1,6 +1,6 @@
 /**
  * @file event.hpp
- * @brief Collection for various event types and data
+ * @brief Collection de données pour représenter des événements utilisateur
  * @author SOLLIER Alexandre
  * @version 1.0
  * @date 09 janvier 2020

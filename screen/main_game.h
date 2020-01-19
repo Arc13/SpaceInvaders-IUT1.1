@@ -1,3 +1,12 @@
+/**
+  * @file main_game.h
+  * @author PALATUIK Alison
+  * @date 13 Janvier 2020
+  * @brief Definition de l'écran de jeu principal
+  * @version 1.0
+  * @bug Aucun connu
+  */
+
 #ifndef SCREENGAME_H
 #define SCREENGAME_H
 

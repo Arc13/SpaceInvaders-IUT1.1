@@ -1,12 +1,10 @@
 /**
-  *
-  * @author Colin Laugier
-  *
-  * @date 09/01/20
-  *
-  * @brief Fichier pour la config
-  *
-  * */
+ * @file config.cpp
+ * @brief Fichier pour la config
+ * @author LAUGIER Colin
+ * @version 1.0
+ * @date 09 janvier 2020
+ */
 
 #include "config.h"
 

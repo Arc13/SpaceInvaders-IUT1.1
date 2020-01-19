@@ -1,6 +1,6 @@
 /**
  * @file transition.h
- * @brief A playing transition
+ * @brief Une transition qui se joue
  * @author SOLLIER Alexandre
  * @version 1.1
  * @date 10 janvier 2020

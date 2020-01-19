@@ -1,6 +1,7 @@
 #include "line.h"
 
 #include <cmath>
+#include "../macros.h"
 #include "../tools/CstCodErr.h"
 #include "../tools/tools.h"
 
@@ -9,6 +10,8 @@ using namespace nsUtil;
 
 void Line::draw(MinGL &window)
 {
+    UNUSED(window);
+
     // On met la couleur de la ligne
     const RGBAcolor inColor = getInColor();
     glColor4ub(inColor.Red, inColor.Green, inColor.Blue, inColor.Alpha);

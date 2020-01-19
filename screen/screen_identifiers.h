@@ -1,6 +1,6 @@
 /**
  * @file screen_identifiers.h
- * @brief Identifiers for the various screens
+ * @brief Identificateur pour les differents écrans
  * @author SOLLIER Alexandre
  * @version 1.0
  * @date 09 janvier 2020

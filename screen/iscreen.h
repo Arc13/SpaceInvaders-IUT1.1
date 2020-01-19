@@ -1,6 +1,6 @@
 /**
  * @file iscreen.h
- * @brief Interface for a screen taking the entire window
+ * @brief Interface pour un écran
  * @author SOLLIER Alexandre
  * @version 1.0
  * @date 09 janvier 2020

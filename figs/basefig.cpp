@@ -2,10 +2,17 @@
 
 #include "basefig.h"
 
+#include "../macros.h"
+
 using namespace std;
 
 BaseFig::BaseFig()
 {}
+
+void BaseFig::draw(MinGL &window)
+{
+    UNUSED(window);
+}
 
 BaseFig::BaseFig(const RGBAcolor & inCol_, const RGBAcolor & bdCol_, const std::string &name_)
     : inColor (inCol_)

@@ -1,6 +1,6 @@
 /**
  * @file idrawable.h
- * @brief An interface for drawable objects
+ * @brief Une interface pour des objets affichables
  * @author SOLLIER Alexandre
  * @version 1.0
  * @date 08 janvier 2020

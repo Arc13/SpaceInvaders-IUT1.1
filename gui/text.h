@@ -1,6 +1,6 @@
 /**
  * @file text.h
- * @brief Text that can be displayed to a MinGL Window
+ * @brief Texte pouvant être affiché dans une fenêtre minGL
  * @author SOLLIER Alexandre
  * @version 1.1
  * @date 28 décembre 2019

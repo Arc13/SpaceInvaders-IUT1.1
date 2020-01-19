@@ -1,6 +1,6 @@
 /**
  * @file config_utility.cpp
- * @brief The configuration screen definition
+ * @brief Definition du gestionnaire de configuration
  * @author SOLLIER Alexandre
  * @version 1.0
  * @date 18 janvier 2020
@@ -97,6 +97,8 @@ void CONFIGUTILITY::processEvent(const nsEvent::Event_t &event)
                 // Aucun contrôle séléctionné, on déselectionne l'actuel
                 deselectControl();
             }
+
+            break;
         }
         case nsEvent::EventType_t::Keyboard:
         {

@@ -1,15 +1,14 @@
-#ifndef MYTYPE_H
-#define MYTYPE_H
-
-/*!
-  * \file MyType.h
-  * \author Alison Palatuik
-  * \date 13/01/2020
-  * \brief Fichier décrivant l'ensemble des alias vers les types utilisés dans le jeu
-  * \version 1.0
-  * \bug Aucun connu
+/**
+  * @file manager_type.h
+  * @author PALATUIK Alison
+  * @date 13 Janvier 2020
+  * @brief Fichier décrivant l'ensemble des alias vers les types utilisés dans le jeu
+  * @version 1.0
+  * @bug Aucun connu
   */
 
+#ifndef MYTYPE_H
+#define MYTYPE_H
 
 #include <vector>
 #include <utility> //pair
@@ -17,29 +16,29 @@
 
 namespace nsGame
 {
-    /*!
-     * \typedef CVString
-     * \brief   Alias vers le type de l'écran (l'espace, la matrice).
+    /**
+     * @typedef CVString
+     * @brief   Alias vers le type de l'écran (l'espace, la matrice).
      */
     typedef std::vector <std::string> CVString;    // c'est le type de l'écran (l'espace, la matrice)
 
 
-    /*!
-     * \typedef CPosition
-     * \brief Alias vers une coordonnée de la matrice. Le premier élément de la paire désigne une ordonnée (axe Y),
+    /**
+     * @typedef CPosition
+     * @brief Alias vers une coordonnée de la matrice. Le premier élément de la paire désigne une ordonnée (axe Y),
      *          le second une abscisse (axe X).
      */
     typedef std::pair <unsigned, unsigned> CPosition; //une coordonnee de la matrice
 
-    /*!
-     * \typedef CVPosition
-     * \brief Alias vers un vecteur de coordonnees.
+    /**
+     * @typedef CVPosition
+     * @brief Alias vers un vecteur de coordonnees.
      */
     typedef std::vector<CPosition> CVPosition; //un vecteur de coordonnees
 
-    /*!
-     * \typedef CAObject
-     * \brief Alias vers un tableau de 4 vecteurs de coordonnees.
+    /**
+     * @typedef CAObject
+     * @brief Alias vers un tableau de 4 vecteurs de coordonnees.
      * <ul>
      *  <li>indice 0 : les positions de l'envahisseur
      *  <li>indice 1 : les positions des missiles

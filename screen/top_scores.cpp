@@ -1,6 +1,6 @@
 /**
  * @file top_scores.cpp
- * @brief The screen showing the 10 top scores
+ * @brief Definition de l'écran du classement
  * @author SOLLIER Alexandre
  * @version 1.0
  * @date 18 janvier 2020
@@ -8,6 +8,7 @@
 
 #include "top_scores.h"
 
+#include "../macros.h"
 #include "../score/score_mgr.h"
 
 #define TOPSCORES nsScreen::TopScores
@@ -38,7 +39,7 @@ void TOPSCORES::processEvent(const nsEvent::Event_t &event)
 
 void TOPSCORES::update(const std::chrono::microseconds &delta)
 {
-
+    UNUSED(delta);
 }
 
 void TOPSCORES::draw(MinGL &window)

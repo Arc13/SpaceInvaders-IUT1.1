@@ -1,6 +1,6 @@
 /*!
  * \file game.cpp
- * \brief Game entry point
+ * \brief Point d'entrée du jeu
  * \author SOLLIER Alexandre
  * \author LAUGIER Colin
  * \author PALATUIK Alison

@@ -3,6 +3,7 @@
 #include <vector>
 #include <algorithm>
 
+#include "../macros.h"
 #include "../tools/CstCodErr.h"
 #include "../tools/tools.h"
 #include "line.h"
@@ -12,6 +13,8 @@ using namespace nsUtil;
 
 void Triangle::draw(MinGL &window)
 {
+    UNUSED(window);
+
     // On règle la couleur du triangle
     const RGBAcolor inColor = getInColor();
     glColor4ub(inColor.Red, inColor.Green, inColor.Blue, inColor.Alpha);

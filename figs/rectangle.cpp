@@ -1,5 +1,6 @@
 #include "rectangle.h"
 
+#include "../macros.h"
 #include "../tools/CstCodErr.h"
 #include "triangle.h"
 #include "line.h"
@@ -9,6 +10,8 @@ using namespace nsUtil;
 
 void Rectangle::draw(MinGL &window)
 {
+    UNUSED(window);
+
     // On règle la couleur du rectangle
     const RGBAcolor inColor = getInColor();
     glColor4ub(inColor.Red, inColor.Green, inColor.Blue, inColor.Alpha);

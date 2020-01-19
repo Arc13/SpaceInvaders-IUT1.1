@@ -1,6 +1,6 @@
 /**
  * @file event_manager.cpp
- * @brief The event manager for user inputs
+ * @brief Le gestionnaire d'événement utilisateur
  * @author SOLLIER Alexandre
  * @version 1.0
  * @date 09 janvier 2020

@@ -1,6 +1,6 @@
 /**
  * @file game.h
- * @brief Game entry point
+ * @brief Point d'entrée du jeu
  * @author SOLLIER Alexandre
  * @author LAUGIER Colin
  * @author PALATUIK Alison

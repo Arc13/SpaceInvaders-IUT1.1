@@ -71,6 +71,7 @@ HEADERS += \
     gui/sprite.h \
     gui/star_background.h \
     gui/text.h \
+    macros.h \
     score/score_mgr.h \
     score/score_mgr.hxx \
     screen/config_utility.h \
