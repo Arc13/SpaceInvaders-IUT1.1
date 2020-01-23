@@ -37,3 +37,4 @@
 
 # Qt Creator
 FreeGlutCppV4.pro.user*
+*.pro.user

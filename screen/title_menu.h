@@ -32,6 +32,12 @@ public:
      */
     TitleMenu();
 
+    /**
+     * @brief Destructeur virtuel pour la classe TitleMenu
+     * @fn virtual ~TitleMenu() {}
+     */
+    virtual ~TitleMenu() {}
+
     virtual void processEvent(const nsEvent::Event_t &event) override;
     virtual void update(const std::chrono::microseconds &delta) override;
     virtual void draw(MinGL &window) override;

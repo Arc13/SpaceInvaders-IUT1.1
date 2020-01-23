@@ -22,7 +22,17 @@ namespace nsScreen {
 class TopScores : public IScreen
 {
 public:
+    /**
+     * @brief Constructeur pour la classe TopScores
+     * @fn TopScores();
+     */
     TopScores();
+
+    /**
+     * @brief Destructeur virtuel pour la classe TopScores
+     * @fn virtual ~TopScores() {}
+     */
+    virtual ~TopScores() {}
 
     virtual void processEvent(const nsEvent::Event_t &event) override;
     virtual void update(const std::chrono::microseconds &delta) override;

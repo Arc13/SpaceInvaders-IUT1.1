@@ -17,10 +17,6 @@
 #include "score_mgr.hxx"
 
 #include "../gui/text.h"
-#include "../gui/star_background.h"
-
-#include "graph/rgbacolor.h"
-#include "graph/vec2d.h"
 
 using namespace std;
 typedef vector<unsigned> TableauScore ;

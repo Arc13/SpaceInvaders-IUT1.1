@@ -40,6 +40,12 @@ public:
      */
     MainGame();
 
+    /**
+     * @brief Destructeur virtuel pour la classe MainGame
+     * @fn virtual ~MainGame() {}
+     */
+    virtual ~MainGame() {}
+
     virtual void processEvent(const nsEvent::Event_t &event) override;
     virtual void update(const std::chrono::microseconds &delta) override;
     virtual void draw(MinGL &window) override;

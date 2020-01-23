@@ -29,6 +29,12 @@ public:
      */
     EndGame();
 
+    /**
+     * @brief Destructeur virtuel pour la classe EndGame
+     * @fn virtual ~EndGame() {}
+     */
+    virtual ~EndGame() {}
+
     virtual void processEvent(const nsEvent::Event_t &event) override;
     virtual void update(const std::chrono::microseconds &delta) override;
     virtual void draw(MinGL &window) override;

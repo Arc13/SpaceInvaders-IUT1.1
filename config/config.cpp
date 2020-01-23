@@ -14,11 +14,7 @@
 #include <iomanip>
 #include <sstream>
 
-#include "gui/text.h"
-#include "gui/star_background.h"
-
-#include "graph/rgbacolor.h"
-#include "graph/vec2d.h"
+#include "../gui/text.h"
 
 using namespace std;
 typedef vector<char> TableauCommande ;

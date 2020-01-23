@@ -34,6 +34,12 @@ public:
      */
     ConfigUtility();
 
+    /**
+     * @brief Destructeur virtuel pour la classe ConfigUtility
+     * @fn virtual ~ConfigUtility() {}
+     */
+    virtual ~ConfigUtility() {}
+
     virtual void processEvent(const nsEvent::Event_t &event) override;
     virtual void update(const std::chrono::microseconds &delta) override;
     virtual void draw(MinGL &window) override;

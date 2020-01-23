@@ -6,7 +6,7 @@
 #include <queue>
 #include <memory> // shared_ptr
 
-#include "freeglut.h"
+#include <freeglut.h>
 
 #include "idrawable.h"
 #include "libgraphique_fonts.h"
