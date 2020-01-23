@@ -42,3 +42,7 @@ Cela permet d'être plus attrayant a l'oeil du joueur. Un exemple flagrant de ce
 ## Captures d'écran
 ![Menu titre](https://i.imgur.com/XCIUr71m.png)
 ![En jeu](https://i.imgur.com/QP9q7eym.png)
+
+## Remerciements
+- Les membres de mon équipe qui ont contribués a ce projet, leurs noms sont présents dans leurs fichiers respectifs
+- Les professeurs de l'IUT pour la base de minGL ainsi que leur critique sur ce code
