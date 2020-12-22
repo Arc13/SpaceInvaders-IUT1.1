@@ -14,7 +14,7 @@ Il est possible de le compiler sous macOS en installant *freeglut* via brew, et 
 ### Compilation
 Il vous suffit simplement de cloner ce repo:
 ```sh
-git clone git@github.com:Arc13/SpaceOutvaders.git
+git clone git@github.com:Kuruyia/SpaceOutvaders.git
 ```
 Puis, ouvrir le fichier *.pro* avec Qt Creator, configurer le projet et cliquer sur le bouton d'exécution du programme.
 
